@@ -1,0 +1,12 @@
+@import '../../node_modules/@angular/material/theming';
+@import './palette.scss';
+$color-ultra-dark: mat-color($palette, 900);
+$color-dark: mat-color($palette, 700);
+$color: mat-color($palette, 500);
+$color-light: mat-color($palette, 200);
+$color-ultra-light: mat-color($palette, 50);
+$contrast-ultra-dark: mat-contrast($palette, 900);
+$contrast-dark: mat-contrast($palette, 700);
+$contrast: mat-contrast($palette, 500);
+$contrast-light: mat-contrast($palette, 200);
+$contrast-ultra-light: mat-contrast($palette, 50);

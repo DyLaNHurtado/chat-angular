@@ -1,0 +1,82 @@
+:root {
+    --branding-primary-color-ultra-light: #{color-ultra-light};
+    --branding-primary-color-light: #{color-light};
+    --branding-primary-color: #{$color};
+    --branding-primary-color-dark: #{$color-dark};
+    --branding-primary-color-ultra-dark: #{$color-ultra-dark};
+    --branding-primary-contrast-ultra-light: #{$contrast-ultra-light};
+    --branding-primary-contrast-light: #{$contrast-light};
+    --branding-primary-contrast: #{$contrast};
+    --branding-primary-contrast-dark: #{$contrast-dark};
+    --branding-primary-contrast-ultra-dark: #{$contrast-ultra-dark};
+  }
+  
+  @font-face {
+    font-family: IcoMoon-Ultimate;
+    src: url("^../../../../utils/IcoMoon-Ultimate-1.woff") format("woff"),
+        url("^../../../../utils/IcoMoon-Ultimate-1.woff") format("woff");
+    src: url("^../../../../utils/IcoMoon-Ultimate-1.ttf") format("truetype"),
+        url("^../../../../utils/IcoMoon-Ultimate-1.ttf") format("truetype");
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: NMFont1;
+    src: url("^../../../../utils/NMFont1.ttf") format("truetype"),
+        url("^../../../../utils/NMFont1.ttf") format("truetype");
+    font-display: swap;
+  }
+  
+  html {
+    height: 100%;
+  }
+  
+  body {
+    margin: 0px;
+    height: 100%;
+  }
+  
+  // autocomplete of patient search
+  .autocomplete-patient {
+    max-height: 70vh !important;
+  }
+  
+  //table style
+  .tablePackage {
+    border-collapse: separate;
+    border-spacing: 0px;
+    cursor: default;
+  }
+  
+  .tablePackage-large {
+    width: 100%;
+  }
+  
+  .tablePackage thead {
+    width: inherit;
+  }
+  
+  .tablePackage tbody {
+    width: inherit;
+  }
+  
+  .tablePackage th {
+    border: 1px solid var(--branding-primary-color);
+    padding: 5px;
+    background: var(--branding-primary-color-ultra-light);
+  }
+  
+  .tablePackage td {
+    border: 1px solid var(--branding-primary-color);
+    padding: 5px;
+  }
+  
+  .tablePackage-rowSelected {
+    color: var(--branding-primary-contrast);
+    background-color: var(--branding-primary-color-light);
+  }
+  
+  .branding-color {
+    color: var(--branding-primary-color);
+  }
+  
