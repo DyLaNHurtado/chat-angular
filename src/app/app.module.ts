@@ -11,6 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { LoginModule } from './components/login/login.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterModule } from './components/register/register.module';
+import { ContactListModule } from './components/contact-list/contact-list.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RegisterModule } from './components/register/register.module';
     LoginModule,
     MatButtonModule,
     RegisterModule,
+    ContactListModule
     
   ],
   providers: [],

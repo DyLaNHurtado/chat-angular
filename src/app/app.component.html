@@ -17,6 +17,6 @@
     </button>
     
     <app-register *ngIf="loginOption==0" (setLogin)="showLogin()"></app-register>
-    <app-login *ngIf="loginOption==1" (setRegister)="showRegister()"></app-login>
+    <app-login *ngIf="loginOption==1" (setRegister)="showRegister()" (logged)="logged()"></app-login>
   </div>
 </mat-drawer-container>

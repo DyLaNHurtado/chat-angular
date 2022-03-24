@@ -11,14 +11,17 @@ export class AppComponent {
   public hide:boolean=false;
   loginOption:number=1;
 
-
-  public showLogin(){
-    this.loginOption=1;
-  }
   public showRegister(){
     this.loginOption=0;
   }
 
+  public showLogin(){
+    this.loginOption=1;
+  }
+  
+  public logged(){
+    this.loginOption=2;
+  }
 
 }
 

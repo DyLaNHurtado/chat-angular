@@ -1,0 +1,7 @@
+<mat-selection-list #contact [multiple]="false">
+  <mat-list-option *ngFor="let contact of contactList" [value]="contact" fxLayout="column" fxFlex="100">
+      {{contact}}
+      <mat-divider></mat-divider>
+    </mat-list-option>
+  </mat-selection-list>
+  

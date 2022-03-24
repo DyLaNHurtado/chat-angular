@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   errorStateMatcher = new MyErrorStateMatcher();
   hide = true;
   @Output() setRegister = new EventEmitter();
+  @Output() logged = new EventEmitter();
   public entityForm!: FormGroup;
   public inputEmail!: string;
   public inputPass!: string;
@@ -33,8 +34,7 @@ export class LoginComponent implements OnInit {
     this.entityForm = new FormGroup({
       inputEmail: new FormControl("", [Validators.email,Validators.required]),
       inputPass: new FormControl("", [Validators.required])
-    })
-    const matcher = new MyErrorStateMatcher();
+    });
   }
   
   public showRegister(){
@@ -44,8 +44,9 @@ export class LoginComponent implements OnInit {
     this.inputEmail=this.entityForm.get("inputEmail")!.value;
     this.inputPass=this.entityForm.get("inputPass")!.value;
     if(this.validateToSend()){
-        //Api llamada 
+        //Api llamada
         alert("Hola");
+        this.logged.emit();
     }else{
       this.dialog.open(FieldsDialog);
     }
