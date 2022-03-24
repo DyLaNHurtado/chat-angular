@@ -25,6 +25,7 @@
   .login-wrapper mat-card-header mat-card-title {
     font-size: 30px;
     margin: 0;
+    font-weight: bold;
   }
 
 
@@ -39,6 +40,9 @@
   }
   mat-card-header{
       margin-bottom: 2em;
+  }
+  .send-button{
+    padding: 1em 2em;
   }
 
   

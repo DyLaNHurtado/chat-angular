@@ -3,16 +3,16 @@
     <mat-card-header>
       <mat-card-title>Login</mat-card-title>
     </mat-card-header>
-    <form class="example-form">
+    <form class="example-form" [formGroup]='entityForm'>
       <mat-card-content>
-        <mat-form-field class="example-full-width" appearance="outline">
+        <mat-form-field class="example-full-width" appearance="outline" >
           <mat-label>Email</mat-label>
-          <input matInput placeholder="Enter your email" value="" />
+          <input matInput placeholder="Enter your email" value="" formControlName="inputEmail" />
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" />
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="inputPass" />
           <button
             mat-icon-button
             matSuffix
@@ -27,7 +27,7 @@
     </form>
     <mat-card-actions fxLayoutAlign="space-between center">
       <button mat-button color="primary" (click)="showRegister()">Dont have account?</button>
-      <button mat-raised-button color="primary">
+      <button mat-raised-button color="primary" (click)="sendInputValues()" class="send-button">
         <mat-icon>arrow_forward_ios</mat-icon>
       </button>
     </mat-card-actions>

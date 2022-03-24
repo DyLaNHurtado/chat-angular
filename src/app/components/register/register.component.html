@@ -3,28 +3,28 @@
     <mat-card-header>
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
-    <form class="example-form" >
+    <form class="example-form"[formGroup]="entityForm" >
       <mat-card-content >
 
         <div fxLayout="row">
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput placeholder="Enter your name" value="">
+            <input matInput placeholder="Enter your name" value="" formControlName="inputName">
           </mat-form-field>
 
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Last Name</mat-label>
-            <input matInput placeholder="Enter your last name" value="">
+            <input matInput placeholder="Enter your last name" value="" formControlName="inputLastName">
           </mat-form-field>
         </div>
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Enter your email" value="">
+            <input matInput placeholder="Enter your email" value="" formControlName="inputEmail">
           </mat-form-field>
 
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'">
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="inputPass">
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
@@ -32,7 +32,7 @@
 
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Confirm Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'">
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="inputConfirmPass">
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
@@ -42,7 +42,7 @@
     </form>
     <mat-card-actions fxLayoutAlign="space-between center">
       <button (click)="showLogin()" mat-button color="primary" >Already have account?</button>
-      <button mat-fab color="primary" ><mat-icon>done</mat-icon></button>
+      <button mat-fab color="primary" (click)="sendInputValues()"><mat-icon>done</mat-icon></button>
     </mat-card-actions>
   </mat-card>
 </div>
