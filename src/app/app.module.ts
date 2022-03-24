@@ -10,6 +10,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button'; 
 import { LoginModule } from './components/login/login.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChatModule } from './components/chat/chat.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatButtonModule,
     LoginModule,
-    MatButtonModule
+    MatButtonModule,
+    ChatModule
     
   ],
   providers: [],

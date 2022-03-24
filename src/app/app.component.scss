@@ -1,14 +1,12 @@
-.sidenav{
-    padding: 20px;
-    
-
+.sidenav {
+  padding: 20px;
 }
-.container{
-    min-width: 100vw;
-    min-height: 100vh;
+.container {
+  min-width: 100vw;
+  min-height: 100vh;
 }
-.sidenav-content{
-    background-color: coral;
-    min-width: 100vw;
-    min-height: 100vh;
+.sidenav-content {
+  background-color: coral;
+  min-width: inherit;
+  min-height: 100vh;
 }

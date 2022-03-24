@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="message-container">
+    <mat-list>
+      <mat-list-item *ngFor="let chat of chatContainer">
+        <div
+          mat-line
+          [ngClass]="
+            chat.isSender == true
+              ? 'sender-message-body'
+              : 'receiver-message-body'
+          "
+        >
+          <div class="user-icon">
+            <mat-icon mat-list-icon color="primary">portrait</mat-icon>
+          </div>
+          <div class="message-text">
+            <div class="user-date-label">
+              <span> {{ chat.userName }}</span> 9.18 am
+            </div>
+            <div class="message">{{ chat.message }}</div>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+
+    <div class="input-container">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Message</mat-label>
+          <input
+            matInput
+            placeholder="Placeholder"
+            class="chat-input"
+            [(ngModel)]="message"
+          />
+        </mat-form-field>
+      </div>
+      <div class="button-container">
+        <button mat-mini-fab color="primary">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
