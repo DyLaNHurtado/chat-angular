@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
   entityForm:FormGroup;
   errorStateMatcher = new MyErrorStateMatcher();
   hide = true;
+  @Output() setRegister = new EventEmitter();
+
   constructor() { this.entityForm = new FormGroup({
     emailFormControl: new FormControl('', [Validators.required, Validators.email])
   });}
@@ -27,6 +29,10 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     const matcher = new MyErrorStateMatcher();
+  }
+  
+  public showRegister(){
+    this.setRegister.emit();
   }
 
 }

@@ -9,4 +9,17 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'ChatAngular';
   public hide:boolean=false;
+  loginOption:number=0;
+
+
+  public showLogin(){
+    this.loginOption=1;
+  }
+  public showRegister(){
+    this.loginOption=0;
+  }
+
+
 }
+
+
