@@ -8,11 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class ContactListComponent implements OnInit {
 
   contactList:string[]=[]
+  filteredOptions:string[]=[]
 
   constructor() {}
 
   ngOnInit() {
     this.contactList=["1","2","3"]
+    this.filteredOptions=["1","2","3","4","5"];
   }
 
 }

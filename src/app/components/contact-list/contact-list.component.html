@@ -1,7 +1,28 @@
-<mat-selection-list #contact [multiple]="false">
-  <mat-list-option *ngFor="let contact of contactList" [value]="contact" fxLayout="column" fxFlex="100">
-      {{contact}}
-      <mat-divider></mat-divider>
-    </mat-list-option>
-  </mat-selection-list>
+
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Number</mat-label>
+    <input type="text"
+           placeholder="Pick one"
+           aria-label="Number"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+
+<mat-selection-list #contact [multiple]="false" fxLayout="column">
+  <mat-list-option *ngFor="let contact of contactList" [value]="contact" fxFlex="100">
+    <div fxFlex="100" fxLayout="row" >
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/OOjs_UI_icon_userAvatarOutline-progressive.svg/1024px-OOjs_UI_icon_userAvatarOutline-progressive.svg.png" height="40em" width="40em"fxLayoutAlign="start center">
+      <p  fxFlex="100">{{contact}}</p>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-list-option>
+</mat-selection-list>
   
