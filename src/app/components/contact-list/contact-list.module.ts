@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ContactListComponent } from './contact-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatListModule} from '@angular/material/list'; 
 import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     FlexLayoutModule,
     MatFormFieldModule,
     MatListModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatInputModule,
   ],
   declarations: [ContactListComponent],
   exports:[ContactListComponent]

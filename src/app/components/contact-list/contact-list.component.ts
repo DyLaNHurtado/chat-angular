@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-contact-list',
@@ -8,13 +11,25 @@ import { Component, OnInit } from '@angular/core';
 export class ContactListComponent implements OnInit {
 
   contactList:string[]=[]
-  filteredOptions:string[]=[]
+  filteredOptions:Observable<string[]>;
+  myControl:FormControl;
 
-  constructor() {}
-
-  ngOnInit() {
-    this.contactList=["1","2","3"]
-    this.filteredOptions=["1","2","3","4","5"];
+  constructor() {
+    this.myControl= new FormControl();
   }
 
+  ngOnInit() {
+    this.myControl = new FormControl();
+    this.contactList=["heero","hello","hola"];
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)),
+    );
+    
+
+}
+private _filter(value: string): string[] {
+  const filterValue = value.toLowerCase();
+  return this.contactList.filter(option => option.toLowerCase().includes(filterValue));
+}
 }
