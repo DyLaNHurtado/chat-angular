@@ -1,9 +1,9 @@
 
 <form class="example-form">
   <mat-form-field class="example-full-width" appearance="fill" fxFlex="100">
-    <mat-label>Search</mat-label>
+    <mat-label> 🔍 Search...</mat-label>
     <input type="text"
-           placeholder="Pick one"
+           placeholder=""
            aria-label="Number"
            matInput
            [formControl]="myControl"
@@ -17,9 +17,11 @@
 </form>
 <mat-selection-list #contact [multiple]="false" fxLayout="column">
   <mat-list-option *ngFor="let contact of filteredOptions  | async" [value]="contact" fxFlex="100">
-    <div fxFlex="100" fxLayout="row" >
+    <div fxFlex="100" fxLayout="row" class="contact" >
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/OOjs_UI_icon_userAvatarOutline-progressive.svg/1024px-OOjs_UI_icon_userAvatarOutline-progressive.svg.png" height="40em" width="40em"fxLayoutAlign="start center">
-      <p  fxFlex="100">{{contact}}</p>
+      <p  fxFlex="100" fxLayoutAlign="center center">{{contact}}</p>
+      <p fxLayoutAlign="center center">🟢 Online</p>
+      <p fxLayoutAlign="center center">🔴 Offline</p>
     </div>
     <mat-divider></mat-divider>
   </mat-list-option>
