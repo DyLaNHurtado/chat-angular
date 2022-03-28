@@ -42,6 +42,7 @@ export class RegisterComponent implements OnInit {
       if(this.inputPass==this.inputConfirmPass){
         //Api llamada 
         alert("Hola");
+        this.router.navigate(['../login'])
       }else{
         this.dialog.open(PasswordDialog);
       }
@@ -61,7 +62,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public showLogin(){
-    this.router.navigate(['../login'])
+    this.router.navigate(['../login']);
   }
 }
 

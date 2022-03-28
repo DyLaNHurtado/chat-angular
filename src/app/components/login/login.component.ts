@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
   errorStateMatcher = new MyErrorStateMatcher();
   hide = true;
   @Output() setRegister = new EventEmitter();
-  @Output() logged = new EventEmitter();
   public entityForm!: FormGroup;
   public inputEmail!: string;
   public inputPass!: string;
@@ -47,7 +46,7 @@ export class LoginComponent implements OnInit {
     if(this.validateToSend()){
         //Api llamada
         alert("Hola");
-        this.logged.emit();
+        this.router.navigate(["../"]);
     }else{
       this.dialog.open(FieldsDialog);
     }
