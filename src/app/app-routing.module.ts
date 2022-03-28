@@ -13,8 +13,9 @@ const routes: Routes = [
     path:"register", component: RegisterComponent
   },
   {
-    path:"", component: MainComponent
+    path:"", loadChildren:()=>import ("./components/main/main.module").then(m=>m.MainModule)
   },
+  
 
 ];
 

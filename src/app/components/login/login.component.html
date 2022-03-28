@@ -26,7 +26,7 @@
       </mat-card-content>
     </form>
     <mat-card-actions fxLayoutAlign="space-between center">
-      <button mat-button color="primary" routerLink="/register">Dont have account?</button>
+      <button mat-button color="primary" (click)="showRegister()">Dont have account?</button>
       <button mat-raised-button color="primary" (click)="sendInputValues()" class="send-button">
         <mat-icon>arrow_forward_ios</mat-icon>
       </button>

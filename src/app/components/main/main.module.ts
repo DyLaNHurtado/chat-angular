@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatBoxModule } from '../chat-box/chat-box.module';
 import { ContactListModule } from '../contact-list/contact-list.module';
 import { LoginModule } from '../login/login.module';
@@ -14,14 +13,15 @@ import { RegisterModule } from '../register/register.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
  import {MatMenuModule} from '@angular/material/menu'; 
+import { MainRoutingModule } from './main.routing';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    MainRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     FlexLayoutModule,
     LoginModule,
     MatSidenavModule,
@@ -33,7 +33,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ChatBoxModule,
     MatToolbarModule,
     MatSlideToggleModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   declarations: [MainComponent],
   exports:[MainComponent]

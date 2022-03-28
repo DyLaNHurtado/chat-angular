@@ -2,6 +2,7 @@ import { Input } from '@angular/core';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,7 @@ export class RegisterComponent implements OnInit {
   inputConfirmPass!:string;
   
   @Output() setLogin=new EventEmitter();
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,private router:Router) { }
 
   ngOnInit() {
     this.entityForm = new FormGroup({
@@ -58,14 +59,9 @@ export class RegisterComponent implements OnInit {
     }
     return false;
   }
-  private validateSamePasswords(){
-    if(this.inputPass===this.inputConfirmPass){
-
-    }
-  }
 
   public showLogin(){
-    this.setLogin.emit();
+    this.router.navigate(['../login'])
   }
 }
 
