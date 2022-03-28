@@ -7,6 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    PickerModule
+    PickerModule,
+    MatCardModule,
+    MatIconModule
   ],
   declarations: [ChatBoxComponent],
   exports:[ChatBoxComponent],

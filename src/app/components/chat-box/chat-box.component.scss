@@ -1,0 +1,41 @@
+.mat-card-header{
+    padding: 1em 1em;
+    background-color: aqua;
+    border-radius: 10px;
+    align-items: center;
+}
+.header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+    border:2px solid coral;
+  }
+
+.chat-box{
+    margin: 0 10vw;
+    min-height: 70vh;
+    margin-top: 1vh;
+    border-radius: 10px;
+}
+
+mat-card-header{
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+.emoji-button{
+    font-size: 1.5em;
+    padding: 1.25em 1em;
+}
+.send-button{
+    margin: 0.23vh 1.5vw;
+    
+}
+
+.messages-content{
+    height: 70vh;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+}
+
+
+  

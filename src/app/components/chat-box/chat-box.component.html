@@ -1,7 +1,22 @@
-<emoji-mart *ngIf="isEmojiPickerVisible" class="emoji-mart"  (emojiSelect)="addEmoji($event)" title="Choose it!" emoji="point_up" ></emoji-mart>
-<div class="chat-box">
-  <button mat-icon-button (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" fxLayoutAlign="center center">😀</button>
-  <mat-form-field class="example-full-width" appearance="fill" fxFlex="100">
-  <input matInput placeholder="Type a message" type="text" name="textarea" [(ngModel)]="textArea"/>
-</mat-form-field>
-</div>
+<mat-card class="chat-box">
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+
+    <div class="messages-content"></div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <div class="input-box">
+      <emoji-mart *ngIf="isEmojiPickerVisible" class="emoji-mart"  (emojiSelect)="addEmoji($event)" title="Choose it!" emoji="point_up" ></emoji-mart>
+      <button class="emoji-button" mat-icon-button (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" fxLayoutAlign="center center">😀</button>
+      <mat-form-field class="example-full-width" appearance="fill" fxFlex="100">
+      <input matInput placeholder="Type a message" type="text" name="textarea" [(ngModel)]="textArea"/>
+    </mat-form-field>
+    <button mat-fab class="send-button"><mat-icon>send</mat-icon></button>
+    </div>
+  </mat-card-actions>
+  </mat-card>
