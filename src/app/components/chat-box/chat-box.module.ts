@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import {ChatMessageModule} from '../chat-message/chat-message.module'
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     PickerModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    ChatMessageModule
   ],
   declarations: [ChatBoxComponent],
   exports:[ChatBoxComponent],

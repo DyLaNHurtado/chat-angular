@@ -1,0 +1,41 @@
+
+
+<p>
+  <mat-toolbar fxFlex="100">
+    <span>My Application</span>
+    <span class="spacer"></span>
+    <div fxLayout ="row">
+      <mat-slide-toggle color="primary"></mat-slide-toggle>
+      <div class="me">
+        <button mat-button  [matMenuTriggerFor]="beforeMenu">
+          <img src="https://material.angular.io/assets/img/examples/shiba1.jpg" />
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button mat-menu-item>
+            <mat-icon>people</mat-icon>
+            <span>About us</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>logout</mat-icon>
+            <span>Log out</span>
+          </button>
+        </mat-menu>
+        
+      </div>
+    </div>
+  </mat-toolbar>
+</p>
+      
+
+      <app-chat-box></app-chat-box>
+
+ 
+
+  
+
+    

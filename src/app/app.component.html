@@ -1,23 +1,9 @@
-<mat-drawer-container class="container" autosize>
-  <mat-drawer #drawer class="sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
-  </mat-drawer>
 
-  <div class="sidenav-content">
-    <button
-      mat-raised-button
-      color="primary"
-      (click)="hide = !hide"
-      type="button"
-      [attr.aria-pressed]="hide"
-      mat-button
-      (click)="drawer.toggle()"
-    >
-      <mat-icon>{{ hide ? "close" : "menu" }}</mat-icon>
-    </button>
-    
-    <app-register *ngIf="loginOption==0" (setLogin)="showLogin()"></app-register>
-    <app-login *ngIf="loginOption==1" (setRegister)="showRegister()" (logged)="logged()"></app-login>
-    <app-chat-box></app-chat-box>
-  </div>
-</mat-drawer-container>
+
+  <nav>
+    <a routerLink="/login">Login</a>
+    <a routerLink="/register">Register</a>
+    <a routerLink="/">Main</a>
+  </nav>
+  <router-outlet></router-outlet>
+

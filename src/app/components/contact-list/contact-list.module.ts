@@ -7,6 +7,7 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatListModule} from '@angular/material/list'; 
 import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 import { MatInputModule } from '@angular/material/input';
+import { ChatMessageModule } from '../chat-message/chat-message.module';
 
 
 @NgModule({

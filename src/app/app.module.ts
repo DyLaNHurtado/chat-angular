@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterModule } from './components/register/register.module';
 import { ContactListModule } from './components/contact-list/contact-list.module';
 import { ChatBoxModule } from './components/chat-box/chat-box.module';
+import { MainModule } from './components/main/main.module';
 
 @NgModule({
   declarations: [
@@ -25,15 +26,15 @@ import { ChatBoxModule } from './components/chat-box/chat-box.module';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    LoginModule,
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
-    LoginModule,
     MatButtonModule,
     RegisterModule,
     ContactListModule,
-    ChatBoxModule
-    
+    ChatBoxModule,
+    MainModule
   ],
   providers: [],
   bootstrap: [AppComponent]
