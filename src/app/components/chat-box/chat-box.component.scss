@@ -42,6 +42,8 @@ mat-card-header{
     background-color: #f7f7f7;
     border-radius: 10px;
     padding-top: 7em;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .emoji-mart{
     position: absolute;
