@@ -1,8 +1,7 @@
 .mat-card-header{
     padding: 1em 1em;
     background-color: aqua;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+
     align-items: center;
     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
     position: absolute;
@@ -17,9 +16,7 @@
   }
 
 .chat-box{
-    margin: 0 10vw;
-    min-height: 70vh;
-    margin-top: 1vh;
+    min-height: 75vh;
     border-radius: 10px;
 }
 
