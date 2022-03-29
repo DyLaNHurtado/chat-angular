@@ -28,4 +28,7 @@ export class MainComponent implements OnInit {
   public goAboutUs(){
     this.router.navigate(["../aboutUs"]);
   }
+  public goSettings(){
+    this.router.navigate(["../settings"]);
+  }
 }
