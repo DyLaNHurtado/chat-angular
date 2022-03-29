@@ -4,6 +4,7 @@ import  { ModuleWithProviders} from "@angular/core";
 import { MainComponent } from "./main.component";
 import { ProfileComponent } from "../profile/profile.component";
 import { HomeComponent } from "../home/home.component";
+import { AboutUsComponent } from "../aboutUs/aboutUs.component";
 
 const routes: Routes = [
 
@@ -16,6 +17,10 @@ const routes: Routes = [
         {
           path:"profile",
           component: ProfileComponent
+        },
+        {
+          path:"aboutUs",
+          component: AboutUsComponent
         },
 
       ]

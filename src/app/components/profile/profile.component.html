@@ -3,7 +3,7 @@
     <div class="edit-button"><button mat-icon-button (click)="onEditFields()" ><mat-icon>{{edit ? 'done' : 'edit'}}</mat-icon></button></div>
     <mat-card-header fxLayout="column" fxLayoutAlign="center center">
       <mat-card-title>Profile</mat-card-title>
-      <img src="https://material.angular.io/assets/img/examples/shiba1.jpg"  alt="image_profile" />
+      <img [src]="image"  alt="image_profile" />
       <input class="image-input" fxLayoutAling="center center" *ngIf="edit" type="file"    (change)="change($event)">
     </mat-card-header>
 

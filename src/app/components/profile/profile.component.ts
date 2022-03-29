@@ -13,6 +13,7 @@ import { Router} from "@angular/router";
 export class ProfileComponent implements OnInit {
   public entityForm!: FormGroup;
   public edit:boolean=false;
+  public image:string="https://material.angular.io/assets/img/examples/shiba1.jpg";
   public inputName: string;
   public inputLastName: string;
   public inputEmail: string;
@@ -51,7 +52,6 @@ export class ProfileComponent implements OnInit {
       this.disableInputs();
     }
   }
-
 
   public enableInputs(){
     this.entityForm.get("inputName").enable();

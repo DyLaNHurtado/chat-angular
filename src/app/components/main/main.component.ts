@@ -25,4 +25,7 @@ export class MainComponent implements OnInit {
   public goLogout(){
     this.router.navigate(["../login"]);
   }
+  public goAboutUs(){
+    this.router.navigate(["../aboutUs"]);
+  }
 }
