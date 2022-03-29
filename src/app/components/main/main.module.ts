@@ -14,6 +14,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
  import {MatMenuModule} from '@angular/material/menu'; 
 import { MainRoutingModule } from './main.routing';
+import { HomeModule } from '../home/home.module';
 
 
 @NgModule({
@@ -27,13 +28,10 @@ import { MainRoutingModule } from './main.routing';
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
-    MatButtonModule,
     RegisterModule,
-    ContactListModule,
-    ChatBoxModule,
-    MatToolbarModule,
-    MatSlideToggleModule,
     MatMenuModule,
+    MatToolbarModule,
+    HomeModule
   ],
   declarations: [MainComponent],
   exports:[MainComponent]

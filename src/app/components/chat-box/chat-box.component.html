@@ -12,7 +12,7 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <emoji-mart *ngIf="isEmojiPickerVisible" class="emoji-mart"  (emojiSelect)="addEmoji($event)" title="Choose it!" emoji="point_up" ></emoji-mart>
+    <emoji-mart *ngIf="isEmojiPickerVisible" class="emoji-mart"  (emojiSelect)="addEmoji($event)" title="Choose it!" emoji="point_up"  ></emoji-mart>
     <div class="input-box">
       <button class="emoji-button" mat-icon-button (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" fxLayoutAlign="center center">😀</button>
       <mat-form-field class="example-full-width" appearance="fill" fxFlex="100">

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Params, Router } from '@angular/router';
+import { ProfileComponent 
+} from '../profile/profile.component';
 
 @Component({
   selector: 'app-main',
@@ -6,11 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  public hide:boolean=false;
-
-  constructor() { }
+  constructor(private router:Router) { 
+  }
 
   ngOnInit() {
   }
+  
 
+  public goHome(){
+    this.router.navigate(["../home"]);
+  }
+  public goProfile(){
+    this.router.navigate(["../profile"]);
+  }
+  public goLogout(){
+    this.router.navigate(["../login"]);
+  }
 }

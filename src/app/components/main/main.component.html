@@ -1,41 +1,33 @@
-<router-outlet></router-outlet>
-
 <p>
-  <mat-toolbar fxFlex="100">
-    <span>My Application</span>
-    <span class="spacer"></span>
-    <div fxLayout ="row" class="div-tools">
-      <div class="me">
-        <button mat-button  [matMenuTriggerFor]="beforeMenu">
-          <img src="https://material.angular.io/assets/img/examples/shiba1.jpg" />
-          <mat-icon>keyboard_arrow_down</mat-icon>
-        </button>
-        <mat-menu #beforeMenu="matMenu" xPosition="before">
-          <button mat-menu-item>
-            <mat-icon>person</mat-icon>
-            <span>Profile</span>
+    <mat-toolbar fxFlex="100">
+      <button mat-button (click)="goHome()">My Application</button>
+      <span class="spacer"></span>
+      <div fxLayout ="row" class="div-tools">
+        <div class="me">
+          <button mat-button [matMenuTriggerFor]="beforeMenu">
+            <img src="https://material.angular.io/assets/img/examples/shiba1.jpg" />
+            <mat-icon>keyboard_arrow_down</mat-icon>
           </button>
-          <button mat-menu-item>
-            <mat-icon>settings</mat-icon>
-            <span>Settings</span>
-          </button>
-          <button mat-menu-item>
-            <mat-icon>people</mat-icon>
-            <span>About us</span>
-          </button>
-          <button mat-menu-item>
-            <mat-icon>logout</mat-icon>
-            <span>Log out</span>
-          </button>
-        </mat-menu>
+          <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <button mat-menu-item (click)="goProfile()">
+              <mat-icon>person</mat-icon>
+              <span>Profile</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>settings</mat-icon>
+              <span>Settings</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>people</mat-icon>
+              <span>About us</span>
+            </button>
+            <button mat-menu-item (click)="goLogout()">
+              <mat-icon>logout</mat-icon>
+              <span>Log out</span>
+            </button>
+          </mat-menu>
+        </div>
       </div>
-    </div>
-  </mat-toolbar>
-</p>
-<app-chat-box></app-chat-box>
-
- 
-
-  
-
-    
+    </mat-toolbar>
+  </p>
+<router-outlet></router-outlet>

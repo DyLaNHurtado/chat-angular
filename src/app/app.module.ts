@@ -14,10 +14,14 @@ import { RegisterModule } from './components/register/register.module';
 import { ContactListModule } from './components/contact-list/contact-list.module';
 import { ChatBoxModule } from './components/chat-box/chat-box.module';
 import { MainModule } from './components/main/main.module';
+import { NotFoundModule } from './components/not-found/not-found.module';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { ProfileModule } from './components/profile/profile.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,11 @@ import { MainModule } from './components/main/main.module';
     RegisterModule,
     ContactListModule,
     ChatBoxModule,
-    MainModule
+    MainModule,
+    ProfileModule,
+    NotFoundModule,
+    MatMenuModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

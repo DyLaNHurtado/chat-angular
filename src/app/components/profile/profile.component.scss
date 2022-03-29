@@ -1,0 +1,28 @@
+img{
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+    border: 10px solid #F2F2F2;
+    margin-bottom: 4vh;
+}
+.edit-image{
+    position: sticky;
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+    margin-bottom: 4vh;
+}
+.mat-card-header .mat-card-title{
+    font-size: 32px;
+    margin: 0;
+    margin-bottom: 4vh;
+    font-weight: bold;
+}
+.edit-button{
+    display: flex;
+    justify-content: flex-end;
+}
+.image-input{
+    margin-bottom: 4vh;
+        
+}
