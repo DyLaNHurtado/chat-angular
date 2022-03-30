@@ -4,8 +4,8 @@ import { SettingsComponent } from './settings.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -14,9 +14,9 @@ import { MatIcon } from '@angular/material/icon';
     FlexLayoutModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatButton,
-    MatIcon,
-
+    MatButtonModule,
+    MatIconModule,
+    
   ],
   declarations: [SettingsComponent],
   exports:[SettingsComponent]

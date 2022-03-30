@@ -6,19 +6,15 @@
            placeholder=""
            aria-label="Number"
            matInput
-           [formControl]="myControl"
-           [matAutocomplete]="auto">
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option}}
-      </mat-option>
-    </mat-autocomplete>
+           [formControl]="myControl">
+
   </mat-form-field>
 </form>
 <mat-selection-list #contact [multiple]="false" fxLayout="column">
   <mat-list-option *ngFor="let contact of filteredOptions  | async" [value]="contact" fxFlex="100">
     <div fxFlex="100" fxLayout="row" class="contact" >
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/OOjs_UI_icon_userAvatarOutline-progressive.svg/1024px-OOjs_UI_icon_userAvatarOutline-progressive.svg.png" height="40em" width="40em"fxLayoutAlign="start center">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/OOjs_UI_icon_userAvatarOutline-progressive.svg/1024px-OOjs_UI_icon_userAvatarOutline-progressive.svg.png" height="40em" width="40em"fxLayoutAlign="center center">
+
       <p  fxFlex="100" fxLayoutAlign="center center">{{contact}}</p>
       <p fxLayoutAlign="center center">🟢 Online</p>
       <p fxLayoutAlign="center center">🔴 Offline</p>

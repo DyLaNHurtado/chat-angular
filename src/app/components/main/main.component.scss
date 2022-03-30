@@ -10,7 +10,17 @@
 }
 mat-toolbar{
     background-color: palegoldenrod;
+    border-bottom: 1px solid black;
 }
 .div-tools{
     align-content: space-between;
+}
+.app-main{
+    box-sizing:content-box;
+    margin: 0 auto;
+    line-height:16px;
+    min-width: 100%;
+    min-height: 100%;
+    background-color: #323232;
+    
 }

@@ -16,6 +16,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MainRoutingModule } from './main.routing';
 import { HomeModule } from '../home/home.module';
 import { AboutUsModule } from '../aboutUs/aboutUs.module';
+import { SettingsModule } from '../settings/settings.module';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AboutUsModule } from '../aboutUs/aboutUs.module';
     MatMenuModule,
     MatToolbarModule,
     HomeModule,
-    AboutUsModule
+    AboutUsModule,
+    SettingsModule
   ],
   declarations: [MainComponent],
   exports:[MainComponent]

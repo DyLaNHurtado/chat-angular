@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   public inputName: string;
   public inputLastName: string;
   public inputEmail: string;
+  public inputStatus: string;
   constructor( private router:Router,public dialog: MatDialog) { }
 
 
@@ -25,6 +26,7 @@ export class ProfileComponent implements OnInit {
       inputName: new FormControl("", [Validators.required]),
       inputLastName: new FormControl("", [Validators.required]),
       inputEmail: new FormControl("", [Validators.email,Validators.required]),
+      inputStatus: new FormControl("", [Validators.required]),
     });
     this.disableInputs();
   }
@@ -33,8 +35,10 @@ export class ProfileComponent implements OnInit {
     this.inputName=this.entityForm.get('inputName').value;
     this.inputLastName=this.entityForm.get('inputLastName').value;
     this.inputEmail=this.entityForm.get('inputEmail').value;
+    this.inputStatus=this.entityForm.get('inputStatus').value;
     if(this.inputName.trim()!=""&&
     this.inputLastName.trim()!=""&&
+    this.inputStatus.trim()!=""&&
     this.inputEmail.trim()!=""&&this.inputEmail.includes("@")){
       return true
     }
@@ -57,6 +61,7 @@ export class ProfileComponent implements OnInit {
     this.entityForm.get("inputName").enable();
     this.entityForm.get("inputLastName").enable();
     this.entityForm.get("inputEmail").enable();
+    this.entityForm.get("inputStatus").enable();
   }
 
   public disableInputs(){
@@ -64,6 +69,7 @@ export class ProfileComponent implements OnInit {
       this.entityForm.get("inputName").disable();
       this.entityForm.get("inputLastName").disable();
       this.entityForm.get("inputEmail").disable();
+      this.entityForm.get("inputStatus").disable();
     }else{
       this.dialog.open(FieldsDialog);
       this.edit=!this.edit
