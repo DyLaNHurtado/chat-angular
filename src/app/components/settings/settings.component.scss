@@ -1,0 +1,53 @@
+.mat-card-header .mat-card-title{
+    font-size: 32px;
+    margin: 0;
+    margin-bottom: 4vh;
+    font-weight: bold;
+    margin-top: 4vh;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+mat-card-content{
+    padding: 20px;
+}
+mat-tab-group{
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+img{
+    height: 12vw;
+    width: 12vw;
+    object-fit: cover;
+    align-items: center;
+}
+.img-option {
+    padding: 1em;
+    margin: 0.2em;
+    border-radius: 10px;
+}
+.options-container{
+    padding: 10px;
+    border-radius: 10px;
+}
+mat-button-toggle-group{
+    border: 0;
+    margin-bottom: 2em;
+}
+mat-button-toggle{
+    padding:0
+}
+.color{
+    padding: 1vw 1vw;
+    border-radius: 50%;
+}
+.theme{
+    font-size: 3em;
+    padding: 2em;
+}
+a{
+    text-decoration:none
+}
+h1{text-align: center;
+    margin-bottom: 2em ;
+}

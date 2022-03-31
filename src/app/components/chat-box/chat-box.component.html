@@ -9,17 +9,17 @@
       </div>
   </div>
   <div class="content-chat">
-    <div class="messages-content">
+    <div class="messages-content" style="background-image: url(../../../assets/img/background1.png);">
       <app-chat-message></app-chat-message>
     </div>
   </div>
 
   <div>
     <emoji-mart *ngIf="isEmojiPickerVisible" class="emoji-mart"  (emojiSelect)="addEmoji($event)" title="Choose it!" emoji="point_up"  ></emoji-mart>
-    <div class="input-box">
+    <div class="input-box dark-theme">
       <button class="emoji-button" mat-icon-button (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" fxLayoutAlign="center center">😀</button>
       <input matInput class="input" placeholder="Type a message" type="text" name="textarea" [(ngModel)]="textArea"/>
-      <button mat-icon-button class="send-button"><mat-icon class="send-icon">send</mat-icon></button>
+      <button mat-icon-button class="send-button"><mat-icon class="send-icon dark-theme">send</mat-icon></button>
     </div>
   </div>
 </div>

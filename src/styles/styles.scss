@@ -1,88 +1,46 @@
+@use '@angular/material' as mat;
 
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@use '~@angular/material' as mat;
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$ChatAngular-primary: mat.define-palette(mat.$indigo-palette);
-$ChatAngular-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$ChatAngular-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$ChatAngular-theme: mat.define-light-theme((
-  color: (
-    primary: $ChatAngular-primary,
-    accent: $ChatAngular-accent,
-    warn: $ChatAngular-warn,
-  )
+// Define a light theme
+$light-primary: mat.define-palette(mat.$indigo-palette);
+$light-accent: mat.define-palette(mat.$pink-palette);
+$light-theme: mat.define-light-theme((
+ color: (
+   primary: $light-primary,
+   accent: $light-accent,
+ )
 ));
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($ChatAngular-theme);
+// Define a dark theme
+$dark-primary: mat.define-palette(mat.$pink-palette);
+$dark-accent: mat.define-palette(mat.$blue-gray-palette);
+$dark-theme: mat.define-dark-theme((
+ color: (
+   primary: $dark-primary,
+   accent: $dark-accent,
+ )
+));
 
-/* You can add global styles to this file, and also import other style files */
+// Apply the dark theme by default
 
-@import "./colors.scss";
-@include mat-core();
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$app-primary: mat-palette($palette);
-$app-accent: mat-palette($mat-amber);
-// The warn palette is optional (defaults to red).
-$app-warn: mat-palette($mat-iron-red);
-// Create the theme object (a Sass map containing all of the palettes).
-$app-theme: mat-light-theme(
-  $app-primary,
-  $app-accent,
-  $app-warn
-);
-$alternative-app-theme: mat-dark-theme(
-  $app-primary,
-  $app-accent,
-  $app-warn
-);
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($app-theme);
-.alternative {
-  @include angular-material-theme($alternative-app-theme);
+
+@include mat.all-component-themes($dark-theme);
+
+
+// Apply the light theme only when the `.my-light-theme` CSS class is applied
+// to an ancestor element of the components (such as `body`).
+.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+    //@include mat.core-color($light-theme);
+    //@include mat.button-color($light-theme);
+    background-color: #424242;
 }
-
-$custom-typography: mat-typography-config(
-  $font-family: "Arial",
-  $headline: mat-typography-level(32px, 48px, 700),
-  $body-1: mat-typography-level(16px, 22px, 500),
-);
-
-// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
-@include mat-base-typography($custom-typography);
-// Override typography for a specific Angular Material components.
-@include mat-checkbox-typography($custom-typography);
-// Override typography for all Angular Material, including mat-base-typography and all components.
-@include angular-material-typography($custom-typography);
-// Override the typography in the core CSS.
-@include mat-core($custom-typography);
 
 body {
   height: 100%;
 }
 
-@import "./common.scss";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

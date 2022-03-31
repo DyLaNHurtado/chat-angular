@@ -46,6 +46,9 @@ export class ProfileComponent implements OnInit {
   }
   
 
+public back(){
+  this.router.navigate(["../home"])
+}
 
   public onEditFields(){
     if(!this.edit){

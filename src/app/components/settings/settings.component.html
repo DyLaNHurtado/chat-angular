@@ -1,3 +1,57 @@
-<p>
-  settings works!
-</p>
+<div class="settings-wrapper" fxLayoutAlign="center center">
+  <mat-card class="box">
+    <div>
+      <button mat-icon-button (click)="openSnackBar()"><mat-icon>arrow_back_ios</mat-icon></button>
+    </div>
+    <mat-card-header fxLayout="column" fxLayoutAlign="center center">
+      <mat-card-title>⚙️ Settings</mat-card-title>
+    </mat-card-header>
+    
+      <mat-card-content>
+        <mat-tab-group mat-align-tabs="center" color="accent">
+          <mat-tab label="🎨 Theme">
+            <h1>🎨 Theme</h1>
+            <mat-button-toggle-group  gru name="themeApp" aria-label="Theme App">
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-button-toggle class="img-option" value="background1"><div class="theme" style="background-color: #f3efea;">🌞</div></mat-button-toggle>
+                <mat-button-toggle class="img-option" value="background1"><div class="theme" style="background-color: #4e5255;">🌜</div></mat-button-toggle>
+              </div>
+            </mat-button-toggle-group>
+          </mat-tab>
+          <mat-tab label="🌠 Background">
+            <h1>🌠 Background</h1>
+              <mat-button-toggle-group  gru name="fontStyle" aria-label="Font Style">
+                <div fxLayout="column" class="options-container">
+                  <div fxLayout="row" fxLayoutAlign="center center">
+                    <mat-button-toggle class="img-option" value="color_white"> <div class="color" style="background-color: #f3efea;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option" value="color_black"> <div class="color" style="background-color: #4e5255;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option" value="color_pink"> <div class="color" style="background-color: #eeaada;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option" value="color_blue"> <div class="color" style="background-color: #aacdee;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option" value="color_orange"> <div class="color" style="background-color: #eebfaa;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option" value="color_green"> <div class="color" style="background-color: #d4eeaa;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option" value="color_purple"> <div class="color" style="background-color: #d8aaee;"></div></mat-button-toggle>
+                  </div>
+                  <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-button-toggle class="img-option" value="background1"><img src="../../../assets/img/background1.png" /></mat-button-toggle>
+                <mat-button-toggle class="img-option" value="background1"><img src="../../../assets/img/background2.jpg" /></mat-button-toggle>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-button-toggle class="img-option" value="background3"><img src="../../../assets/img/background3.jpg"></mat-button-toggle>
+                <mat-button-toggle class="img-option" value="background4"><img src="../../../assets/img/background4.jpg" /></mat-button-toggle>
+              </div>
+              </div>
+              </mat-button-toggle-group>
+            
+          </mat-tab>
+          <mat-tab label="❔ Help">
+            <h1>❔ Help </h1>
+            <a href="mailto:dylanhurtado43@gmail.com" target="_blank">
+            <div fxFlex="100" fxLayoutAlign="center center">
+              <button mat-flat-button fxFlex="100" color="primary">Contact here</button>
+            </div>
+          </a>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+  </mat-card>
+</div>

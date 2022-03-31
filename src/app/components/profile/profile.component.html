@@ -1,8 +1,10 @@
 <div class="profile-wrapper" fxLayoutAlign="center center">
-  <mat-card class="box">
-    <div class="edit-button"><button mat-icon-button (click)="onEditFields()" ><mat-icon>{{edit ? 'done' : 'edit'}}</mat-icon></button></div>
+  <mat-card class="box" fxLayout="column">
+    <div class="edit-button" fxLayout="row"  fxFlex="100" fxLayoutAlign="space-between center">
+      <button mat-icon-button (click)="back()" ><mat-icon>arrow_back_ios</mat-icon></button>
+      <button mat-icon-button (click)="onEditFields()" ><mat-icon>{{edit ? 'done' : 'edit'}}</mat-icon></button></div>
     <mat-card-header fxLayout="column" fxLayoutAlign="center center">
-      <mat-card-title>Profile</mat-card-title>
+      <mat-card-title>👤 Profile</mat-card-title>
       <img [src]="image"  alt="image_profile" />
       <input class="image-input" fxLayoutAling="center center" *ngIf="edit" type="file"    (change)="change($event)">
     </mat-card-header>
