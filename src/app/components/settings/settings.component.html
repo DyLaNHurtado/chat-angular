@@ -1,4 +1,4 @@
-<div class="settings-wrapper" fxLayoutAlign="center center">
+<div class="settings-wrapper" [ngClass]="{ 'my-light-theme':themeDark==false, 'my-dark-theme':themeDark}" fxLayoutAlign="center center">
   <mat-card class="box">
     <div>
       <button mat-icon-button (click)="openSnackBar()"><mat-icon>arrow_back_ios</mat-icon></button>
@@ -13,23 +13,23 @@
             <h1>🎨 Theme</h1>
             <mat-button-toggle-group  gru name="themeApp" aria-label="Theme App">
               <div fxLayout="row" fxLayoutAlign="center center">
-                <mat-button-toggle class="img-option" value="background1"><div class="theme" style="background-color: #f3efea;">🌞</div></mat-button-toggle>
-                <mat-button-toggle class="img-option" value="background1"><div class="theme" style="background-color: #4e5255;">🌜</div></mat-button-toggle>
+                <mat-button-toggle class="img-option" value="background1" (click)="onSetLightTheme()"><div class="theme" style="background-color: #f3efea;">🌞</div></mat-button-toggle>
+                <mat-button-toggle class="img-option" value="background1" (click)="onSetDarkTheme()"><div class="theme" style="background-color: #4e5255;">🌜</div></mat-button-toggle>
               </div>
             </mat-button-toggle-group>
           </mat-tab>
           <mat-tab label="🌠 Background">
             <h1>🌠 Background</h1>
-              <mat-button-toggle-group  gru name="fontStyle" aria-label="Font Style">
-                <div fxLayout="column" class="options-container">
-                  <div fxLayout="row" fxLayoutAlign="center center">
-                    <mat-button-toggle class="img-option" value="color_white"> <div class="color" style="background-color: #f3efea;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option" value="color_black"> <div class="color" style="background-color: #4e5255;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option" value="color_pink"> <div class="color" style="background-color: #eeaada;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option" value="color_blue"> <div class="color" style="background-color: #aacdee;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option" value="color_orange"> <div class="color" style="background-color: #eebfaa;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option" value="color_green"> <div class="color" style="background-color: #d4eeaa;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option" value="color_purple"> <div class="color" style="background-color: #d8aaee;"></div></mat-button-toggle>
+              <mat-button-toggle-group gru name="fontStyle" aria-label="Font Style" >
+                <div fxLayout="column" class="options-container" >
+                  <div fxLayout="row" fxLayoutAlign="center center" class="colors">
+                    <mat-button-toggle class="img-option color-button" value="color_white"> <div class="color" style="background-color: #f3efea;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option color-button" value="color_black"> <div class="color" style="background-color: #4e5255;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option color-button" value="color_pink"> <div class="color" style="background-color: #eeaada;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option color-button" value="color_blue"> <div class="color" style="background-color: #aacdee;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option color-button" value="color_orange"> <div class="color" style="background-color: #eebfaa;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option color-button" value="color_green"> <div class="color" style="background-color: #d4eeaa;"></div></mat-button-toggle>
+                    <mat-button-toggle class="img-option color-button" value="color_purple"> <div class="color" style="background-color: #d8aaee;"></div></mat-button-toggle>
                   </div>
                   <div fxLayout="row" fxLayoutAlign="center center">
                 <mat-button-toggle class="img-option" value="background1"><img src="../../../assets/img/background1.png" /></mat-button-toggle>

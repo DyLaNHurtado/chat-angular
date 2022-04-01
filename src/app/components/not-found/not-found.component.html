@@ -1,6 +1,6 @@
-<div fxLayout="column" fxFlex="100" fxLayoutAlign="center center">
+<div fxLayout="column" fxFlex="100" fxLayoutAlign="center center" [ngClass]="{ 'my-light-theme':!themeDark, 'my-dark-theme':themeDark}">
   <h1>🕵️‍♂️ Page not found</h1>
   <h2>Error 404</h2>
-  <button mat-raised-button>🏠 Go Home</button>
+  <button mat-raised-button (click)="goHome()">🏠 Go Home</button>
 </div>
 

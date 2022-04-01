@@ -17,11 +17,13 @@ export class RegisterComponent implements OnInit {
   inputEmail!:string;
   inputPass!:string;
   inputConfirmPass!:string;
+  themeDark:boolean;
   
   @Output() setLogin=new EventEmitter();
   constructor(public dialog: MatDialog,private router:Router) { }
 
   ngOnInit() {
+    this.setTheme();
     this.entityForm = new FormGroup({
       inputName: new FormControl("", [Validators.required]),
       inputLastName: new FormControl("", [Validators.required]),
@@ -30,6 +32,15 @@ export class RegisterComponent implements OnInit {
       inputConfirmPass: new FormControl("", [Validators.required]),
     })
   }
+
+  private setTheme(){
+    if(JSON.parse(localStorage.getItem('theme'))==1){
+      this.themeDark=true;
+    }else{
+      this.themeDark=false;
+    }
+  }
+
 
   public sendInputValues(){
     this.inputName=this.entityForm.get('inputName')!.value;

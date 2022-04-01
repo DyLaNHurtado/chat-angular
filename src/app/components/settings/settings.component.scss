@@ -1,10 +1,16 @@
+.settings-wrapper{
+    min-height: 100%;
+}
 .mat-card-header .mat-card-title{
     font-size: 32px;
     margin: 0;
     margin-bottom: 4vh;
     font-weight: bold;
-    margin-top: 4vh;
+    margin-top: 2em;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 mat-card-content{
@@ -25,6 +31,7 @@ img{
     padding: 1em;
     margin: 0.2em;
     border-radius: 10px;
+    border:0;
 }
 .options-container{
     padding: 10px;
@@ -38,7 +45,7 @@ mat-button-toggle{
     padding:0
 }
 .color{
-    padding: 1vw 1vw;
+    padding: 1em 1em;
     border-radius: 50%;
 }
 .theme{
@@ -48,6 +55,14 @@ mat-button-toggle{
 a{
     text-decoration:none
 }
-h1{text-align: center;
+h1{
+    text-align: center;
     margin-bottom: 2em ;
 }
+.color-button{
+    padding: 1vw 0;
+}
+.colors{
+    margin-bottom: 2vh;
+}
+.mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle {border:0;}

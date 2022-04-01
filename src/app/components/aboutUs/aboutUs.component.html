@@ -1,4 +1,4 @@
-<div class="aboutUs-wrapper" fxLayoutAlign="center center">
+<div class="aboutUs-wrapper" [ngClass]="{ 'my-light-theme':themeDark==false, 'my-dark-theme':themeDark}" fxLayoutAlign="center center">
   <mat-card class="box">
     <mat-card-header fxLayout="column" fxLayoutAlign="center center">
       <mat-card-title> <mat-icon>people</mat-icon> About Us</mat-card-title>

@@ -9,12 +9,22 @@ import { ProfileComponent
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+  themeDark:boolean;
   constructor(private router:Router) { 
   }
 
   ngOnInit() {
+    this.setTheme();
+    window.addEventListener("storage", this.setTheme, false);
   }
-  
+
+  private setTheme(){
+    if(JSON.parse(localStorage.getItem('theme'))==1){
+      this.themeDark=true;
+    }else{
+      this.themeDark=false;
+    }
+  }
 
   public goHome(){
     this.router.navigate(["../home"]);

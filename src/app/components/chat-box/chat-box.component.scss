@@ -73,11 +73,41 @@ img {
     font-size: large;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
+    color: #a1eb7e;
 }
 .status{
     font-size: 0.8em;
     color: #919191;
 }
+.my-dark-theme .parent-input .input-box{
+    background-color: #424242;
+    padding-right: 17px;
+    padding-left: 10px;
+    border-left: 1px solid whitesmoke;
+    display: flex;
+}
+.my-dark-theme .content-chat .messages-content{
+    border-left: 1px solid whitesmoke;
+}
+.my-dark-theme .header{
+    border-left: 1px solid whitesmoke;
+}
+
+.my-light-theme .parent-input .input-box{
+    background-color: #f6f6f6;
+    padding-right: 17px;
+    padding-left: 10px;
+    border-left: 1px solid #424242;
+    display: flex;
+}
+.my-light-theme .content-chat .messages-content{
+    border-left: 1px solid#424242;
+}
+.my-light-theme .header{
+    border-left: 1px solid #424242;
+    background-color: white;
+}
+
 .input-box{
     padding-right: 17px;
     padding-left: 10px;
@@ -91,6 +121,7 @@ img {
         position:relative;
         border-radius: 8px;
         box-sizing: border-box;
+        background-color: #c8c8c8;
 }
 
 

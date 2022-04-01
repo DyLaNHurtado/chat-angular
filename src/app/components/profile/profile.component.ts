@@ -18,10 +18,12 @@ export class ProfileComponent implements OnInit {
   public inputLastName: string;
   public inputEmail: string;
   public inputStatus: string;
+  public themeDark:boolean;
   constructor( private router:Router,public dialog: MatDialog) { }
 
 
   ngOnInit() {
+    this.setTheme()
     this.entityForm = new FormGroup({
       inputName: new FormControl("", [Validators.required]),
       inputLastName: new FormControl("", [Validators.required]),
@@ -29,6 +31,14 @@ export class ProfileComponent implements OnInit {
       inputStatus: new FormControl("", [Validators.required]),
     });
     this.disableInputs();
+  }
+
+  private setTheme(){
+    if(JSON.parse(localStorage.getItem('theme'))==1){
+      this.themeDark=true;
+    }else{
+      this.themeDark=false;
+    }
   }
 
   private validateToSend():boolean{

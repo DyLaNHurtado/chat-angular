@@ -7,10 +7,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./aboutUs.component.scss']
 })
 export class AboutUsComponent implements OnInit {
-
+  public themeDark:boolean;
   constructor(private router:Router) { }
 
   ngOnInit() {
+    this.setTheme();
   }
+
+  private setTheme(){
+    if(JSON.parse(localStorage.getItem('theme'))==1){
+      this.themeDark=true;
+    }else{
+      this.themeDark=false;
+    }
+  }
+
 
 }

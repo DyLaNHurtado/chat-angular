@@ -1,4 +1,4 @@
-<div class="chat-box">
+<div class="chat-box" [ngClass]="{ 'my-light-theme':!themeDark, 'my-dark-theme':themeDark}">
   <div class="header" fxLayout="row">
     <div class="img-wrapper">
       <img src="https://material.angular.io/assets/img/examples/shiba1.jpg" />
@@ -14,12 +14,12 @@
     </div>
   </div>
 
-  <div>
+  <div class="parent-input">
     <emoji-mart *ngIf="isEmojiPickerVisible" class="emoji-mart"  (emojiSelect)="addEmoji($event)" title="Choose it!" emoji="point_up"  ></emoji-mart>
-    <div class="input-box dark-theme">
+    <div class="input-box">
       <button class="emoji-button" mat-icon-button (click)="isEmojiPickerVisible = !isEmojiPickerVisible;" fxLayoutAlign="center center">😀</button>
       <input matInput class="input" placeholder="Type a message" type="text" name="textarea" [(ngModel)]="textArea"/>
-      <button mat-icon-button class="send-button"><mat-icon class="send-icon dark-theme">send</mat-icon></button>
+      <button mat-icon-button class="send-button"><mat-icon class="send-icon">send</mat-icon></button>
     </div>
   </div>
 </div>

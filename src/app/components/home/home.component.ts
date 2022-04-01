@@ -7,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  theme:boolean;
+  themeDark:boolean;
   constructor() { }
 
   ngOnInit() {
+    this.setTheme();
+  }
+  
+  private setTheme(){
+    if(JSON.parse(localStorage.getItem('theme'))==1){
+      this.themeDark=true;
+    }else{
+      this.themeDark=false;
+    }
   }
 
 }
