@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -30,9 +30,11 @@ export class ChatBoxComponent implements OnInit {
       this.themeDark=false;
     }
   }
+  public getBg(){
+    return JSON.parse(localStorage.getItem('bg'));
+  }
   public addEmoji(event) {
     this.textArea = `${this.textArea}${event.emoji.native}`;
-    this.isEmojiPickerVisible = false;
  }
  
  public sendMessage(){

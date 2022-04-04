@@ -14,9 +14,9 @@
   <div class="content-chat">
     <div
       class="messages-content"
-      style="background-image: url(../../../assets/img/background4.jpg)"
+      [style]="getBg()"
     >
-      <app-chat-message></app-chat-message>
+      <app-chat-message [text]="'Hello World!'" [time]="'18:30'"></app-chat-message>
     </div>
   </div>
 

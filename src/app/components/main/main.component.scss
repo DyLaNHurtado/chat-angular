@@ -9,11 +9,8 @@
     object-fit: cover;
 }
 mat-toolbar{
-    background-color: #0c0c0c;
-opacity: 0.8;
-background-image:  linear-gradient(30deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(150deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(30deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(150deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(60deg, #32323277 25%, transparent 25.5%, transparent 75%, #32323277 75%, #32323277), linear-gradient(60deg, #32323277 25%, transparent 25.5%, transparent 75%, #32323277 75%, #32323277);
-background-size: 42px 74px;
-background-position: 0 0, 0 0, 21px 37px, 21px 37px, 0 0, 21px 37px;
+    background-color:#b14c4c;
+    
     border-bottom: 2px solid #ae9e8d;
     padding-left: 0;
 }
@@ -26,7 +23,10 @@ background-position: 0 0, 0 0, 21px 37px, 21px 37px, 0 0, 21px 37px;
     line-height:16px;
     min-width: 100%;
     min-height: 100%;
-    background-color: #8d99ae;
+    background-color: #0c0c0c;
+    background-image:  linear-gradient(30deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(150deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(30deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(150deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(60deg, #32323277 25%, transparent 25.5%, transparent 75%, #32323277 75%, #32323277), linear-gradient(60deg, #32323277 25%, transparent 25.5%, transparent 75%, #32323277 75%, #32323277);
+    background-size: 42px 74px;
+    background-position: 0 0, 0 0, 21px 37px, 21px 37px, 0 0, 21px 37px; 
 }
 .icon-menu{
     color: aliceblue;

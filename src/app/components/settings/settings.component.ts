@@ -17,6 +17,9 @@ export class SettingsComponent implements OnInit {
       window.addEventListener("storage", this.setTheme, false);
   }
 
+  public onSetBackground(background:string){
+    localStorage.setItem('bg', JSON.stringify(background));
+  }
   
   public onSetLightTheme(){
     localStorage.setItem('theme', JSON.stringify(0));

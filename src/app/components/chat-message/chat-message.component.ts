@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-chat-message',
@@ -6,9 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-message.component.scss']
 })
 export class ChatMessageComponent implements OnInit {
-
-  public text:string="Hola! 🤪";
-  public time:string = "18:30";
+//iNPUTS USUARIOS HORA ETC
+  @Input () text: string;
+  @Input () time:string;
   constructor() { }
   
   ngOnInit() {
