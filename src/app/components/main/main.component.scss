@@ -9,8 +9,13 @@
     object-fit: cover;
 }
 mat-toolbar{
-    background-color: #dd4d4d;
-    border-bottom: 1px solid black;
+    background-color: #0c0c0c;
+opacity: 0.8;
+background-image:  linear-gradient(30deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(150deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(30deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(150deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(60deg, #32323277 25%, transparent 25.5%, transparent 75%, #32323277 75%, #32323277), linear-gradient(60deg, #32323277 25%, transparent 25.5%, transparent 75%, #32323277 75%, #32323277);
+background-size: 42px 74px;
+background-position: 0 0, 0 0, 21px 37px, 21px 37px, 0 0, 21px 37px;
+    border-bottom: 2px solid #ae9e8d;
+    padding-left: 0;
 }
 .div-tools{
     align-content: space-between;
@@ -21,5 +26,13 @@ mat-toolbar{
     line-height:16px;
     min-width: 100%;
     min-height: 100%;
-    background-color: #5f5e5e;
+    background-color: #8d99ae;
+}
+.icon-menu{
+    color: aliceblue;
+}
+.logo{
+    height: 64px;
+    width: 64px;
+
 }

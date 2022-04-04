@@ -12,9 +12,11 @@
     -webkit-user-select: none;
     -moz-user-select: none;
 }
-
+mat-card{
+    min-width: 20vw;
+}
 mat-card-content{
-    padding: 20px;
+    padding: 0;
 }
 mat-tab-group{
     user-select: none;
@@ -22,8 +24,8 @@ mat-tab-group{
     -moz-user-select: none;
 }
 img{
-    height: 12vw;
-    width: 12vw;
+    height: 8vw;
+    width: 8vw;
     object-fit: cover;
     align-items: center;
 }

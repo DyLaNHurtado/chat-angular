@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
     if(this.validateToSend()){
         //Api llamada
         alert("Hola");
-        this.router.navigate(["../"]);
+        this.router.navigate(["../home"]);
     }else{
       this.dialog.open(FieldsDialog);
     }

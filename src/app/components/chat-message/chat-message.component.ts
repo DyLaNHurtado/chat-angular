@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatMessageComponent implements OnInit {
 
+  public text:string="Hola! 🤪";
+  public time:string = "18:30";
   constructor() { }
   
   ngOnInit() {

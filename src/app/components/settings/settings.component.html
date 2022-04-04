@@ -12,7 +12,7 @@
           <mat-tab label="🎨 Theme">
             <h1>🎨 Theme</h1>
             <mat-button-toggle-group  gru name="themeApp" aria-label="Theme App">
-              <div fxLayout="row" fxLayoutAlign="center center">
+              <div fxLayout="row" fxLayoutAlign="center center" fxFlex="100">
                 <mat-button-toggle class="img-option" value="background1" (click)="onSetLightTheme()"><div class="theme" style="background-color: #f3efea;">🌞</div></mat-button-toggle>
                 <mat-button-toggle class="img-option" value="background1" (click)="onSetDarkTheme()"><div class="theme" style="background-color: #4e5255;">🌜</div></mat-button-toggle>
               </div>
@@ -21,8 +21,8 @@
           <mat-tab label="🌠 Background">
             <h1>🌠 Background</h1>
               <mat-button-toggle-group gru name="fontStyle" aria-label="Font Style" >
-                <div fxLayout="column" class="options-container" >
-                  <div fxLayout="row" fxLayoutAlign="center center" class="colors">
+                <div fxLayout="column" class="options-container" fxFlex="100">
+                  <div fxLayout="row" fxLayoutAlign="center center" class="colors"fxFlex="100">
                     <mat-button-toggle class="img-option color-button" value="color_white"> <div class="color" style="background-color: #f3efea;"></div></mat-button-toggle>
                     <mat-button-toggle class="img-option color-button" value="color_black"> <div class="color" style="background-color: #4e5255;"></div></mat-button-toggle>
                     <mat-button-toggle class="img-option color-button" value="color_pink"> <div class="color" style="background-color: #eeaada;"></div></mat-button-toggle>

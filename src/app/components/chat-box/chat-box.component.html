@@ -3,8 +3,8 @@
   [ngClass]="{ 'my-light-theme': !themeDark, 'my-dark-theme': themeDark }"
 >
   <div class="header" fxLayout="row">
-    <div class="img-wrapper">
-      <img src="https://material.angular.io/assets/img/examples/shiba1.jpg" />
+    <div class="img-wrapper" (click)="openImageDialog()">
+      <img [src]="image" alt="avatar"/>
     </div>
     <div fxLayout="column">
       <span class="name">Shiba Inu</span>
@@ -27,27 +27,33 @@
       (emojiSelect)="addEmoji($event)"
       title="Choose it!"
       emoji="point_up"
+      color="#dd4d4d"
+      
     ></emoji-mart>
     <div class="input-box">
       <button
-        class="emoji-button"
-        mat-icon-button
-        (click)="isEmojiPickerVisible = !isEmojiPickerVisible"
-        fxLayoutAlign="center center"
-      >
-        😀
-      </button>
-      <input
-        matInput
-        class="input"
-        placeholder="Type a message"
-        type="text"
-        name="textarea"
-        [(ngModel)]="textArea"
-      />
-      <button mat-icon-button class="send-button">
-        <mat-icon class="send-icon">send</mat-icon>
-      </button>
+          class="emoji-button"
+          mat-icon-button
+          (click)="isEmojiPickerVisible = !isEmojiPickerVisible"
+          fxLayoutAlign="center center"
+        >
+          😀
+        </button>
+      <form fxFlex="100" fxLayout="row" [formGroup]="entityForm">
+        <input
+          matInput
+          class="input"
+          placeholder="Type a message"
+          type="text"
+          name="textarea"
+          [(ngModel)]="textArea"
+          formControlName="input"
+        />
+     
+        <button mat-icon-button class="send-button" (click)="sendMessage()">
+          <mat-icon class="send-icon" >send</mat-icon>
+        </button>
+      </form>
     </div>
   </div>
 </div>

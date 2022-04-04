@@ -8,6 +8,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 import { MatInputModule } from '@angular/material/input';
 import { ChatMessageModule } from '../chat-message/chat-message.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -20,6 +22,8 @@ import { ChatMessageModule } from '../chat-message/chat-message.module';
     MatListModule,
     MatAutocompleteModule,
     MatInputModule,
+    MatButtonModule,
+    MatIconModule
   ],
   declarations: [ContactListComponent],
   exports:[ContactListComponent]

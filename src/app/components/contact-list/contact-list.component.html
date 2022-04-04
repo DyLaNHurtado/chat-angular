@@ -2,6 +2,7 @@
   class="contact-list-container"
   [ngClass]="{ 'my-light-theme': !themeDark, 'my-dark-theme': themeDark }"
 >
+<div fxLayout="column">
   <form class="example-form">
     <mat-form-field class="search-autocomplete" appearance="fill" fxFlex="100">
       <mat-label> 🔍 Search...</mat-label>
@@ -12,8 +13,12 @@
         matInput
         [formControl]="myControl"
       />
+     
     </mat-form-field>
   </form>
+    <button mat-flat-button class="button-add" fxFlex="100"><mat-icon>add</mat-icon></button>
+</div>
+
   <mat-selection-list #contact [multiple]="false" fxLayout="column">
     <mat-list-option
       *ngFor="let contact of filteredOptions | async"

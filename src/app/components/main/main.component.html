@@ -1,12 +1,12 @@
 <div class="app-main" fxLayout="column">
       <mat-toolbar fxLayout="row">
-        <button mat-button (click)="goHome()">My Application</button>
+        <button mat-button (click)="goHome()"><img src="../../../assets/img/logo.png" class="logo"></button>
         <span class="spacer"></span>
         <div fxLayout ="row" class="div-tools">
           <div class="me">
             <button mat-button [matMenuTriggerFor]="beforeMenu">
-              <img src="https://material.angular.io/assets/img/examples/shiba1.jpg" />
-              <mat-icon>keyboard_arrow_down</mat-icon>
+              <img src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
+              <mat-icon class="icon-menu">keyboard_arrow_down</mat-icon>
             </button>
             <mat-menu #beforeMenu="matMenu" xPosition="before">
               <button mat-menu-item (click)="goProfile()" >

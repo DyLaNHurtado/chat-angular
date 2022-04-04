@@ -31,10 +31,8 @@ export class SettingsComponent implements OnInit {
   private setTheme= ()=>{
     if(JSON.parse(localStorage.getItem('theme'))==1){
       this.themeDark=true;
-      console.log("tema oscuro");
     }else{
       this.themeDark=false;
-      console.log("tema claro");
     }
   }
 
