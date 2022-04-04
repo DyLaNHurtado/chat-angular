@@ -24,6 +24,7 @@
       *ngFor="let contact of filteredOptions | async"
       [value]="contact"
       fxFlex="100"
+      (click)="sendName()"
     >
       <div fxFlex="100" fxLayout="row" class="contact">
         <img

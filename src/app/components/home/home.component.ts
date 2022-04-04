@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  contact:string;
   themeDark:boolean;
   constructor() { }
 
@@ -20,6 +20,9 @@ export class HomeComponent implements OnInit {
     }else{
       this.themeDark=false;
     }
+  }
+  public selectContact(contact:string){
+    this.contact=contact
   }
 
 }

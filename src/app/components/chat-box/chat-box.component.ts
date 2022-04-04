@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -8,6 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./chat-box.component.scss']
 })
 export class ChatBoxComponent implements OnInit {
+  @Input() contact:string;
   public textArea: string = '';
   public isEmojiPickerVisible: boolean;
   public themeDark:boolean;

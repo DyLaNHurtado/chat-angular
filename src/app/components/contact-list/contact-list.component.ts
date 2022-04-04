@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatSelectionList } from '@angular/material/list';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
@@ -10,6 +11,8 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class ContactListComponent implements OnInit {
 
+  @Output() selectContact= new EventEmitter();
+  @ViewChild("contact") contact:MatSelectionList;
   contactList:string[]=[]
   filteredOptions:Observable<string[]>;
   myControl:FormControl;
@@ -39,6 +42,9 @@ export class ContactListComponent implements OnInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.contactList.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  public sendName(){
+    this.selectContact.emit(this.contact.selectedOptions.selected[0].value);
   }
 
 }
