@@ -8,7 +8,9 @@
     (selectContact)="selectContact($event)"
       fxFlex="30"
       [ngClass]="{ 'my-light-theme': !themeDark, 'my-dark-theme': themeDark }"
+      class="contact-list"
     ></app-contact-list>
-    <app-chat-box fxFlex="70" [contact]="contact"></app-chat-box>
+    <app-chat-box *ngIf="contactSeleted" fxFlex="70" [contact]="contact" class="chat-box"></app-chat-box>
+    <app-not-selected *ngIf="!contactSeleted" fxFlex="70" class="not-selected"></app-not-selected>
   </div>
 </div>

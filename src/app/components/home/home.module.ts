@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { ChatBoxModule } from '../chat-box/chat-box.module';
 import { ContactListModule } from '../contact-list/contact-list.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { NotSelectedModule } from '../not-selected/not-selected.module';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     ChatBoxModule,
     ContactListModule,
+    NotSelectedModule
   ],
   declarations: [HomeComponent],
   exports:[HomeComponent]

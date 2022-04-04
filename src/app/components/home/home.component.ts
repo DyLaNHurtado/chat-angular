@@ -8,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   contact:string;
   themeDark:boolean;
+  contactSeleted:boolean;
   constructor() { }
 
   ngOnInit() {
+    if(this.contact==""){
+      this.contactSeleted=false;
+    }
     this.setTheme();
   }
   
@@ -23,6 +27,7 @@ export class HomeComponent implements OnInit {
   }
   public selectContact(contact:string){
     this.contact=contact
+    this.contactSeleted=true;
   }
 
 }
