@@ -64,6 +64,7 @@ export class RegisterComponent implements OnInit {
     if(this.inputName.trim()!=""&&
     this.inputLastName.trim()!=""&&
     this.inputEmail.trim()!=""&&
+    this.inputEmail.includes('@')&&
     this.inputPass!=""&&
     this.inputConfirmPass!=""){
       return true

@@ -33,7 +33,6 @@ $dark-theme: mat.define-dark-theme((
 // to an ancestor element of the components (such as `body`).
 .my-dark-theme {
   @include mat.all-component-themes($dark-theme);
-
 }
 .my-light-theme {
   @include mat.all-component-themes($light-theme);

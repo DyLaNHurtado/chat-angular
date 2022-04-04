@@ -23,7 +23,7 @@ img {
     box-sizing:border-box;
     padding-right: 17px;
     padding-left: 10px;
-    border-left: 1px solid black;
+    border-left: 2px solid black;
     display:flex;
     float:none;
     line-height:20px;
@@ -53,14 +53,14 @@ img {
     height: 40;
     width: 24;
     text-align: center;
-    color: #919191;
+    color: #dd4d4d;
 }
 
 .messages-content{
     height: 75vh;
     padding-right: 17px;
     padding-left: 10px;
-    border-left: 1px solid black;
+    border-left: 2px solid black;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -73,45 +73,49 @@ img {
     font-size: large;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
-    color: #a1eb7e;
+    color: #dd4d4d;
 }
 .status{
     font-size: 0.8em;
     color: #919191;
 }
 .my-dark-theme .parent-input .input-box{
-    background-color: #424242;
+    background-color: #2b2d42;
     padding-right: 17px;
     padding-left: 10px;
-    border-left: 1px solid whitesmoke;
+    border-left: 2px solid whitesmoke;
     display: flex;
 }
 .my-dark-theme .content-chat .messages-content{
-    border-left: 1px solid whitesmoke;
+    border-left: 2px solid whitesmoke;
 }
 .my-dark-theme .header{
-    border-left: 1px solid whitesmoke;
+    border-left: 2px solid whitesmoke;
 }
 
 .my-light-theme .parent-input .input-box{
-    background-color: #f6f6f6;
+    background-color: #edf2f4;
     padding-right: 17px;
     padding-left: 10px;
-    border-left: 1px solid #424242;
+    border-left: 2px solid #2b2d42;
     display: flex;
 }
 .my-light-theme .content-chat .messages-content{
-    border-left: 1px solid#424242;
+    border-left: 2px solid #2b2d42;
 }
 .my-light-theme .header{
-    border-left: 1px solid #424242;
+    border-left: 2px solid #2b2d42;
     background-color: white;
+}
+.my-dark-theme .header{
+    border-left: 2px solid whitesmoke;
+    background-color: #2b2d42;
 }
 
 .input-box{
     padding-right: 17px;
     padding-left: 10px;
-    border-left: 1px solid black;
+    border-left: 2px solid black;
     display: flex;
 
 }

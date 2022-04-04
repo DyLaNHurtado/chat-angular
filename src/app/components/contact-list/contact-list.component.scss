@@ -14,3 +14,16 @@ p{
     -webkit-user-select: none;
     -moz-user-select: none;
 }
+
+.my-light-theme{
+    background-color: #f7f7f7;
+}
+
+.my-dark-theme{
+    background-color: #282438;
+}
+
+.my-dark-theme .search-autocomplete{
+    background-color: #242638;
+    margin:0
+}

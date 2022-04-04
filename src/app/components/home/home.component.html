@@ -1,6 +1,13 @@
-  <div fxLayout="column" fxFlexFill [ngClass]="{ 'my-light-theme':!themeDark, 'my-dark-theme':themeDark}">
-    <div class="home-wrapper" fxLayout="row">
-      <app-contact-list fxFlex="30"></app-contact-list>
-      <app-chat-box fxFlex="70"></app-chat-box>
-    </div>
+<div
+  fxLayout="column"
+  fxFlexFill
+  [ngClass]="{ 'my-light-theme': !themeDark, 'my-dark-theme': themeDark }"
+>
+  <div class="home-wrapper" fxLayout="row">
+    <app-contact-list
+      fxFlex="30"
+      [ngClass]="{ 'my-light-theme': !themeDark, 'my-dark-theme': themeDark }"
+    ></app-contact-list>
+    <app-chat-box fxFlex="70"></app-chat-box>
+  </div>
 </div>
