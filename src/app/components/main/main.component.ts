@@ -32,11 +32,18 @@ export class MainComponent implements OnInit {
   }
   public goLogout(){
     this.router.navigate(["../login"]);
+    this.resetLocalStorage();
   }
   public goAboutUs(){
     this.router.navigate(["../aboutUs"]);
   }
   public goSettings(){
     this.router.navigate(["../settings"]);
+  }
+
+  private resetLocalStorage(){
+    localStorage.setItem('last',JSON.stringify(""));
+    localStorage.setItem('bg',JSON.stringify("background-image: url(../../../assets/img/background1.png)"));
+    localStorage.setItem('theme',JSON.stringify("0"));
   }
 }

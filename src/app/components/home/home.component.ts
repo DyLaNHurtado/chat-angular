@@ -12,8 +12,11 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if(this.contact==""){
+    this.contact= JSON.parse(localStorage.getItem('last'));
+    if(this.contact=="" || this.contact==undefined){
       this.contactSeleted=false;
+    }else{
+      this.contactSeleted=true
     }
     this.setTheme();
   }
@@ -27,6 +30,7 @@ export class HomeComponent implements OnInit {
   }
   public selectContact(contact:string){
     this.contact=contact
+    localStorage.setItem('last',JSON.stringify(this.contact));
     this.contactSeleted=true;
   }
 

@@ -94,7 +94,7 @@ img {
 }
 
 .my-light-theme .parent-input .input-box{
-    background-color: #edf2f4;
+    background:linear-gradient(to bottom, white,#cccccc);
     padding-right: 17px;
     padding-left: 10px;
     border-left: 2px solid #2b2d42;
@@ -105,7 +105,7 @@ img {
 }
 .my-light-theme .header{
     border-left: 2px solid #2b2d42;
-    background-color: white;
+    background:linear-gradient(to bottom, white,#cccccc);
 }
 .my-dark-theme .header{
     border-left: 2px solid whitesmoke;
