@@ -86,6 +86,10 @@ img {
     border-left: 2px solid whitesmoke;
     display: flex;
 }
+.my-dark-theme .parent-input .input-box input{
+    color: whitesmoke;
+    background-color: #424242;
+}
 .my-dark-theme .content-chat .messages-content{
     border-left: 2px solid whitesmoke;
 }
