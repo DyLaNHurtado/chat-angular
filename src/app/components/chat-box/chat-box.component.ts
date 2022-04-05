@@ -43,7 +43,7 @@ export class ChatBoxComponent implements OnInit {
   if(this.input.trim()!=""){
     alert(this.input.trim());
     this.entityForm.get("input").setValue("");
-
+    this.isEmojiPickerVisible=false
    }
   }
 
