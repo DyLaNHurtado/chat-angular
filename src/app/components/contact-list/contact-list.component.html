@@ -16,7 +16,7 @@
      
     </mat-form-field>
   </form>
-    <button mat-flat-button class="button-add" fxFlex="100"><mat-icon>add</mat-icon></button>
+    <button mat-flat-button class="button-add" (click)="openAddDialog()" fxFlex="100"><mat-icon>add</mat-icon></button>
 </div>
 
   <mat-selection-list #contact [multiple]="false" fxLayout="column">

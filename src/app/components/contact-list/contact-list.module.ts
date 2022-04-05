@@ -7,9 +7,10 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatListModule} from '@angular/material/list'; 
 import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 import { MatInputModule } from '@angular/material/input';
-import { ChatMessageModule } from '../chat-message/chat-message.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddDialogModule } from '../add-dialog/add-dialog.module';
 
 
 @NgModule({
@@ -23,7 +24,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatAutocompleteModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    AddDialogModule
   ],
   declarations: [ContactListComponent],
   exports:[ContactListComponent]

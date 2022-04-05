@@ -1,8 +1,10 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSelectionList } from '@angular/material/list';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 
 @Component({
   selector: 'app-contact-list',
@@ -17,7 +19,8 @@ export class ContactListComponent implements OnInit {
   filteredOptions:Observable<string[]>;
   myControl:FormControl;
   themeDark:boolean;
-  constructor() {
+  
+  constructor(public dialog: MatDialog) {
     this.myControl= new FormControl();
   }
 
@@ -47,4 +50,9 @@ export class ContactListComponent implements OnInit {
     this.selectContact.emit(this.contact.selectedOptions.selected[0].value);
   }
 
+  public openAddDialog(){
+    this.dialog.open(AddDialogComponent);
+  }
+
 }
+

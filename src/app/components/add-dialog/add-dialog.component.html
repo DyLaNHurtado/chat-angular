@@ -1,0 +1,8 @@
+<div class="add-dialog-container" fxLayoutAlign="center center">
+  <form class="example-form" [formGroup]="entityForm" fxFlex="100" fxLayout="column" >
+      <mat-form-field class="example-full-width" appearance="fill"  >
+      <input matInput placeholder="Enter the email" fxFlex="100" formControlName="addInput"/>
+      </mat-form-field>
+      <button mat-raised-button (click)="addContact()" color="primary" ><mat-icon>add</mat-icon></button>
+  </form>
+</div>

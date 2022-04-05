@@ -18,8 +18,8 @@ export class RegisterComponent implements OnInit {
   inputPass!:string;
   inputConfirmPass!:string;
   themeDark:boolean;
-  
   @Output() setLogin=new EventEmitter();
+  
   constructor(public dialog: MatDialog,private router:Router) { }
 
   ngOnInit() {
