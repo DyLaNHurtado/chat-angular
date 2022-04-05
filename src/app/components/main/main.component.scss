@@ -36,3 +36,9 @@ mat-toolbar{
     width: 64px;
 
 }
+
+.logo:hover{
+    -webkit-transform:scale(1.3);transform:scale(1.3);
+    overflow:hidden;
+}
+

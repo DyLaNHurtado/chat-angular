@@ -1,9 +1,20 @@
-.not-selected-container{
-    box-sizing:content-box;
-    display:block;
-    float:none;
-    line-height:16px;
-    position:static;
-    z-index:auto;
+div{
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
     min-height: 100%;
+    line-height:0;
+}
+.img-welcome{
+    height: 90px;
+    width: 100%;
+    
+    scale: 1;
+    object-fit: none;
+}
+
+.img-plane{
+    max-width:70%;
+    scale: 0.6;  
+    display:block 
 }
