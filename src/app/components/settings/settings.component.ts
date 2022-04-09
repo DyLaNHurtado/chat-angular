@@ -20,6 +20,9 @@ export class SettingsComponent implements OnInit {
   public onSetBackground(background:string){
     localStorage.setItem('bg', JSON.stringify(background));
   }
+  public onSetBgColor(bg_color:string){
+    localStorage.setItem('bg_color', JSON.stringify(bg_color));
+  }
   
   public onSetLightTheme(){
     localStorage.setItem('theme', JSON.stringify(0));
@@ -31,6 +34,10 @@ export class SettingsComponent implements OnInit {
     window.dispatchEvent(new Event('storage'));
   }
 
+  public getColor(){
+    return JSON.parse(localStorage.getItem('bg_color'))
+  }
+
   private setTheme= ()=>{
     if(JSON.parse(localStorage.getItem('theme'))==1){
       this.themeDark=true;
@@ -40,7 +47,7 @@ export class SettingsComponent implements OnInit {
   }
 
   openSnackBar() {
-    this._snackBar.open("✅ Saved! ", "Ok");
+    this._snackBar.open("✅ Saved! ", "Ok",{duration:3000});
     this.router.navigate(["../home"])
   }
 

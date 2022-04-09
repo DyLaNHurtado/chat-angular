@@ -58,49 +58,49 @@
                 <mat-button-toggle
                   class="img-option color-button"
                   value="color_white"
-                  (click)="onSetBackground('background-color: #f3efea;')"
+                  (click)="onSetBgColor('background-color: #f3efea;')"
                 >
                   <div class="color" style="background-color: #f3efea"></div
                 ></mat-button-toggle>
                 <mat-button-toggle
                   class="img-option color-button"
                   value="color_black"
-                  (click)="onSetBackground('background-color: #4e5255;')"
+                  (click)="onSetBgColor('background-color: #4e5255;')"
                 >
                   <div class="color" style="background-color: #4e5255"></div
                 ></mat-button-toggle>
                 <mat-button-toggle
                   class="img-option color-button"
                   value="color_pink"
-                  (click)="onSetBackground('background-color: #eeaada;')"
+                  (click)="onSetBgColor('background-color: #eeaada;')"
                 >
                   <div class="color" style="background-color: #eeaada"></div
                 ></mat-button-toggle>
                 <mat-button-toggle
                   class="img-option color-button"
                   value="color_blue"
-                  (click)="onSetBackground('background-color: #aacdee;')"
+                  (click)="onSetBgColor('background-color: #aacdee;')"
                 >
                   <div class="color" style="background-color: #aacdee"></div
                 ></mat-button-toggle>
                 <mat-button-toggle
                   class="img-option color-button"
                   value="color_orange"
-                  (click)="onSetBackground('background-color: #eebfaa;')"
+                  (click)="onSetBgColor('background-color: #eebfaa;')"
                 >
                   <div class="color" style="background-color: #eebfaa"></div
                 ></mat-button-toggle>
                 <mat-button-toggle
                   class="img-option color-button"
                   value="color_green"
-                  (click)="onSetBackground('background-color: #d4eeaa;')"
+                  (click)="onSetBgColor('background-color: #d4eeaa;')"
                 >
                   <div class="color" style="background-color: #d4eeaa"></div
                 ></mat-button-toggle>
                 <mat-button-toggle
                   class="img-option color-button"
                   value="color_purple"
-                  (click)="onSetBackground('background-color: #d8aaee;')"
+                  (click)="onSetBgColor('background-color: #d8aaee;')"
                 >
                   <div class="color" style="background-color: #d8aaee"></div
                 ></mat-button-toggle>
@@ -116,22 +116,34 @@
                   <mat-button-toggle
                     class="img-option"
                     value="background1"
+                    (click)="onSetBackground('')"
+                    ><mat-icon class="clear-icon" [style]="getColor()"
+                      >no_sim</mat-icon
+                    ></mat-button-toggle
+                  >
+                  <mat-button-toggle
+                    class="img-option"
+                    value="background1"
                     (click)="
                       onSetBackground(
-                        'background-image: url(../../../assets/img/bg-cats.svg)'
+                        'background-image: url(https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/b814d3e449d34f6efe09a53964e64b7b379f2aa3/src/assets/img/bg-cats.svg)'
                       )
                     "
-                    ><img src="../../../assets/img/bg-cats.svg"
+                    ><img
+                      src="https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/b814d3e449d34f6efe09a53964e64b7b379f2aa3/src/assets/img/bg-cats.svg"
+                      [style]="getColor()"
                   /></mat-button-toggle>
                   <mat-button-toggle
                     class="img-option"
                     value="background1"
                     (click)="
                       onSetBackground(
-                        'background-image: url(../../../assets/img/bg-math.svg)'
+                        'background-image: url(https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/b814d3e449d34f6efe09a53964e64b7b379f2aa3/src/assets/img/bg-math.svg)'
                       )
                     "
-                    ><img src="../../../assets/img/bg-math.svg"
+                    ><img
+                      src="https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/b814d3e449d34f6efe09a53964e64b7b379f2aa3/src/assets/img/bg-math.svg"
+                      [style]="getColor()"
                   /></mat-button-toggle>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="center center">
@@ -140,20 +152,24 @@
                     value="background3"
                     (click)="
                       onSetBackground(
-                        'background-image: url(../../../assets/img/bg-starwars.svg)'
+                        'background-image: url(https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/b814d3e449d34f6efe09a53964e64b7b379f2aa3/src/assets/img/bg-starwars.svg)'
                       )
                     "
-                    ><img src="../../../assets/img/bg-starwars.svg"
+                    ><img
+                      src="https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/b814d3e449d34f6efe09a53964e64b7b379f2aa3/src/assets/img/bg-starwars.svg"
+                      [style]="getColor()"
                   /></mat-button-toggle>
                   <mat-button-toggle
                     class="img-option"
                     value="background4"
                     (click)="
                       onSetBackground(
-                        'background-image: url(../../../assets/img/bg-art.svg)'
+                        'background-image: url(https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/b814d3e449d34f6efe09a53964e64b7b379f2aa3/src/assets/img/bg-art.svg)'
                       )
                     "
-                    ><img src="../../../assets/img/bg-art.svg"
+                    ><img
+                      src="https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/b814d3e449d34f6efe09a53964e64b7b379f2aa3/src/assets/img/bg-art.svg"
+                      [style]="getColor()"
                   /></mat-button-toggle>
                 </div>
               </div>

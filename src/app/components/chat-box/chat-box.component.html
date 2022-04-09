@@ -4,19 +4,19 @@
 >
   <div class="header" fxLayout="row">
     <div class="img-wrapper" (click)="openImageDialog()">
-      <img [src]="image" alt="avatar"/>
+      <img [src]="image" alt="avatar" />
     </div>
     <div fxLayout="column">
-      <span class="name">{{contact}}</span>
+      <span class="name">{{ contact }}</span>
       <span class="status">📝 Writing ...</span>
     </div>
   </div>
-  <div class="content-chat">
-    <div
-      class="messages-content"
-      [style]="getBg()"
-    >
-      <app-chat-message [text]="'Hello World!'" [time]="'18:30'"></app-chat-message>
+  <div class="content-chat" [style]="getColor()">
+    <div class="messages-content" [style]="getBg()">
+      <app-chat-message
+        [text]="'Hello World!'"
+        [time]="'18:30'"
+      ></app-chat-message>
     </div>
   </div>
 
@@ -28,17 +28,16 @@
       title="Choose it!"
       emoji="point_up"
       color="#dd4d4d"
-      
     ></emoji-mart>
     <div class="input-box">
       <button
-          class="emoji-button"
-          mat-icon-button
-          (click)="isEmojiPickerVisible = !isEmojiPickerVisible"
-          fxLayoutAlign="center center"
-        >
-          😀
-        </button>
+        class="emoji-button"
+        mat-icon-button
+        (click)="isEmojiPickerVisible = !isEmojiPickerVisible"
+        fxLayoutAlign="center center"
+      >
+        😀
+      </button>
       <form fxFlex="100" fxLayout="row" [formGroup]="entityForm">
         <input
           matInput
@@ -49,9 +48,9 @@
           [(ngModel)]="textArea"
           formControlName="input"
         />
-     
+
         <button mat-icon-button class="send-button" (click)="sendMessage()">
-          <mat-icon class="send-icon" >send</mat-icon>
+          <mat-icon class="send-icon">send</mat-icon>
         </button>
       </form>
     </div>

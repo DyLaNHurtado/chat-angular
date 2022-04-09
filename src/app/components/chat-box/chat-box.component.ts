@@ -34,6 +34,9 @@ export class ChatBoxComponent implements OnInit {
   public getBg(){
     return JSON.parse(localStorage.getItem('bg'));
   }
+  public getColor(){
+    return JSON.parse(localStorage.getItem('bg_color'));
+  }
   public addEmoji(event) {
     this.textArea = `${this.textArea}${event.emoji.native}`;
  }
