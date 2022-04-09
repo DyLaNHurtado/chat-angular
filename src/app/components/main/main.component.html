@@ -1,33 +1,40 @@
 <div class="app-main" fxLayout="column">
-      <mat-toolbar fxLayout="row">
-        <button mat-button (click)="goHome()"><img src="../../../assets/img/logo.png" class="logo"></button>
-        <span class="spacer"></span>
-        <div fxLayout ="row" class="div-tools">
-          <div class="me">
-            <button mat-button [matMenuTriggerFor]="beforeMenu">
-              <img src="https://material.angular.io/assets/img/examples/shiba1.jpg"/>
-              <mat-icon class="icon-menu">keyboard_arrow_down</mat-icon>
-            </button>
-            <mat-menu #beforeMenu="matMenu" xPosition="before">
-              <button mat-menu-item (click)="goProfile()" >
-                <mat-icon>person</mat-icon>
-                <span>Profile</span>
-              </button>
-              <button mat-menu-item (click)="goSettings()">
-                <mat-icon>settings</mat-icon>
-                <span>Settings</span>
-              </button>
-              <button mat-menu-item (click)="goAboutUs()">
-                <mat-icon>people</mat-icon>
-                <span>About us</span>
-              </button>
-              <button mat-menu-item (click)="goLogout()">
-                <mat-icon>logout</mat-icon>
-                <span>Log out</span>
-              </button>
-            </mat-menu>
-          </div>
-        </div>
-      </mat-toolbar>
+  <mat-toolbar fxLayout="row">
+    <button mat-button (click)="goHome()">
+      <img
+        src="https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/logo.png"
+        class="logo"
+      />
+    </button>
+    <span class="spacer"></span>
+    <div fxLayout="row" class="div-tools">
+      <div class="me">
+        <button mat-button [matMenuTriggerFor]="beforeMenu">
+          <img
+            src="https://material.angular.io/assets/img/examples/shiba1.jpg"
+          />
+          <mat-icon class="icon-menu">keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button mat-menu-item (click)="goProfile()">
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item (click)="goSettings()">
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button>
+          <button mat-menu-item (click)="goAboutUs()">
+            <mat-icon>people</mat-icon>
+            <span>About us</span>
+          </button>
+          <button mat-menu-item (click)="goLogout()">
+            <mat-icon>logout</mat-icon>
+            <span>Log out</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </mat-toolbar>
   <router-outlet></router-outlet>
 </div>
