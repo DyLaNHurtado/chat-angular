@@ -28,12 +28,15 @@ img{
     width: 8vw;
     object-fit: cover;
     align-items: center;
+    background-color: aqua;
+    
 }
 .img-option {
     padding: 1em;
     margin: 0.2em;
     border-radius: 10px;
     border:0;
+    
 }
 .options-container{
     padding: 10px;
@@ -41,7 +44,6 @@ img{
 }
 mat-button-toggle-group{
     border: 0;
-    margin-bottom: 2em;
 }
 mat-button-toggle{
     padding:0
@@ -65,6 +67,5 @@ h1{
     padding: 1vw 0;
 }
 .colors{
-    margin-bottom: 2vh;
 }
 .mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle {border:0;}

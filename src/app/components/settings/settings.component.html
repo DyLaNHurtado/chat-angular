@@ -1,57 +1,176 @@
-<div class="settings-wrapper" [ngClass]="{ 'my-light-theme':themeDark==false, 'my-dark-theme':themeDark}" fxLayoutAlign="center center">
+<div
+  class="settings-wrapper"
+  [ngClass]="{
+    'my-light-theme': themeDark == false,
+    'my-dark-theme': themeDark
+  }"
+  fxLayoutAlign="center center"
+>
   <mat-card class="box">
     <div>
-      <button mat-icon-button (click)="openSnackBar()"><mat-icon>arrow_back_ios</mat-icon></button>
+      <button mat-icon-button (click)="openSnackBar()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
     </div>
     <mat-card-header fxLayout="column" fxLayoutAlign="center center">
       <mat-card-title>⚙️ Settings</mat-card-title>
     </mat-card-header>
-    
-      <mat-card-content>
-        <mat-tab-group mat-align-tabs="center" color="accent">
-          <mat-tab label="🎨 Theme">
-            <h1>🎨 Theme</h1>
-            <mat-button-toggle-group  gru name="themeApp" aria-label="Theme App">
-              <div fxLayout="row" fxLayoutAlign="center center" fxFlex="100">
-                <mat-button-toggle class="img-option" value="background1" (click)="onSetLightTheme()"><div class="theme" style="background-color: #f3efea;">🌞</div></mat-button-toggle>
-                <mat-button-toggle class="img-option" value="background1" (click)="onSetDarkTheme()"><div class="theme" style="background-color: #4e5255;">🌜</div></mat-button-toggle>
+
+    <mat-card-content>
+      <mat-tab-group mat-align-tabs="center" color="accent">
+        <mat-tab label="🎨 Theme">
+          <h1>🎨 Theme</h1>
+          <mat-button-toggle-group gru name="themeApp" aria-label="Theme App">
+            <div fxLayout="row" fxLayoutAlign="center center" fxFlex="100">
+              <mat-button-toggle
+                class="img-option"
+                value="background1"
+                (click)="onSetLightTheme()"
+                ><div class="theme" style="background-color: #f3efea">
+                  🌞
+                </div></mat-button-toggle
+              >
+              <mat-button-toggle
+                class="img-option"
+                value="background1"
+                (click)="onSetDarkTheme()"
+                ><div class="theme" style="background-color: #4e5255">
+                  🌜
+                </div></mat-button-toggle
+              >
+            </div>
+          </mat-button-toggle-group>
+        </mat-tab>
+        <mat-tab label="🌠 Background">
+          <h1>🌠 Background</h1>
+          <div fxLayout="column" class="options-container" fxFlex="100">
+            <mat-button-toggle-group
+              gru
+              name="fontStyle"
+              aria-label="Font Style"
+            >
+              <div
+                fxLayout="row"
+                fxLayoutAlign="center center"
+                class="colors"
+                fxFlex="100"
+              >
+                <mat-button-toggle
+                  class="img-option color-button"
+                  value="color_white"
+                  (click)="onSetBackground('background-color: #f3efea;')"
+                >
+                  <div class="color" style="background-color: #f3efea"></div
+                ></mat-button-toggle>
+                <mat-button-toggle
+                  class="img-option color-button"
+                  value="color_black"
+                  (click)="onSetBackground('background-color: #4e5255;')"
+                >
+                  <div class="color" style="background-color: #4e5255"></div
+                ></mat-button-toggle>
+                <mat-button-toggle
+                  class="img-option color-button"
+                  value="color_pink"
+                  (click)="onSetBackground('background-color: #eeaada;')"
+                >
+                  <div class="color" style="background-color: #eeaada"></div
+                ></mat-button-toggle>
+                <mat-button-toggle
+                  class="img-option color-button"
+                  value="color_blue"
+                  (click)="onSetBackground('background-color: #aacdee;')"
+                >
+                  <div class="color" style="background-color: #aacdee"></div
+                ></mat-button-toggle>
+                <mat-button-toggle
+                  class="img-option color-button"
+                  value="color_orange"
+                  (click)="onSetBackground('background-color: #eebfaa;')"
+                >
+                  <div class="color" style="background-color: #eebfaa"></div
+                ></mat-button-toggle>
+                <mat-button-toggle
+                  class="img-option color-button"
+                  value="color_green"
+                  (click)="onSetBackground('background-color: #d4eeaa;')"
+                >
+                  <div class="color" style="background-color: #d4eeaa"></div
+                ></mat-button-toggle>
+                <mat-button-toggle
+                  class="img-option color-button"
+                  value="color_purple"
+                  (click)="onSetBackground('background-color: #d8aaee;')"
+                >
+                  <div class="color" style="background-color: #d8aaee"></div
+                ></mat-button-toggle>
               </div>
             </mat-button-toggle-group>
-          </mat-tab>
-          <mat-tab label="🌠 Background">
-            <h1>🌠 Background</h1>
-              <mat-button-toggle-group gru name="fontStyle" aria-label="Font Style" >
-                <div fxLayout="column" class="options-container" fxFlex="100">
-                  <div fxLayout="row" fxLayoutAlign="center center" class="colors"fxFlex="100">
-                    <mat-button-toggle class="img-option color-button" value="color_white" (click)="onSetBackground('background-color: #f3efea;')" > <div class="color" style="background-color: #f3efea;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option color-button" value="color_black" (click)="onSetBackground('background-color: #4e5255;')"> <div class="color" style="background-color: #4e5255;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option color-button" value="color_pink" (click)="onSetBackground('background-color: #eeaada;')"> <div class="color" style="background-color: #eeaada;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option color-button" value="color_blue" (click)="onSetBackground('background-color: #aacdee;')"> <div class="color" style="background-color: #aacdee;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option color-button" value="color_orange" (click)="onSetBackground('background-color: #eebfaa;')"> <div class="color" style="background-color: #eebfaa;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option color-button" value="color_green" (click)="onSetBackground('background-color: #d4eeaa;')"> <div class="color" style="background-color: #d4eeaa;"></div></mat-button-toggle>
-                    <mat-button-toggle class="img-option color-button" value="color_purple" (click)="onSetBackground('background-color: #d8aaee;')"> <div class="color" style="background-color: #d8aaee;"></div></mat-button-toggle>
-                  </div>
-                  <div fxLayout="row" fxLayoutAlign="center center">
-                <mat-button-toggle class="img-option" value="background1" (click)="onSetBackground('background-image: url(../../../assets/img/background1.png)')"><img src="../../../assets/img/background1.png" /></mat-button-toggle>
-                <mat-button-toggle class="img-option" value="background1" (click)="onSetBackground('background-image: url(../../../assets/img/background2.jpg)')"><img src="../../../assets/img/background2.jpg" /></mat-button-toggle>
+            <mat-button-toggle-group
+              gru
+              name="fontStyle"
+              aria-label="Font Style"
+            >
+              <div fxLayout="column" fxLayoutAlign="center center" fxFlex="100">
+                <div fxLayout="row" fxLayoutAlign="center center" fxFlex="100">
+                  <mat-button-toggle
+                    class="img-option"
+                    value="background1"
+                    (click)="
+                      onSetBackground(
+                        'background-image: url(../../../assets/img/bg-cats.svg)'
+                      )
+                    "
+                    ><img src="../../../assets/img/bg-cats.svg"
+                  /></mat-button-toggle>
+                  <mat-button-toggle
+                    class="img-option"
+                    value="background1"
+                    (click)="
+                      onSetBackground(
+                        'background-image: url(../../../assets/img/bg-math.svg)'
+                      )
+                    "
+                    ><img src="../../../assets/img/bg-math.svg"
+                  /></mat-button-toggle>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                  <mat-button-toggle
+                    class="img-option"
+                    value="background3"
+                    (click)="
+                      onSetBackground(
+                        'background-image: url(../../../assets/img/bg-starwars.svg)'
+                      )
+                    "
+                    ><img src="../../../assets/img/bg-starwars.svg"
+                  /></mat-button-toggle>
+                  <mat-button-toggle
+                    class="img-option"
+                    value="background4"
+                    (click)="
+                      onSetBackground(
+                        'background-image: url(../../../assets/img/bg-art.svg)'
+                      )
+                    "
+                    ><img src="../../../assets/img/bg-art.svg"
+                  /></mat-button-toggle>
+                </div>
               </div>
-              <div fxLayout="row" fxLayoutAlign="center center">
-                <mat-button-toggle class="img-option" value="background3" (click)="onSetBackground('background-image: url(../../../assets/img/background3.jpg)')"><img src="../../../assets/img/background3.jpg"></mat-button-toggle>
-                <mat-button-toggle class="img-option" value="background4" (click)="onSetBackground('background-image: url(../../../assets/img/background4.jpg)')"><img src="../../../assets/img/background4.jpg" /></mat-button-toggle>
-              </div>
-              </div>
-              </mat-button-toggle-group>
-            
-          </mat-tab>
-          <mat-tab label="❔ Help">
-            <h1>❔ Help </h1>
-            <a href="mailto:dylanhurtado43@gmail.com" target="_blank">
+            </mat-button-toggle-group>
+          </div>
+        </mat-tab>
+        <mat-tab label="❔ Help">
+          <h1>❔ Help</h1>
+          <a href="mailto:dylanhurtado43@gmail.com" target="_blank">
             <div fxFlex="100" fxLayoutAlign="center center">
-              <button mat-flat-button fxFlex="100" color="primary">Contact here</button>
+              <button mat-flat-button fxFlex="100" color="primary">
+                Contact here
+              </button>
             </div>
           </a>
-          </mat-tab>
-        </mat-tab-group>
-      </mat-card-content>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
   </mat-card>
 </div>
