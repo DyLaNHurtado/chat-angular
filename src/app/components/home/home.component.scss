@@ -16,15 +16,14 @@
 }
 .my-light-theme .not-selected{
     background-color: #484849;
-    background: url("../../../assets/img/no-content.gif");
+    background: url("https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/no-content.gif");
     background-size: cover;
     border-left:  2px solid #2b2d42;
 }
 
 .my-dark-theme .not-selected{
     padding: 0 ;
-    background: url("../../../assets/img/no-content.gif");
-    background-size: contain;
+    background: url("https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/no-content.gif");
     background-size: cover;
     border-left:  2px solid #e1e1e1;
     
