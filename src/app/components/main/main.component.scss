@@ -9,7 +9,7 @@
     object-fit: cover;
 }
 mat-toolbar{
-    background: linear-gradient(to bottom, #405663, #242638);
+    background: linear-gradient(to right,#3c0425 ,#4c126bc2,#fabb5dbc);
     border-bottom: 2px solid #ae9e8d;
     padding-left: 0;
 }
@@ -22,10 +22,8 @@ mat-toolbar{
     line-height:16px;
     min-width: 100%;
     min-height: 100%;
-    background-color: #0c0c0c;
-    background-image:  linear-gradient(30deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(150deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(30deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(150deg, #323232 12%, transparent 12.5%, transparent 87%, #323232 87.5%, #323232), linear-gradient(60deg, #32323277 25%, transparent 25.5%, transparent 75%, #32323277 75%, #32323277), linear-gradient(60deg, #32323277 25%, transparent 25.5%, transparent 75%, #32323277 75%, #32323277);
-    background-size: 42px 74px;
-    background-position: 0 0, 0 0, 21px 37px, 21px 37px, 0 0, 21px 37px; 
+    background: url("../../../assets/img/login.gif");
+    background-size: contain;
 }
 .icon-menu{
     color: aliceblue;

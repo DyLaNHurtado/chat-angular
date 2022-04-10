@@ -5,17 +5,11 @@ div{
     min-height: 100%;
     line-height:0;
 }
-.img-welcome{
-    height: 90px;
-    min-width: 100%;
-    display:inline-block;
-    scale: 0.35;
-    object-fit: none;
-    overflow: hidden;
-}
 
-.img-plane{
-    max-width:70%;
-    scale: .60;  
-    display:inline-block;
+p{
+    padding: 50px 100px;
+    background: #32323292;
+    color: #fdbd5e;
+    font-size: x-large;
+    border-radius: 10px;
 }

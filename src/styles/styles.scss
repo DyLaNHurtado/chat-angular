@@ -43,7 +43,11 @@ html, body {
   width: 100%;
   margin: 0;
   padding: 0;}
-  
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-menu-content{
+  opacity: 0.9;
+  background: linear-gradient(to right,#3c04255d ,#4c126b45,#fabb5d4f);
+}
 
 @import '~@ctrl/ngx-emoji-mart/picker';

@@ -1,11 +1,12 @@
 .login-wrapper {
     height: 100%;
-    background-color: #686868;
+    background: url("../../../assets/img/login.gif");
+    background-size: contain;
   }
   .box {
     position: relative;
     top: 0;
-    opacity: 1;
+    opacity: 0.90;
     padding: 60px 50px 40px 50px;
     width: 100%;
     border-radius: 10px;
@@ -14,6 +15,7 @@
     -ms-transform: scale(1);
     z-index: 5;
     max-width: 25em;
+    background-color: #ffffffe1;
   }
   
   .login-wrapper mat-card-header {
