@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { SocketProviderConnect } from './web-socket.service';
 
 
 @Component({
@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'ChatAngular';
-  public hide:boolean=false;
-  constructor(){
+  constructor(public socket:SocketProviderConnect){
 
   }
 }
