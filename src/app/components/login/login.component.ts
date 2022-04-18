@@ -6,6 +6,10 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketProviderConnect } from 'src/app/web-socket.service';
 import jwt_decode from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
+import { HttpclientService } from 'src/app/httpclient.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -28,7 +32,7 @@ export class LoginComponent implements OnInit {
   public entityForm!: FormGroup;
   public inputEmail!: string;
   public inputPass!: string;
-  constructor(public dialog: MatDialog,private router:Router,private cookieService: CookieService,public socket:SocketProviderConnect) {
+  constructor(public dialog: MatDialog,private router:Router,private cookieService: CookieService,public socket:SocketProviderConnect,public httpService:HttpclientService) {
     
   }
 
@@ -54,6 +58,15 @@ export class LoginComponent implements OnInit {
     if(this.validateToSend()){
         //Api llamada
         alert("Hola");
+        this.httpService.login({"email":this.inputEmail,"password":this.inputPass}).subscribe(res => {
+          console.log(res.status);
+          console.log(res.body);
+          const token=res.body.token
+          console.log(token);
+          });
+          
+        
+        
         const tokenInfo = this.getDecodedAccessToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDA0ZTRiNzE5ODFjMDQ2MjNkM2ZiMCIsImVtYWlsIjoiZHlsYW5odXJ0YWRvNDNAZ21haWwuY29tIiwiaWF0IjoxNjUwMzAxMjI0LCJleHAiOjE2NTAzODc2MjR9.mZqwdjL87gJgWrN2-vRDInRpuEjfRCZLa4uSaDiX_lQ"); // decode token
         const expireDate = tokenInfo.exp; // get token expiration dateTime
         console.log(tokenInfo);
@@ -65,7 +78,7 @@ export class LoginComponent implements OnInit {
           }
       ));
         this.router.navigate(["../home"]).then(() => {
-          window.location.reload();
+         // window.location.reload();
         });
     }else{
       this.dialog.open(FieldsDialog);

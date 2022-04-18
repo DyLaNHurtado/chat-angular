@@ -23,6 +23,7 @@ import { ProfileModule } from './components/profile/profile.module';
 import { SocketIoModule } from 'ngx-socket-io';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketProviderConnect } from './web-socket.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SocketProviderConnect } from './web-socket.service';
     MatMenuModule,
     MatToolbarModule,
     SocketIoModule,
+    HttpClientModule
   ],
   providers: [SocketProviderConnect, CookieService],
   bootstrap: [AppComponent]
