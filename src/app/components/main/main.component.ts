@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SocketProviderConnect } from 'src/app/web-socket.service';
 
 @Component({
   selector: 'app-main',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class MainComponent implements OnInit {
   themeDark:boolean;
-  constructor(private router:Router) { 
+  constructor(private router:Router,public socket:SocketProviderConnect) { 
   }
 
   ngOnInit() {
@@ -31,6 +32,7 @@ export class MainComponent implements OnInit {
     this.router.navigate(["../profile"]);
   }
   public goLogout(){
+    this.socket.disconnect();
     this.router.navigate(["../login"]);
     this.resetLocalStorage();
   }

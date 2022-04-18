@@ -9,6 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button'; 
 import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    HttpClientModule
   ],
   declarations: [LoginComponent,FieldsDialog],
   exports:[LoginComponent]

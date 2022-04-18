@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketProviderConnect } from 'src/app/web-socket.service';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +10,8 @@ export class HomeComponent implements OnInit {
   contact:string;
   themeDark:boolean;
   contactSeleted:boolean;
-  constructor() { }
-
+  constructor(public socket:SocketProviderConnect) { }
+  
   ngOnInit() {
     this.contact= JSON.parse(localStorage.getItem('last'));
     if(this.contact=="" || this.contact==undefined){

@@ -9,18 +9,16 @@ import { CookieService } from 'ngx-cookie-service';
 export class SocketProviderConnect  extends Socket{
   @Output() outEven: EventEmitter<any> = new EventEmitter(); 
   constructor(private cookieService: CookieService) {
-    console.log("hola");
-    
     super({
       url: environment.serverSocket,
       options: {
           query: {
-              //payload: cookieService.get('user')
+              payload: cookieService.get('payload')
           }
       }
 
   });
-
+  console.log(cookieService.get("payload"));
   
 
   

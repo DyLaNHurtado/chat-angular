@@ -9,7 +9,7 @@ import { SocketProviderConnect } from './web-socket.service';
 })
 export class AppComponent {
   title = 'ChatAngular';
-  constructor(public socket:SocketProviderConnect){
+  constructor(){
 
   }
 }
