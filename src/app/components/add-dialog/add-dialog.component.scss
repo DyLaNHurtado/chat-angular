@@ -4,3 +4,21 @@
 button{
     background:linear-gradient(to bottom, #8d2d2d,#9e5b5b);
 }
+.span{
+    color: rgb(245, 55, 55);
+    font-weight: bold;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    margin-bottom: 1.5em;
+    
+  }
+  .success{
+    color: rgb(110, 187, 100);
+    font-weight: bold;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    margin-bottom: 1.5em;
+    
+  }

@@ -30,6 +30,7 @@
           <mat-label>Status</mat-label>
           <input matInput placeholder="" value="" formControlName="inputStatus" />
         </mat-form-field>
+        <span *ngIf="error" class="span">{{errorMsg}}</span>
       </div>
       </mat-card-content>
     </form>

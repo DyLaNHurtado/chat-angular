@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FieldsDialog, PasswordDialog, RegisterComponent } from './register.component';
+import { RegisterComponent } from './register.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,10 +21,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule,
     
   ],
-  declarations: [RegisterComponent,PasswordDialog,FieldsDialog],
+  declarations: [RegisterComponent],
   exports:[RegisterComponent]
 })
 export class RegisterModule { }

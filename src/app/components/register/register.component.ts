@@ -10,7 +10,10 @@ import { Router } from '@angular/router';
 })
 
 export class RegisterComponent implements OnInit {
+  error:boolean=false;
+  errorMsg:string;
   hide:boolean=true;
+  hide2:boolean=true;
   entityForm!:FormGroup;
   inputName!:string;
   inputLastName!:string;
@@ -23,6 +26,7 @@ export class RegisterComponent implements OnInit {
   constructor(public dialog: MatDialog,private router:Router) { }
 
   ngOnInit() {
+    this.error=false;
     this.setTheme();
     this.entityForm = new FormGroup({
       inputName: new FormControl("", [Validators.required]),
@@ -54,10 +58,14 @@ export class RegisterComponent implements OnInit {
         alert("Hola");
         this.router.navigate(['../login'])
       }else{
-        this.dialog.open(PasswordDialog);
+        this.error=false;
+        setTimeout(()=>{this.error=true},200)
+        this.errorMsg="❌ Passwords do not match";
       }
     }else{
-      this.dialog.open(FieldsDialog);
+      this.error=false;
+      setTimeout(()=>{this.error=true},200)
+      this.errorMsg="❌ Invalid email or/and password";
     }
   }
   private validateToSend():boolean{
@@ -75,19 +83,4 @@ export class RegisterComponent implements OnInit {
   public showLogin(){
     this.router.navigate(['../login']);
   }
-}
-
-@Component({
-  selector: 'passwords-dialog',
-  templateUrl: 'passwords.dialog.html',
-})
-export class PasswordDialog {
-}
-
-
-@Component({
-  selector: 'fields-dialog',
-  templateUrl: 'fields.dialog.html',
-})
-export class FieldsDialog {
 }

@@ -11,6 +11,8 @@ import { Router} from "@angular/router";
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  error:boolean=false;
+  errorMsg:string;
   public entityForm!: FormGroup;
   public edit:boolean=false;
   public image:string="https://material.angular.io/assets/img/examples/shiba1.jpg";
@@ -23,6 +25,7 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit() {
+    this.error=false;
     this.setTheme()
     this.entityForm = new FormGroup({
       inputName: new FormControl("", [Validators.required]),
@@ -83,8 +86,11 @@ public back(){
       this.entityForm.get("inputLastName").disable();
       this.entityForm.get("inputEmail").disable();
       this.entityForm.get("inputStatus").disable();
+      this.error=false;
     }else{
-      this.dialog.open(FieldsDialog);
+      this.error=false;
+      setTimeout(()=>{this.error=true},200)
+      this.errorMsg="❌ Enter all fields or check if some is incorrect"
       this.edit=!this.edit
     }
   }
@@ -95,10 +101,4 @@ public back(){
 
 
 
-}
-@Component({
-  selector: 'fields-dialog',
-  templateUrl: '../register/fields.dialog.html',
-})
-export class FieldsDialog {
 }

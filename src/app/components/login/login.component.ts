@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketProviderConnect } from 'src/app/web-socket.service';
 import jwt_decode from 'jwt-decode';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { HttpclientService } from 'src/app/httpclient.service';
@@ -25,7 +25,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  error:boolean=false;
+  errorMsg:string;
   errorStateMatcher = new MyErrorStateMatcher();
   hide = true;
   @Output() setRegister = new EventEmitter();
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.error=false;
     this.entityForm = new FormGroup({
       inputEmail: new FormControl("", [Validators.email,Validators.required]),
       inputPass: new FormControl("", [Validators.required])
@@ -57,31 +59,39 @@ export class LoginComponent implements OnInit {
     this.inputPass=this.entityForm.get("inputPass")!.value;
     if(this.validateToSend()){
         //Api llamada
-        alert("Hola");
-        this.httpService.login({"email":this.inputEmail,"password":this.inputPass}).subscribe(res => {
+        this.httpService.login({"email":this.inputEmail,"password":this.inputPass})
+        
+        .subscribe(res => {
           console.log(res.status);
-          console.log(res.body);
-          const token=res.body.token
-          console.log(token);
-          });
-          
-        
-        
-        const tokenInfo = this.getDecodedAccessToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDA0ZTRiNzE5ODFjMDQ2MjNkM2ZiMCIsImVtYWlsIjoiZHlsYW5odXJ0YWRvNDNAZ21haWwuY29tIiwiaWF0IjoxNjUwMzAxMjI0LCJleHAiOjE2NTAzODc2MjR9.mZqwdjL87gJgWrN2-vRDInRpuEjfRCZLa4uSaDiX_lQ"); // decode token
-        const expireDate = tokenInfo.exp; // get token expiration dateTime
-        console.log(tokenInfo);
-        this.socket.connect();
-        this.cookieService.set("payload",JSON.stringify(
-          {
-            user:this.inputEmail,
-             
+          if(res.status == 200){
+            this.error=false;
+            console.log(res.body);
+            const token=res.body.token
+            console.log(token);
+            const tokenInfo = this.getDecodedAccessToken(token);
+            console.log(tokenInfo);
+            this.socket.connect();
+            this.cookieService.set("payload",JSON.stringify(
+              this.getDecodedAccessToken(token)));
+            this.router.navigate(["../home"]).then(() => {
+              // window.location.reload();
+             });
           }
-      ));
-        this.router.navigate(["../home"]).then(() => {
-         // window.location.reload();
-        });
+          },
+          (errorRes:HttpErrorResponse) => {
+              this.error=true;
+              this.errorMsg=errorRes.error.error
+          
+          });
+        
+         // decode token // get token expiration dateTime
+        
+        
+        
     }else{
-      this.dialog.open(FieldsDialog);
+      this.error=false;
+      setTimeout(()=>{this.error=true},200)
+      this.errorMsg="❌ Invalid email or/and password"
     }
   }
   private validateToSend():boolean{
@@ -93,14 +103,4 @@ export class LoginComponent implements OnInit {
 
 }
 
-
-@Component({
-  selector: 'fields-dialog',
-  templateUrl: '../register/fields.dialog.html',
-})
-export class FieldsDialog {
-}
-function skipLocationChange() {
-  throw new Error('Function not implemented.');
-}
 

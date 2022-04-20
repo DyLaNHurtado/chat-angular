@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddDialogComponent, FieldsDialog } from './add-dialog.component';
+import { AddDialogComponent} from './add-dialog.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,7 +20,7 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatIconModule
   ],
-  declarations: [AddDialogComponent,FieldsDialog],
+  declarations: [AddDialogComponent],
   exports:[AddDialogComponent]
 })
 export class AddDialogModule { }

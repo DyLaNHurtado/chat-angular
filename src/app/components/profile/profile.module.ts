@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FieldsDialog, ProfileComponent } from './profile.component';
+import { ProfileComponent } from './profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,7 +23,7 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
 
   ],
-  declarations: [ProfileComponent,FieldsDialog],
+  declarations: [ProfileComponent],
   exports:[ProfileComponent]
 })
 export class ProfileModule { }

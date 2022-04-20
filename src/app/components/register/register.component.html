@@ -3,10 +3,10 @@
     <mat-card-header>
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
-    <form class="example-form"[formGroup]="entityForm" >
-      <mat-card-content >
+    <form class="example-form"[formGroup]="entityForm">
+      <mat-card-content (keyup.enter)="sendInputValues()">
 
-        <div fxLayout="row">
+        <div fxLayout="row" >
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Name</mat-label>
             <input matInput placeholder="Enter your name" value="" formControlName="inputName">
@@ -25,19 +25,19 @@
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput [type]="hide ? 'password' : 'text'" formControlName="inputPass">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <div mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+            </div>
           </mat-form-field>
 
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Confirm Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="inputConfirmPass">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+            <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="inputConfirmPass">
+            <div mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+              <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </div>
           </mat-form-field>
-
+          <span *ngIf="error" class="span">{{errorMsg}}</span>
       </mat-card-content>
     </form>
     <mat-card-actions fxLayoutAlign="space-between center">

@@ -14,6 +14,8 @@
         formControlName="addInput"
       />
     </mat-form-field>
+    <span *ngIf="error" class="span">{{errorMsg}}</span>
+    <span *ngIf="success" class="success">{{errorMsg}}</span>
     <button mat-raised-button (click)="addContact()" color="primary">
       <mat-icon>add</mat-icon>
     </button>
