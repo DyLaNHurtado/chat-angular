@@ -27,5 +27,24 @@ export class HttpclientService {
     return this.http.get<any>(this.url+`user/${email}`,{ headers: headers,observe: 'response' });
   }
 
+  public getAvatar(auth_token:string,avatarName:string){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth_token}`,
+      
+    })
+    return this.http.get<any>(this.url+`avatar/${avatarName}`,{ headers: headers ,observe: 'response' });
+  }
+
+  public uploadAvatar(auth_token:string,userId:string,formdata:FormData){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${auth_token}`,
+      
+    })
+    
+    return this.http.put<any>(this.url+`upload-avatar/${userId}`,formdata,{ headers: headers ,observe: 'response' });
+  }
+
   
 }

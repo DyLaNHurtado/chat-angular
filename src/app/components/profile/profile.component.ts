@@ -1,6 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { Router} from "@angular/router";
 import { CookieService } from 'ngx-cookie-service';
 import { HttpclientService } from 'src/app/httpclient.service';
@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   errorMsg:string;
   public entityForm!: FormGroup;
   public edit:boolean=false;
-  public image:string="https://material.angular.io/assets/img/examples/shiba1.jpg";
+  public avatar:string="https://material.angular.io/assets/img/examples/shiba1.jpg";
   public inputName: string;
   public inputLastName: string;
   public inputEmail: string;
@@ -57,10 +57,28 @@ private setDataApiInputs(){
     inputLastName:this.user.lastname,
     inputEmail:this.user.email,
     inputStatus:this.user.status});
-    this.image=this.user.avatar
+    this.avatar=this.user.avatar
 }
 
+  public uploadAvatar(){
+    const inputImage = document.getElementById("image-input")[0];
+    let avatar=this.avatar;
+    inputImage.addEventListener('change', function(e) {
+			var file = inputImage.files[0];
+			var textType = /text.*/;
 
+				var reader = new FileReader();
+        
+				reader.onload = function(e) {
+					avatar=file;
+				}
+
+				reader.readAsText(file);	
+		});
+    this.avatar=avatar;
+    console.log("fdsd");
+    
+}
 
 
   private setTheme(){
@@ -123,8 +141,40 @@ public back(){
   }
 
   change(event:any) {
-    console.log(event.target.files);
-    }
+    const file =event.target.files[0];
+    const fd = new FormData();
+    fd.append('file', file.data)
+    this.httpService.uploadAvatar(this.cookieService.get('token').toString(),JSON.parse(this.cookieService.get('payload'))._id,fd)
+    .subscribe(res => {
+      console.log(res.status);
+      if(res.status == 200){
+        this.error=false;
+        console.log(res.body);
+        const token=res.body
+        console.log(token);
+      }
+      },
+      (errorRes:HttpErrorResponse) => {
+          this.error=true;
+          this.errorMsg=errorRes.error.error
+      });
+      console.log(file);
+      
+      this.httpService.getAvatar(this.cookieService.get('token')[1],"4fDkzPzHMgmm4Fq6znwM0xue.png")
+    .subscribe(res => {
+      console.log(res.status);
+      if(res.status == 200){
+        this.error=false;
+        console.log(res.body);
+        const token=res.body
+        console.log(token);
+      }
+      },
+      (errorRes:HttpErrorResponse) => {
+          this.error=true;
+          this.errorMsg=errorRes.error.error
+      });
+  }
 
 
 
