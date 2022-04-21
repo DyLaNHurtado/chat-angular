@@ -71,6 +71,7 @@ export class LoginComponent implements OnInit {
             const tokenInfo = this.getDecodedAccessToken(token);
             console.log(tokenInfo);
             this.socket.connect();
+            this.cookieService.set("token",token);
             this.cookieService.set("payload",JSON.stringify(
               this.getDecodedAccessToken(token)));
             this.router.navigate(["../home"]).then(() => {

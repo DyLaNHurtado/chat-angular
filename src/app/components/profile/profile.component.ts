@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router} from "@angular/router";
+import { CookieService } from 'ngx-cookie-service';
+import { HttpclientService } from 'src/app/httpclient.service';
 
 
 
@@ -11,6 +13,8 @@ import { Router} from "@angular/router";
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  private user:any;
+  private email:string;
   error:boolean=false;
   errorMsg:string;
   public entityForm!: FormGroup;
@@ -21,10 +25,23 @@ export class ProfileComponent implements OnInit {
   public inputEmail: string;
   public inputStatus: string;
   public themeDark:boolean;
-  constructor( private router:Router,public dialog: MatDialog) { }
+  constructor( private router:Router,private cookieService:CookieService,public httpService:HttpclientService) { }
 
 
   ngOnInit() {
+
+    console.log(JSON.parse(this.cookieService.get('payload')).email);
+    this.email=JSON.parse(this.cookieService.get('payload')).email
+    this.httpService.getUserByEmail(this.cookieService.get('token'),this.email).subscribe(res => {
+      this.user=res.body[0];
+      this.setDataApiInputs();
+    });
+    
+    
+     
+
+
+
     this.error=false;
     this.setTheme()
     this.entityForm = new FormGroup({
@@ -33,8 +50,21 @@ export class ProfileComponent implements OnInit {
       inputEmail: new FormControl("", [Validators.email,Validators.required]),
       inputStatus: new FormControl("", [Validators.required]),
     });
+    
+    
     this.disableInputs();
+    
   }
+
+private setDataApiInputs(){
+  this.entityForm.setValue({inputName:this.user.name,
+    inputLastName:this.user.lastname,
+    inputEmail:this.user.email,
+    inputStatus:this.user.status});
+    this.image=this.user.avatar
+}
+
+
 
   private setTheme(){
     if(JSON.parse(localStorage.getItem('theme'))==1){
