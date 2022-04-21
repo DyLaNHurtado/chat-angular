@@ -15,16 +15,16 @@ export class HttpclientService {
     return this.http.post<any>(this.url+"user/login",body,{ observe: 'response' });
   }
 
+  public register(body:any){
+    return this.http.post<any>(this.url+"user/register",body,{ observe: 'response' });
+  }
+
   public getUserByEmail(auth_token:string,email:string){
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${auth_token}`
     })
     return this.http.get<any>(this.url+`user/${email}`,{ headers: headers,observe: 'response' });
-  }
-
-  public getInitialImage(){
-    return this.http.get<any>(`https://ui-avatars.com/api/?name=dvhn+Doe&background=random&format=svg`,{ observe: 'response' });
   }
 
   

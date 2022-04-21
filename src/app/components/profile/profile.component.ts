@@ -35,12 +35,8 @@ export class ProfileComponent implements OnInit {
     this.httpService.getUserByEmail(this.cookieService.get('token'),this.email).subscribe(res => {
       this.user=res.body[0];
       this.setDataApiInputs();
+      this.disableInputs();
     });
-    
-    
-     
-
-
 
     this.error=false;
     this.setTheme()
@@ -52,7 +48,7 @@ export class ProfileComponent implements OnInit {
     });
     
     
-    this.disableInputs();
+    
     
   }
 
@@ -63,6 +59,7 @@ private setDataApiInputs(){
     inputStatus:this.user.status});
     this.image=this.user.avatar
 }
+
 
 
 

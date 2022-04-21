@@ -1,7 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpclientService } from 'src/app/httpclient.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +26,7 @@ export class RegisterComponent implements OnInit {
   themeDark:boolean;
   @Output() setLogin=new EventEmitter();
   
-  constructor(public dialog: MatDialog,private router:Router) { }
+  constructor(public dialog: MatDialog,private router:Router,private cookieService:CookieService,public httpService:HttpclientService) { }
 
   ngOnInit() {
     this.error=false;
@@ -55,6 +58,27 @@ export class RegisterComponent implements OnInit {
     if(this.validateToSend()){
       if(this.inputPass==this.inputConfirmPass){
         //Api llamada 
+
+        this.httpService.register({"name":this.inputName,"lastname":this.inputLastName,"email":this.inputEmail,"password":this.inputPass,"avatar":`https://ui-avatars.com/api/?name=${this.inputName}+${this.inputLastName}&background=random&format=svg`})
+        .subscribe(res => {
+          console.log(res.status);
+          if(res.status == 200){
+            this.error=false;
+            console.log(res.body);
+            const token=res.body
+            console.log(token);
+          }
+          },
+          (errorRes:HttpErrorResponse) => {
+              this.error=true;
+              this.errorMsg=errorRes.error.error
+          
+          });
+
+
+
+
+
         alert("Hola");
         this.router.navigate(['../login'])
       }else{
