@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SocketProviderConnect } from './web-socket.service';
 
 
 @Component({

@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
             this.cookieService.set("payload",JSON.stringify(
               this.getDecodedAccessToken(token)));
             this.router.navigate(["../home"]).then(() => {
-              // window.location.reload();
+              window.location.reload();
              });
           }
           },
