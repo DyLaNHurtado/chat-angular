@@ -27,12 +27,12 @@ export class HttpclientService {
     return this.http.get<any>(this.url+`user/${email}`,{ headers: headers,observe: 'response' });
   }
 
-  public getAvatar(auth_token:string,avatarName:string){
+  public getAvatar(avatarName:string){
     
     return this.http.get(this.url+`user/avatar/${avatarName}`,{observe: 'response',responseType: 'blob' });
   }
 
-  public uploadAvatar(auth_token:string,userId:string,formdata:FormData){
+  public uploadAvatar(userId:string,formdata:FormData){
   console.log("fddsf");
 
     return this.http.put<any>(this.url+`user/upload-avatar/${userId}`,formdata,{observe: 'response' });

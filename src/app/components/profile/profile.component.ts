@@ -159,7 +159,7 @@ public back(){
     console.log(JSON.parse(this.cookieService.get('payload')).id); 
     console.log(this.cookieService.get('token'));
     
-     this.httpService.uploadAvatar(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).id,fd)
+     this.httpService.uploadAvatar(JSON.parse(this.cookieService.get('payload')).id,fd)
     .subscribe(res => {
       console.log(res.status);
       if(res.status == 200){
@@ -200,7 +200,7 @@ public back(){
 
 
 setTimeout(()=>{
-      this.httpService.getAvatar(this.cookieService.get('token'),this.user.avatar.replace("uploads/",""))
+      this.httpService.getAvatar(this.user.avatar.replace("uploads/",""))
         .subscribe(res => {
           console.log(this.user.avatar);
           console.log(res.status);
