@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.socket.disconnect();
     this.error=false;
     this.entityForm = new FormGroup({
       inputEmail: new FormControl("", [Validators.email,Validators.required]),
