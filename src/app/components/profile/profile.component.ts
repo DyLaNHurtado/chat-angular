@@ -146,20 +146,19 @@ public back(){
     
     const file =event.target.files[0];
     this.uploadImageApi(file);
-      this.getImageApi();
       
     }
 
 
 
 
-    private  async uploadImageApi(file){
+    private   uploadImageApi(file){
       const fd = new FormData();
       fd.append('avatar', file, file.name)
     console.log(JSON.parse(this.cookieService.get('payload')).id); 
     console.log(this.cookieService.get('token'));
     
-    await this.httpService.uploadAvatar(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).id,fd)
+     this.httpService.uploadAvatar(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).id,fd)
     .subscribe(res => {
       console.log(res.status);
       if(res.status == 200){
@@ -174,15 +173,15 @@ public back(){
       });
 
       
-      this.getImageApi();
+      setTimeout(()=>this.getImageApi(),2000);
     }
 
 
 
 
-    private async  getImageApi(){
+    private   getImageApi(){
 
-        await this.httpService.getUserByEmail(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).email)
+         this.httpService.getUserByEmail(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).email)
     .subscribe(res => {
       console.log(res.status);
       if(res.status == 200){
@@ -199,8 +198,8 @@ public back(){
       });
 
 
-
-      await this.httpService.getAvatar(this.cookieService.get('token'),this.user.avatar)
+setTimeout(()=>{
+      this.httpService.getAvatar(this.cookieService.get('token'),this.user.avatar.replace("uploads/",""))
         .subscribe(res => {
           console.log(this.user.avatar);
           console.log(res.status);
@@ -209,7 +208,7 @@ public back(){
           if(res.status == 200){
             var reader = new FileReader();
             reader.readAsDataURL(res.body);
-              reader.onloadend = function() {
+              reader.onload = () => {
                 ProfileComponent.base64data = reader.result;
                 console.log(ProfileComponent.base64data.toString());
               }
@@ -218,8 +217,8 @@ public back(){
                 this.base64dataToImage();
                 this.error=false;
                 console.log(res.body);
-              },100000)
-                
+              },1000)
+              reader.readAsText(res.body);
               
           }
           },
@@ -229,6 +228,6 @@ public back(){
               this.error=true;
               this.errorMsg=errorRes.error.error
           });
-      }
+        },2000)}
 
 }
