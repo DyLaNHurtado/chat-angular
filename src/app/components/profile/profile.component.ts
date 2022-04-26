@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   errorMsg:string;
   public entityForm!: FormGroup;
   public edit:boolean=false;
-  public avatar:string="https://c.tenor.com/On7kvXhzml4AAAAi/loading-gif.gif";
+  public avatar:string="https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif";
   public inputName: string;
   public inputLastName: string;
   public inputEmail: string;
@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit {
         this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(ProfileComponent.base64data));
         console.log(this.avatar);
       }
-    },200)
+    },1)
     
 }
 private setDataApiInputs(){
