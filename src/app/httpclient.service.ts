@@ -33,9 +33,12 @@ export class HttpclientService {
   }
 
   public uploadAvatar(userId:string,formdata:FormData){
-  console.log("fddsf");
 
     return this.http.put<any>(this.url+`user/upload-avatar/${userId}`,formdata,{observe: 'response' });
+  }
+
+  public editProfile(body:any,idUser:string){
+    return this.http.put<any>(this.url+`user/edit-profile/${idUser}`,body,{ observe: 'response' });
   }
 
 

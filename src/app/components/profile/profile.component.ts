@@ -64,10 +64,8 @@ export class ProfileComponent implements OnInit {
         this.getImageApi()
       }else{
         console.log("siiii");
-        console.log(this.avatar);
         
         this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(ProfileComponent.base64data));
-        console.log(this.avatar);
       }
     },1)
     
@@ -118,6 +116,17 @@ public back(){
     }else{
       this.edit=!this.edit;
       this.disableInputs();
+      
+      this.httpService.editProfile({"name":this.inputName,"lastname":this.inputLastName,"email":this.inputEmail,"status":this.inputStatus},JSON.parse(this.cookieService.get('payload')).id)
+      .subscribe(res => { 
+        this.error=false;
+        window.location.reload();
+      },
+        (errorRes:HttpErrorResponse) => {
+          console.log(errorRes);
+            this.error=true;
+            this.errorMsg=errorRes.error.error
+        });
     }
   }
 
@@ -147,7 +156,6 @@ public back(){
     
     const file =event.target.files[0];
     this.uploadImageApi(file);
-      
     }
 
 
