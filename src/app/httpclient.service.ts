@@ -38,5 +38,5 @@ export class HttpclientService {
     return this.http.put<any>(this.url+`user/upload-avatar/${userId}`,formdata,{observe: 'response' });
   }
 
-  
+
 }

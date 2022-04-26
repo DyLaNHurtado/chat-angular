@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   errorMsg:string;
   public entityForm!: FormGroup;
   public edit:boolean=false;
-  public avatar:string="https://material.angular.io/assets/img/examples/shiba1.jpg";
+  public avatar:string="https://c.tenor.com/On7kvXhzml4AAAAi/loading-gif.gif";
   public inputName: string;
   public inputLastName: string;
   public inputEmail: string;
@@ -40,6 +40,7 @@ export class ProfileComponent implements OnInit {
 
       
       this.setDataApiInputs();
+      this.getImageApi();
       this.disableInputs();
     });
 
@@ -68,7 +69,7 @@ export class ProfileComponent implements OnInit {
         this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(ProfileComponent.base64data));
         console.log(this.avatar);
       }
-    },3000)
+    },200)
     
 }
 private setDataApiInputs(){
@@ -152,7 +153,7 @@ public back(){
 
 
 
-    private   uploadImageApi(file){
+    private uploadImageApi(file){
       const fd = new FormData();
       fd.append('avatar', file, file.name)
     console.log(JSON.parse(this.cookieService.get('payload')).id); 
@@ -173,13 +174,13 @@ public back(){
       });
 
       
-      setTimeout(()=>this.getImageApi(),2000);
+      setTimeout(()=>this.getImageApi(),100);
     }
 
 
 
 
-    private   getImageApi(){
+    private getImageApi(){
 
          this.httpService.getUserByEmail(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).email)
     .subscribe(res => {
@@ -228,6 +229,6 @@ setTimeout(()=>{
               this.error=true;
               this.errorMsg=errorRes.error.error
           });
-        },2000)}
+        },500)}
 
 }
