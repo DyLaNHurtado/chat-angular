@@ -1,9 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectionList } from '@angular/material/list';
+import { DomSanitizer } from '@angular/platform-browser';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { HttpclientService } from 'src/app/httpclient.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 
 @Component({
@@ -19,20 +23,38 @@ export class ContactListComponent implements OnInit {
   filteredOptions:Observable<string[]>;
   myControl:FormControl;
   themeDark:boolean;
+  user:any;
   
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog,private cookieService:CookieService,public httpService:HttpclientService,private _sanitizer: DomSanitizer) {
     this.myControl= new FormControl();
   }
 
   ngOnInit() {
+    
     this.setTheme();
     this.myControl = new FormControl();
-    this.contactList=["heero","hello","hola"];
+    this.setContactList();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
     );
   }
+
+  private setContactList(){
+    this.httpService.getFullUser(JSON.parse(this.cookieService.get('payload')).id)
+      .subscribe(res => {
+        if(res.status==200){
+          this.user=res.body;
+          this.contactList= this.user.contacts.map((user)=>{return user.name;})
+          
+        }
+
+        
+      },
+        (errorRes:HttpErrorResponse) => {
+          console.error(errorRes);
+        });
+    }
   
   private setTheme(){
     if(JSON.parse(localStorage.getItem('theme'))==1){
