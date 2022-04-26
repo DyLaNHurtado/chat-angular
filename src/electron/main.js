@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require("electron");
-
+const path = require('path');
+const url = require('url');
 let appWin;
 
 createWindow = () => {
@@ -10,13 +11,14 @@ createWindow = () => {
         minHeight:710,
         title: "Angular and Electron",
         resizable: true,
+        icon: "https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/logo.png",
         webPreferences: {
             contextIsolation: false,
-            nodeIntegration: true
+            nodeIntegration: true,
         }
     });
     
-    appWin.loadFile(`dist/index.html`);
+    appWin.loadURL(`http://localhost:4200`);
 
     appWin.setMenu(null);
 
@@ -26,10 +28,7 @@ createWindow = () => {
         appWin = null;
     });
 }
-const nativeImage = require('electron').nativeImage
 
-const image = nativeImage.createFromPath('src/assets/img/logo.png')
-console.log(image)
 app.on("ready", createWindow);
 
 app.on("window-all-closed", () => {

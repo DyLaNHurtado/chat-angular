@@ -86,9 +86,6 @@ export class LoginComponent implements OnInit {
           
           });
         
-         // decode token // get token expiration dateTime
-        
-        
         
     }else{
       this.error=false;
