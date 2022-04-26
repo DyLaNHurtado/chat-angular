@@ -1,9 +1,11 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse, JsonpClientBackend } from '@angular/common/http';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router} from "@angular/router";
 import { CookieService } from 'ngx-cookie-service';
 import { HttpclientService } from 'src/app/httpclient.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { LoginComponent } from '../login/login.component';
 
 
 
@@ -25,7 +27,8 @@ export class ProfileComponent implements OnInit {
   public inputEmail: string;
   public inputStatus: string;
   public themeDark:boolean;
-  constructor( private router:Router,private cookieService:CookieService,public httpService:HttpclientService) { }
+  public static base64data:any;
+  constructor( private router:Router,private cookieService:CookieService,public httpService:HttpclientService,private _sanitizer: DomSanitizer) { }
 
 
   ngOnInit() {
@@ -34,6 +37,8 @@ export class ProfileComponent implements OnInit {
     this.email=JSON.parse(this.cookieService.get('payload')).email
     this.httpService.getUserByEmail(this.cookieService.get('token'),this.email).subscribe(res => {
       this.user=res.body[0];
+
+      
       this.setDataApiInputs();
       this.disableInputs();
     });
@@ -51,32 +56,29 @@ export class ProfileComponent implements OnInit {
     
     
   }
-
+  public base64dataToImage() : void {
+    setTimeout(()=>{
+      if(!ProfileComponent.base64data){
+        console.log("nooo");
+        this.getImageApi()
+      }else{
+        console.log("siiii");
+        console.log(this.avatar);
+        
+        this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(ProfileComponent.base64data));
+        console.log(this.avatar);
+      }
+    },3000)
+    
+}
 private setDataApiInputs(){
   this.entityForm.setValue({inputName:this.user.name,
     inputLastName:this.user.lastname,
     inputEmail:this.user.email,
     inputStatus:this.user.status});
-    this.avatar=this.user.avatar
-}
-
-  public uploadAvatar(){
-    const inputImage = document.getElementById("image-input")[0];
-    let avatar=this.avatar;
-    inputImage.addEventListener('change', function(e) {
-			var file = inputImage.files[0];
-			var textType = /text.*/;
-
-				var reader = new FileReader();
-        
-				reader.onload = function(e) {
-					avatar=file;
-				}
-
-				reader.readAsText(file);	
-		});
-    this.avatar=avatar;
-    console.log("fdsd");
+    //this.avatar=this.user.avatar
+    
+    console.log(this.avatar);
     
 }
 
@@ -141,41 +143,92 @@ public back(){
   }
 
   change(event:any) {
+    
     const file =event.target.files[0];
-    const fd = new FormData();
-    fd.append('file', file.data)
-    this.httpService.uploadAvatar(this.cookieService.get('token').toString(),JSON.parse(this.cookieService.get('payload'))._id,fd)
-    .subscribe(res => {
-      console.log(res.status);
-      if(res.status == 200){
-        this.error=false;
-        console.log(res.body);
-        const token=res.body
-        console.log(token);
-      }
-      },
-      (errorRes:HttpErrorResponse) => {
-          this.error=true;
-          this.errorMsg=errorRes.error.error
-      });
-      console.log(file);
+    this.uploadImageApi(file);
+      this.getImageApi();
       
-      this.httpService.getAvatar(this.cookieService.get('token')[1],"4fDkzPzHMgmm4Fq6znwM0xue.png")
+    }
+
+
+
+
+    private  async uploadImageApi(file){
+      const fd = new FormData();
+      fd.append('avatar', file, file.name)
+    console.log(JSON.parse(this.cookieService.get('payload')).id); 
+    console.log(this.cookieService.get('token'));
+    
+    await this.httpService.uploadAvatar(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).id,fd)
     .subscribe(res => {
       console.log(res.status);
       if(res.status == 200){
         this.error=false;
-        console.log(res.body);
-        const token=res.body
-        console.log(token);
       }
       },
       (errorRes:HttpErrorResponse) => {
+        console.log(errorRes);
+        
           this.error=true;
           this.errorMsg=errorRes.error.error
       });
-  }
+
+      
+      this.getImageApi();
+    }
 
 
+
+
+    private async  getImageApi(){
+
+        await this.httpService.getUserByEmail(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).email)
+    .subscribe(res => {
+      console.log(res.status);
+      if(res.status == 200){
+        this.error=false;
+        this.user=res.body[0];
+        console.log(this.user);
+        
+      }
+      },
+      (errorRes:HttpErrorResponse) => {
+        console.log(errorRes);
+          this.error=true;
+          this.errorMsg=errorRes.error.error
+      });
+
+
+
+      await this.httpService.getAvatar(this.cookieService.get('token'),this.user.avatar)
+        .subscribe(res => {
+          console.log(this.user.avatar);
+          console.log(res.status);
+         
+         
+          if(res.status == 200){
+            var reader = new FileReader();
+            reader.readAsDataURL(res.body);
+              reader.onloadend = function() {
+                ProfileComponent.base64data = reader.result;
+                console.log(ProfileComponent.base64data.toString());
+              }
+              setTimeout(()=>{
+                console.log(ProfileComponent.base64data.toString());
+                this.base64dataToImage();
+                this.error=false;
+                console.log(res.body);
+              },100000)
+                
+              
+          }
+          },
+          (errorRes:HttpErrorResponse) => {
+            console.log(errorRes);
+            
+              this.error=true;
+              this.errorMsg=errorRes.error.error
+          });
+      }
 
 }

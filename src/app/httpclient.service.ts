@@ -28,22 +28,14 @@ export class HttpclientService {
   }
 
   public getAvatar(auth_token:string,avatarName:string){
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`,
-      
-    })
-    return this.http.get<any>(this.url+`avatar/${avatarName}`,{ headers: headers ,observe: 'response' });
+    
+    return this.http.get(this.url+`user/avatar/${avatarName}`,{observe: 'response',responseType: 'blob' });
   }
 
   public uploadAvatar(auth_token:string,userId:string,formdata:FormData){
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${auth_token}`,
-      
-    })
-    
-    return this.http.put<any>(this.url+`upload-avatar/${userId}`,formdata,{ headers: headers ,observe: 'response' });
+  console.log("fddsf");
+
+    return this.http.put<any>(this.url+`user/upload-avatar/${userId}`,formdata,{observe: 'response' });
   }
 
   

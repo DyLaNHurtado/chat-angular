@@ -1,40 +1,87 @@
-<div class="profile-wrapper" [ngClass]="{ 'my-light-theme':!themeDark, 'my-dark-theme':themeDark}" fxLayoutAlign="center center">
+<div
+  class="profile-wrapper"
+  [ngClass]="{ 'my-light-theme': !themeDark, 'my-dark-theme': themeDark }"
+  fxLayoutAlign="center center"
+>
   <mat-card class="box" fxLayout="column">
-    <div class="edit-button" fxLayout="row"  fxFlex="100" fxLayoutAlign="space-between center">
-      <button mat-icon-button (click)="back()" ><mat-icon>arrow_back_ios</mat-icon></button>
-      <button mat-icon-button (click)="onEditFields()" ><mat-icon>{{edit ? 'done' : 'edit'}}</mat-icon></button></div>
+    <div
+      class="edit-button"
+      fxLayout="row"
+      fxFlex="100"
+      fxLayoutAlign="space-between center"
+    >
+      <button mat-icon-button (click)="back()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <button mat-icon-button (click)="onEditFields()">
+        <mat-icon>{{ edit ? "done" : "edit" }}</mat-icon>
+      </button>
+    </div>
     <mat-card-header fxLayout="column" fxLayoutAlign="center center">
       <mat-card-title>👤 Profile</mat-card-title>
-      <img [src]="avatar"  alt="image_profile" />
-      <input id="image-input" fxLayoutAling="center center" *ngIf="edit" type="file"    (change)="change($event)">
+      <img [src]="avatar" alt="image_profile" />
+      <input
+        id="image-input"
+        fxLayoutAling="center center"
+        *ngIf="edit"
+        type="file"
+        (change)="change($event)"
+      />
     </mat-card-header>
 
-    <form class="example-form" [formGroup]='entityForm'>
+    <form class="example-form" [formGroup]="entityForm">
       <mat-card-content>
         <div fxLayout="column">
-        <div>
-          <mat-form-field class="example-full-width" appearance="outline" >
-            <mat-label>Name</mat-label>
-            <input matInput placeholder="" value="" formControlName="inputName" />
+          <div>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Name</mat-label>
+              <input
+                matInput
+                placeholder=""
+                value=""
+                formControlName="inputName"
+              />
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Lastname</mat-label>
+              <input
+                matInput
+                placeholder=""
+                value=""
+                formControlName="inputLastName"
+              />
+            </mat-form-field>
+          </div>
+          <mat-form-field
+            class="example-full-width"
+            fxFlex="100"
+            appearance="outline"
+          >
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              placeholder=""
+              value=""
+              formControlName="inputEmail"
+            />
           </mat-form-field>
-          <mat-form-field class="example-full-width"  appearance="outline" >
-            <mat-label>Lastname</mat-label>
-            <input matInput placeholder="" value="" formControlName="inputLastName" />
+          <mat-form-field
+            class="example-full-width"
+            fxFlex="100"
+            appearance="outline"
+          >
+            <mat-label>Status</mat-label>
+            <input
+              matInput
+              placeholder=""
+              value=""
+              formControlName="inputStatus"
+            />
           </mat-form-field>
+          <span *ngIf="error" class="span">{{ errorMsg }}</span>
         </div>
-        <mat-form-field class="example-full-width" fxFlex="100" appearance="outline" >
-          <mat-label>Email</mat-label>
-          <input matInput placeholder="" value="" formControlName="inputEmail" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width" fxFlex="100" appearance="outline" >
-          <mat-label>Status</mat-label>
-          <input matInput placeholder="" value="" formControlName="inputStatus" />
-        </mat-form-field>
-        <span *ngIf="error" class="span">{{errorMsg}}</span>
-      </div>
       </mat-card-content>
     </form>
-    <mat-card-actions fxLayoutAlign="space-between center">
-    </mat-card-actions>
+    <mat-card-actions fxLayoutAlign="space-between center"> </mat-card-actions>
   </mat-card>
 </div>
