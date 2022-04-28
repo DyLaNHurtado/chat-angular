@@ -26,7 +26,7 @@ export class ContactListComponent implements OnInit {
   user:any;
   
   constructor(public dialog: MatDialog,private cookieService:CookieService,public httpService:HttpclientService,private _sanitizer: DomSanitizer) {
-    this.myControl= new FormControl();
+    this.myControl = new FormControl();
   }
 
   ngOnInit() {
@@ -34,10 +34,8 @@ export class ContactListComponent implements OnInit {
     this.setTheme();
     this.myControl = new FormControl();
     this.setContactList();
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
-    );
+    
+   
   }
 
   private setContactList(){
@@ -45,15 +43,19 @@ export class ContactListComponent implements OnInit {
       .subscribe(res => {
         if(res.status==200){
           this.user=res.body;
-          this.contactList= this.user.contacts.map((user)=>{return user.name;})
-          
+          this.contactList = this.user.contacts.map((user)=>{return user.name;})
         }
-
-        
       },
         (errorRes:HttpErrorResponse) => {
           console.error(errorRes);
         });
+
+        setTimeout(()=>{
+          this.filteredOptions = this.myControl.valueChanges.pipe(
+            startWith(''),
+            map(value => this._filter(value)),
+          );
+        },1);
     }
   
   private setTheme(){
