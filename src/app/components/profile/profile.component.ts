@@ -207,36 +207,28 @@ public back(){
       });
 
 
-setTimeout(()=>{
+      setTimeout(()=>{
+        if(!this.user.avatar.includes("https://ui-avatars.com/api/")){
       this.httpService.getAvatar(this.user.avatar.replace("uploads/",""))
         .subscribe(res => {
-          console.log(this.user.avatar);
-          console.log(res.status);
-         
-         
-          if(res.status == 200){
-            var reader = new FileReader();
-            reader.readAsDataURL(res.body);
-              reader.onload = () => {
-                ProfileComponent.base64data = reader.result;
-                console.log(ProfileComponent.base64data.toString());
-              }
-              setTimeout(()=>{
-                console.log(ProfileComponent.base64data.toString());
-                this.base64dataToImage();
-                this.error=false;
-                console.log(res.body);
-              },1000)
-              reader.readAsText(res.body);
-              
-          }
-          },
-          (errorRes:HttpErrorResponse) => {
-            console.log(errorRes);
-            
-              this.error=true;
-              this.errorMsg=errorRes.error.error
-          });
-        },500)}
+         if(res.status == 200){
+           var reader = new FileReader();
+           reader.readAsDataURL(res.body);
+             reader.onload = () => {
+               ProfileComponent.base64data = reader.result;
+             }
+             setTimeout(()=>{
+               this.base64dataToImage();
+               console.log(res.body);
+             },1000)
+             reader.readAsText(res.body);
+         }
+         },
+         (errorRes:HttpErrorResponse) => {
+           console.error(errorRes);
+         });
+        }else{
+          this.avatar=this.user.avatar;}
+       },500)}
 
 }

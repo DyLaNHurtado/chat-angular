@@ -84,13 +84,10 @@ export class MainComponent implements OnInit {
  });
 
 
-setTimeout(()=>{
- this.httpService.getAvatar(this.user.avatar.replace("uploads/",""))
-   .subscribe(res => {
-     console.log(this.user.avatar);
-     console.log(res.status);
-    
-    
+  setTimeout(()=>{
+    if(!this.user.avatar.includes("https://ui-avatars.com/api/")){
+  this.httpService.getAvatar(this.user.avatar.replace("uploads/",""))
+    .subscribe(res => {
      if(res.status == 200){
        var reader = new FileReader();
        reader.readAsDataURL(res.body);
@@ -102,11 +99,14 @@ setTimeout(()=>{
            console.log(res.body);
          },1000)
          reader.readAsText(res.body);
-         
      }
      },
      (errorRes:HttpErrorResponse) => {
        console.error(errorRes);
      });
-   },500)}
+    }else{
+      this.avatar=this.user.avatar;}
+   },500)
+  }
+  
 }
