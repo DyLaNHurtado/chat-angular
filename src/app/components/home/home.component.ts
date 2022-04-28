@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
       this.themeDark=false;
     }
   }
-  public selectContact(contact:string){
+  public selectContact(contact:any){
     this.contact=contact
     localStorage.setItem('last',JSON.stringify(this.contact));
     this.contactSeleted=true;

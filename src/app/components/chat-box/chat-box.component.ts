@@ -1,6 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, Inject, Input, OnInit, SecurityContext } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpclientService } from 'src/app/httpclient.service';
 
 @Component({
   selector: 'app-chat-box',
@@ -8,21 +12,60 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./chat-box.component.scss']
 })
 export class ChatBoxComponent implements OnInit {
-  @Input() contact:string;
+  @Input() contact:any;
   public textArea: string = '';
   public isEmojiPickerVisible: boolean;
   public themeDark:boolean;
   public entityForm: FormGroup;
   public input: string;
-  public image:string="https://material.angular.io/assets/img/examples/shiba1.jpg";
-  constructor(public dialog: MatDialog) { }
+  static base64data:any;
+  avatar:string="https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif";
+  constructor(public dialog: MatDialog,private cookieService:CookieService,public httpService:HttpclientService,private _sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.setTheme();
     this.entityForm = new FormGroup({
       input: new FormControl("",[]),
     });
+    this.getImageApi();
   }
+
+  public base64dataToImage() : void {
+    setTimeout(()=>{
+      if(!ChatBoxComponent.base64data){
+        console.log("nooo");
+        this.getImageApi()
+      }else{
+        console.log("siiii");
+        
+        this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(ChatBoxComponent.base64data));
+      }
+    },1) 
+}
+
+private getImageApi(){
+  if(!this.contact.avatar.includes("https://ui-avatars.com/api/")){
+      this.httpService.getAvatar(this.contact.avatar.replace("uploads/",""))
+        .subscribe(res => {
+         if(res.status == 200){
+           var reader = new FileReader();
+           reader.readAsDataURL(res.body);
+             reader.onload = () => {
+               ChatBoxComponent.base64data = reader.result;
+             }
+             setTimeout(()=>{
+               this.base64dataToImage();
+               console.log(res.body);
+             },1000)
+         }
+         },
+         (errorRes:HttpErrorResponse) => {
+           console.error(errorRes);
+         });
+        }else{
+          this.avatar=this.contact.avatar;}
+}
+
   
   private setTheme(){
     if(JSON.parse(localStorage.getItem('theme'))==1){
@@ -51,10 +94,10 @@ export class ChatBoxComponent implements OnInit {
   }
 
   public openImageDialog(){
-    console.log(this.image);
+    console.log(this.avatar);
     
     this.dialog.open(ImageDialog,{
-      data:{img:this.image}
+      data:{img:this.avatar}
     });
   }
   

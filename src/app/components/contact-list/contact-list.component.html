@@ -28,15 +28,15 @@
     >
       <div fxFlex="100" fxLayout="row" class="contact">
         <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/OOjs_UI_icon_userAvatarOutline-progressive.svg/1024px-OOjs_UI_icon_userAvatarOutline-progressive.svg.png"
+          [src]="getContactAvatar('hola')"
           height="40em"
           width="40em"
           fxLayoutAlign="center center"
         />
 
         <p fxFlex="100" fxLayoutAlign="center center">{{ contact }}</p>
-        <p fxLayoutAlign="center center">🟢 Online</p>
-        <p fxLayoutAlign="center center">🔴 Offline</p>
+        <p fxLayoutAlign="end center">🟢 Online</p>
+        <p fxLayoutAlign="end center">🔴 Offline</p>
       </div>
       <mat-divider></mat-divider>
     </mat-list-option>

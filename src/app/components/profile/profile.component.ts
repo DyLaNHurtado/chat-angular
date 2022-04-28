@@ -67,9 +67,9 @@ export class ProfileComponent implements OnInit {
         
         this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(ProfileComponent.base64data));
       }
-    },1)
-    
+    },1) 
 }
+
 private setDataApiInputs(){
   this.entityForm.setValue({inputName:this.user.name,
     inputLastName:this.user.lastname,
@@ -221,7 +221,6 @@ public back(){
                this.base64dataToImage();
                console.log(res.body);
              },1000)
-             reader.readAsText(res.body);
          }
          },
          (errorRes:HttpErrorResponse) => {

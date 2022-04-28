@@ -76,13 +76,11 @@ export class MainComponent implements OnInit {
       console.log(res.status);
       if(res.status == 200){
         this.user=res.body[0];
-   
- }
+  }
  },
  (errorRes:HttpErrorResponse) => {
    console.error(errorRes);
  });
-
 
   setTimeout(()=>{
     if(!this.user.avatar.includes("https://ui-avatars.com/api/")){
@@ -98,15 +96,14 @@ export class MainComponent implements OnInit {
            this.base64dataToImage();
            console.log(res.body);
          },1000)
-         reader.readAsText(res.body);
      }
      },
      (errorRes:HttpErrorResponse) => {
        console.error(errorRes);
-     });
+     }).unsubscribe;
     }else{
       this.avatar=this.user.avatar;}
-   },500)
+   },1000)
   }
   
 }
