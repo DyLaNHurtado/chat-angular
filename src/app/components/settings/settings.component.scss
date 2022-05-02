@@ -2,12 +2,14 @@
     min-height: 100%;
 }
 .mat-card-header .mat-card-title{
-    font-size: 32px;
+    font-size: 3vw;
+    color:#415184;
+    text-shadow: 2px 4px 4px black;
     margin: 0;
-    margin-bottom: 4vh;
+    font-family: 'Luckiest Guy', cursive;
     font-weight: bold;
-    margin-top: 2em;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 4vh;
+    margin-top: 4vh;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
