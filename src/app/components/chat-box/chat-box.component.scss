@@ -37,6 +37,7 @@ img {
 .emoji-button{
     font-size: 1.5em;
     padding: 1.25em 1em;
+    text-shadow: 1px 2px 2px rgb(125, 125, 125);
     
 }
 .send-button{
@@ -53,7 +54,9 @@ img {
     height: 40;
     width: 24;
     text-align: center;
-    color: #dd4d4d;
+    color: #e0a963;
+    font-weight: bold;
+    text-shadow:0.5px 1px 1px rgb(125, 125, 125);
 }
 
 .messages-content{
@@ -73,7 +76,10 @@ img {
     font-size: large;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
-    color: #dd4d4d;
+    color: #e0a963;
+    text-shadow: 0.5px 1px 1px rgb(125, 125, 125);
+
+    
 }
 .status{
     font-size: 0.8em;
