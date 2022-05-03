@@ -3,6 +3,7 @@ import { Component, OnInit, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { elementAt } from 'rxjs/operators';
 import { HttpclientService } from 'src/app/httpclient.service';
 import { SocketProviderConnect } from 'src/app/web-socket.service';
 
@@ -76,13 +77,14 @@ export class MainComponent implements OnInit {
       console.log(res.status);
       if(res.status == 200){
         this.user=res.body[0];
+        document.dispatchEvent(new Event("gotUserMain"));
   }
  },
  (errorRes:HttpErrorResponse) => {
    console.error(errorRes);
  });
 
-  setTimeout(()=>{
+  document.addEventListener('gotUserMain',()=>{
     if(!this.user.avatar.includes("https://ui-avatars.com/api/")){
   this.httpService.getAvatar(this.user.avatar.replace("uploads/",""))
     .subscribe(res => {
@@ -91,19 +93,20 @@ export class MainComponent implements OnInit {
        reader.readAsDataURL(res.body);
          reader.onload = () => {
            MainComponent.base64data = reader.result;
+           document.dispatchEvent(new Event("readedImageMain"));
          }
-         setTimeout(()=>{
+         document.addEventListener('readedImageMain',()=>{
            this.base64dataToImage();
-           console.log(res.body);
-         },1000)
+         });
      }
      },
      (errorRes:HttpErrorResponse) => {
        console.error(errorRes);
      }).unsubscribe;
     }else{
-      this.avatar=this.user.avatar;}
-   },1000)
+      this.avatar=this.user.avatar;
+    }
+  });
   }
   
 }

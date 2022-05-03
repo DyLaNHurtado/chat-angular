@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
     
   }
   public base64dataToImage() : void {
-    setTimeout(()=>{
+
       if(!ProfileComponent.base64data){
         console.log("nooo");
         this.getImageApi()
@@ -67,7 +67,6 @@ export class ProfileComponent implements OnInit {
         
         this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(ProfileComponent.base64data));
       }
-    },1) 
 }
 
 private setDataApiInputs(){
@@ -172,6 +171,7 @@ public back(){
       console.log(res.status);
       if(res.status == 200){
         this.error=false;
+        document.dispatchEvent(new Event("avatarUploadedProfile"));
       }
       },
       (errorRes:HttpErrorResponse) => {
@@ -182,32 +182,33 @@ public back(){
       });
 
       
-      setTimeout(()=>this.getImageApi(),100);
+      document.addEventListener('avatarUploadedProfile',()=>{this.getImageApi();}); 
     }
 
 
 
 
     private getImageApi(){
+    
+      this.httpService.getUserByEmail(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).email)
+      .subscribe(res => {
+        console.log(res.status);
+        if(res.status == 200){
+          this.error=false;
+          this.user=res.body[0];
+          console.log(this.user);
+          document.dispatchEvent(new Event("gotUserProfile"));
+        }
+        },
+        (errorRes:HttpErrorResponse) => {
+          console.log(errorRes);
+            this.error=true;
+            this.errorMsg=errorRes.error.error
+        });
+         
 
-         this.httpService.getUserByEmail(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).email)
-    .subscribe(res => {
-      console.log(res.status);
-      if(res.status == 200){
-        this.error=false;
-        this.user=res.body[0];
-        console.log(this.user);
-        
-      }
-      },
-      (errorRes:HttpErrorResponse) => {
-        console.log(errorRes);
-          this.error=true;
-          this.errorMsg=errorRes.error.error
-      });
 
-
-      setTimeout(()=>{
+    document.addEventListener('gotUserProfile',()=>{
         if(!this.user.avatar.includes("https://ui-avatars.com/api/")){
       this.httpService.getAvatar(this.user.avatar.replace("uploads/",""))
         .subscribe(res => {
@@ -216,18 +217,19 @@ public back(){
            reader.readAsDataURL(res.body);
              reader.onload = () => {
                ProfileComponent.base64data = reader.result;
+               document.dispatchEvent(new Event("avatarReadedProfile"));
              }
-             setTimeout(()=>{
+             document.addEventListener('avatarReadedProfile',()=>{
                this.base64dataToImage();
-               console.log(res.body);
-             },1000)
+              });
          }
          },
          (errorRes:HttpErrorResponse) => {
            console.error(errorRes);
          });
         }else{
-          this.avatar=this.user.avatar;}
-       },500)}
-
+          this.avatar=this.user.avatar;
+        }
+      });
+    }
 }
