@@ -1,12 +1,8 @@
 <div class="app-main" fxLayout="column">
   <mat-toolbar fxLayout="row">
-    <button mat-button (click)="goHome()">
-      <img
-        src="https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/logo.png"
-        class="logo"
-      />
-    </button>
-    <span class="spacer"></span>
+    
+    <span class="spacer"><button mat-button class="button-logo"(click)="goHome()" fxFlex="100">COSMOS</button></span>
+  
     <div fxLayout="row" class="div-tools">
       <div class="me">
         <button mat-button [matMenuTriggerFor]="beforeMenu">

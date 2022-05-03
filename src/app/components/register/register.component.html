@@ -1,7 +1,13 @@
 <div class="register-wrapper" fxLayoutAlign="center center">
   <mat-card class="box" >
     <mat-card-header>
-      <mat-card-title>Register</mat-card-title>
+      <div fxLayout="row">
+        <img fxLayoutAlign="center center" 
+            src="../../../assets/img/2.png"
+            class="logo"
+          />
+          <p>COSMOS</p>
+        </div>
     </mat-card-header>
     <form class="example-form"[formGroup]="entityForm">
       <mat-card-content (keyup.enter)="sendInputValues()">
@@ -41,8 +47,8 @@
       </mat-card-content>
     </form>
     <mat-card-actions fxLayoutAlign="space-between center">
-      <button (click)="showLogin()" mat-button color="primary" >Already have account?</button>
-      <button mat-fab color="primary" (click)="sendInputValues()"><mat-icon>done</mat-icon></button>
+      <button (click)="showLogin()" mat-button color="primary" class="login-link" >Already have account?</button>
+      <button mat-fab color="primary" (click)="sendInputValues()" class="button-register"><mat-icon>done</mat-icon></button>
     </mat-card-actions>
   </mat-card>
 </div>

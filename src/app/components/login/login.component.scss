@@ -1,6 +1,6 @@
 .login-wrapper {
     height: 100%;
-    background: url("https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/login.gif");
+    background: linear-gradient(to right ,#fabb5dbc,#4c126bc2,#3c0425); 
     background-size: contain;
   }
   .box {
@@ -15,9 +15,19 @@
     -ms-transform: scale(1);
     z-index: 5;
     max-width: 25em;
-    background-color: #ffffffe1;
+    background-color: #f5d7fc7d;
   }
-  
+  p{
+    font-family: 'Lastica';
+    font-size: 48px;
+    margin: 0.5em 0.2em;
+    text-align: center;
+    font-weight: bold;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+
+  }
   .login-wrapper mat-card-header {
     text-align: center;
     width: 100%;
@@ -25,11 +35,16 @@
     font-weight: 700;
   }
   .login-wrapper mat-card-header mat-card-title {
-    font-size: 60px;
-    color:#384fad;
+    font-size: 3vw;
+    color:#fd8d6b;
+    letter-spacing: 0.5vw;
     margin: 0;
-    font-family: 'Oleo Script Swash Caps', cursive;
-    font-weight: bold;
+    text-shadow: 2px 4px 4px #2b2b2a;
+    font-family: 'Luckiest Guy', cursive;
+    font-weight: bold;  
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
   }
 
 
@@ -47,6 +62,13 @@
   }
   .send-button{
     padding: 1em 2em;
+    background:linear-gradient(to bottom,#f18f70,#e6cd66);
+  }
+  .register-link{
+    color: white;
+    text-shadow: 0.5px 1px 1px #2b2b2a;
+    font-size: 1.1em;
+    background:linear-gradient(to bottom,#f18f70,#e6cd66);
   }
 .span{
   color: rgb(245, 55, 55);
@@ -56,3 +78,6 @@
   -moz-user-select: none;
   
 }
+img{
+    max-width: 100px; max-height: 100px; height: 100px; width: 100px;
+  }

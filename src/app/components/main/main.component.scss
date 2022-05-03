@@ -1,6 +1,11 @@
 .spacer{
     flex: 1 1 auto;
 }
+.me{
+    position:absolute;
+    right: 0.5em;
+    top:0.2em;
+}
 .me img{
     height: 40px;
     width: 40px;
@@ -15,6 +20,7 @@
 mat-toolbar{
     background: linear-gradient(to right ,#fabb5dbc,#4c126bc2,#3c0425); 
     padding-left: 0;
+    border-bottom: 1px solid #424242;
 }
 .div-tools{
     align-content: space-between;
@@ -25,24 +31,25 @@ mat-toolbar{
     line-height:16px;
     min-width: 100%;
     min-height: 100%;
-    background: url("../../../assets/img/login.gif");
+    background: linear-gradient(to right ,#fabb5dbc,#4c126bc2,#3c0425); 
     background-size: contain;
 }
 .icon-menu{
     color: aliceblue;
 }
-.logo{
-    height: 52px;
-    width: 52px;
 
-}
 
-.logo:hover{
-    -webkit-transform:scale(1.2);transform:scale(1.2);
-    overflow:hidden;
-}
-.logo:active{
-    -webkit-transform:scale(1);transform:scale(1);
-    overflow:hidden;
+.button-logo{
+    font-family: 'Lastica';
+    text-align: center;
+    font-size:2.5em;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    color:white;
+    text-shadow: 2px 4px 4px black;
+    margin: 0;
+    padding:1vh 0;
+
 }
 

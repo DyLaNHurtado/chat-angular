@@ -50,4 +50,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background: linear-gradient(to right,#3c04255d ,#4c126b45,#fabb5d4f);
 }
 
+@font-face {
+  font-family: 'Lastica';
+  src: url(../assets/fonts/FontsFree-Net-Lastica.ttf) format("truetype");
+}
+
 @import '~@ctrl/ngx-emoji-mart/picker';
