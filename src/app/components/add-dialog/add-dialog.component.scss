@@ -1,8 +1,10 @@
 .add-dialog-container{
     width: 40vw;
+    
 }
 button{
-    background:linear-gradient(to bottom, #8d2d2d,#9e5b5b);
+  background: linear-gradient(to bottom, #f18f70, #e6cd66);
+  border: 2px solid black;
 }
 .span{
     color: rgb(245, 55, 55);
@@ -23,10 +25,13 @@ button{
     
   }
   h1{
-    font-size: 2.5vw;
-    color:#415184;
-    text-shadow: 2px 4px 4px black;
-    margin: 0;
-    font-family: 'Luckiest Guy', cursive;
+    font-size: 2vw;
+    font-weight: bold;
+    color:#e0a963;
+    margin:0;
+    margin-bottom: 2vh;
+    text-align:center;
+    text-shadow: 1px 2px 2px black;
+    font-family: 'Lastica', cursive;
     font-weight: bold;
   }

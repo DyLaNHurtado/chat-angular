@@ -39,7 +39,7 @@ export class AddDialogComponent implements OnInit {
     }
   }
   private validate(){
-    return this.entityForm.get("addInput").value.trim()!="";
+    return this.entityForm.get("addInput").value.trim()!=""&&this.entityForm.get("addInput").value.includes('@');
   }
 
 }
