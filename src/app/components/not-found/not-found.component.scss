@@ -1,11 +1,21 @@
 div{
     position: relative;
-    margin-top: 30vh;
+    background-color:#ffffff;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    min-width: none;
+    min-height:95vh;
+}
+img{
+    min-height: 100%;
 }
 button{
     margin: 4em;
     padding: 1em 3em;
-    font-size: 20px;
+    font-size: 2vw;
+    background: linear-gradient(to bottom, #f18f70, #e6cd66);
 }
 h1{
  font-size: 70px;
