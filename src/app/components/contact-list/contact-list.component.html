@@ -28,7 +28,7 @@
     >
       <div fxFlex="100" fxLayout="row" class="contact">
         <img
-          [src]=""
+          [src]="getImageApi(contactObjectsList[getIndexByName(contact)].avatar)"
           height="40em"
           width="40em"
           fxLayoutAlign="center center"

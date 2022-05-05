@@ -43,6 +43,8 @@ export class ContactListComponent implements OnInit {
   index: number;
   avatar: string;
   avatarList: string[] = [];
+  cont=0;
+  exampleList=[1,2,'new']
 
   constructor(
     public dialog: MatDialog,
@@ -54,6 +56,7 @@ export class ContactListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cont=0;
     this.setTheme();
     this.myControl = new FormControl();
     this.setContactList();
@@ -61,38 +64,95 @@ export class ContactListComponent implements OnInit {
 
   public base64dataToImage(): string {
     return this._sanitizer.sanitize(
-      SecurityContext.RESOURCE_URL,
-      this._sanitizer.bypassSecurityTrustResourceUrl(
-        ContactListComponent.base64data
-      )
-    );
+        SecurityContext.RESOURCE_URL,
+        this._sanitizer.bypassSecurityTrustResourceUrl(
+          ContactListComponent.base64data
+        )
+      );
+     
+  }
+
+  public objectToJson(object){
+    console.log(object);
+    
+    return JSON.stringify(object);
+
   }
 
   public getImageApi(avatar: string) {
-    if (!avatar.includes('https://ui-avatars.com/api/')) {
-      this.httpService.getAvatar(avatar.replace('uploads/', '')).subscribe(
-        (res) => {
-          if (res.status == 200) {
-            var reader = new FileReader();
-            reader.readAsDataURL(res.body);
-            reader.onload = () => {
-              ContactListComponent.base64data = reader.result;
-              document.dispatchEvent(new Event('avatarReadedCL'));
-            };
-            document.addEventListener('avatarReadedCL', () => {
-              return of(this.base64dataToImage());
-              console.log(res.body);
-            });
-          }
-        },
-        (errorRes: HttpErrorResponse) => {
-          console.error(errorRes);
+    console.log("ff");
+      document.addEventListener('getImageReady'+this.cont, () => {
+        this.cont++;
+        console.log(avatar);  
+        console.log(this.filteredOptions);
+          if (!avatar.includes('https://ui-avatars.com/api/')) {
+          this.httpService.getAvatar(avatar.replace('uploads/', '')).subscribe(
+            (res) => {
+              if (res.status == 200 ) {
+                console.log(200);
+                
+                var reader = new FileReader();
+                console.log(res.body);
+                
+                reader.readAsDataURL(res.body);
+                reader.onload = () => {
+                  ContactListComponent.base64data = reader.result;
+                  document.dispatchEvent(new Event('avatarReadedCL'));
+                };
+                document.addEventListener('avatarReadedCL', () => {
+                  console.log("base64");
+                  
+                  this.avatar = this.base64dataToImage();
+                });
+              }
+              this.avatar= "404";
+            },
+            (errorRes: HttpErrorResponse) => {
+              console.error(errorRes);
+            }
+          );
+        } else {
+          console.log(avatar, "avatar de la api");
+          this.avatar= avatar;
         }
-      );
-    } else {
-      return of(this.avatar);
+       
+        
+      });
+      if (!avatar.includes('https://ui-avatars.com/api/')) {
+        this.httpService.getAvatar(avatar.replace('uploads/', '')).subscribe(
+          (res) => {
+            if (res.status == 200 ) {
+              console.log(200);
+              
+              var reader = new FileReader();
+              console.log(res.body);
+              
+              reader.readAsDataURL(res.body);
+              reader.onload = () => {
+                ContactListComponent.base64data = reader.result;
+                document.dispatchEvent(new Event('avatarReadedCL'));
+              };
+              document.addEventListener('avatarReadedCL', () => {
+                console.log("base64");
+                
+                this.avatar = this.base64dataToImage();
+              });
+            }
+            this.avatar= "404";
+          },
+          (errorRes: HttpErrorResponse) => {
+            console.error(errorRes);
+          }
+        );
+      } else {
+        console.log(avatar, "avatar de la api");
+        return avatar;
+      }
+      return avatar;
+        
+   
     }
-  }
+    
 
   private setContactList() {
     this.httpService
@@ -122,7 +182,12 @@ export class ContactListComponent implements OnInit {
         startWith(''),
         map((value) => this._filter(value))
       );
+      console.log("dd");
+      document.dispatchEvent(new Event('getImageReady'+this.cont));
+      console.log(this.filteredOptions);
+      
     });
+    
   }
 
   private setTheme() {
