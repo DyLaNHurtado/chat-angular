@@ -77,6 +77,13 @@ export class MainComponent implements OnInit {
       console.log(res.status);
       if(res.status == 200){
         this.user=res.body[0];
+        console.log(this.user);
+        
+        
+        let payload = this.cookieService.get('payload');
+        const npayload = payload.substring(0,payload.length-1)+`,"chats":${this.user.chats}}`;
+        this.cookieService.set('payload',npayload);
+        
         document.dispatchEvent(new Event("gotUserMain"));
   }
  },
