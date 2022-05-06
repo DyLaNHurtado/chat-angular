@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit {
     this.contact=contact
     localStorage.setItem('last',JSON.stringify(this.contact));
     this.contactSeleted=true;
+    document.dispatchEvent(new Event("userSelected"));
+    
   }
 
 }

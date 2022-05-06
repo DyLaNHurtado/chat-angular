@@ -27,12 +27,6 @@
       (click)="sendName()"
     >
       <div fxFlex="100" fxLayout="row" class="contact">
-        <img
-          [src]="getImageApi(contactObjectsList[getIndexByName(contact)].avatar)"
-          height="40em"
-          width="40em"
-          fxLayoutAlign="center center"
-        />
 
         <p fxFlex="100" fxLayoutAlign="center center">{{ contact }}</p>
         <p fxLayoutAlign="end center">🟢 Online</p>

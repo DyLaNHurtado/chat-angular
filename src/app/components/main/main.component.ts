@@ -81,8 +81,8 @@ export class MainComponent implements OnInit {
         
         
         let payload = this.cookieService.get('payload');
-        const npayload = payload.substring(0,payload.length-1)+`,"chats":${this.user.chats}}`;
-        this.cookieService.set('payload',npayload);
+        if(this.user.chat!=[] || this.user.chat){ 
+        }
         
         document.dispatchEvent(new Event("gotUserMain"));
   }

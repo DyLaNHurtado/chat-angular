@@ -44,6 +44,13 @@ export class ChatBoxComponent implements OnInit {
       input: new FormControl('', []),
     });
     this.getImageApi();
+    document.addEventListener('userSelected',()=>{
+      console.log("gsf");
+      this.contact=JSON.parse(localStorage.getItem('last'));
+      this.getImageApi();
+    });
+      
+    
   }
 
   public base64dataToImage(): void {
