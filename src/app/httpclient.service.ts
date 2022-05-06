@@ -41,6 +41,10 @@ export class HttpclientService {
     return this.http.put<any>(this.url+`user/edit-profile/${idUser}`,body,{ observe: 'response' });
   }
 
+  public editSettings(body:any,idUser:string){
+    return this.http.put<any>(this.url+`user/edit-settings/${idUser}`,body,{ observe: 'response' });
+  }
+
   public getFullUser(idUser:string){
     return this.http.get(this.url+`user/full-data/${idUser}`,{ observe: 'response' });
   }

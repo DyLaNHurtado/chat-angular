@@ -2,6 +2,8 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, OnInit,HostBinding } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpclientService } from 'src/app/httpclient.service';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -9,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class SettingsComponent implements OnInit {
   public theme:number=0;
-  constructor(private _snackBar: MatSnackBar,private router:Router) { }
+  constructor(private _snackBar: MatSnackBar,private router:Router,public httpService:HttpclientService,private cookieService:CookieService) { }
   public themeDark:boolean;
   
   ngOnInit() {
@@ -47,8 +49,18 @@ export class SettingsComponent implements OnInit {
   }
 
   openSnackBar() {
-    this._snackBar.open("✅ Saved! ", "Ok",{duration:3000});
-    this.router.navigate(["../home"])
+    let user = 
+    this.httpService.editSettings({"theme":JSON.parse(localStorage.getItem('theme')),"background":JSON.parse(localStorage.getItem('bg')),"bgColor":JSON.parse(localStorage.getItem('bg_color'))},JSON.parse(this.cookieService.get('payload')).id)
+    .subscribe(res => {
+      if(res.status==200){
+        this._snackBar.open("✅ Saved! ", "Ok",{duration:3000});
+        this.router.navigate(["../home"])
+      }else{
+        this._snackBar.open("❌ Error not Saved! ", "Ok",{duration:3000});
+        this.router.navigate(["../home"])
+      }
+    });
+    
   }
 
 }

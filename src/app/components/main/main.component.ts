@@ -22,7 +22,11 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.getImageApi();
-    this.setTheme();
+    document.addEventListener('startSettings',()=>{
+      this.setTheme();
+      window.location.reload();
+    });
+    
     window.addEventListener("storage", this.setTheme, false);
   }
 
@@ -65,9 +69,6 @@ export class MainComponent implements OnInit {
 
   private resetLocalStorage(){
     localStorage.setItem('last',JSON.stringify(""));
-    localStorage.setItem('bg',JSON.stringify("background-image: url(https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/b814d3e449d34f6efe09a53964e64b7b379f2aa3/src/assets/img/bg-art.svg)"));
-    localStorage.setItem('bg_color',JSON.stringify("background-color: #f3efea"));
-    localStorage.setItem('theme',JSON.stringify("0"));
   }
 
   private getImageApi(){

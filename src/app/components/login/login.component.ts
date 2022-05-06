@@ -60,32 +60,9 @@ export class LoginComponent implements OnInit {
     this.inputPass=this.entityForm.get("inputPass")!.value;
     if(this.validateToSend()){
         //Api llamada
-        this.httpService.login({"email":this.inputEmail,"password":this.inputPass})
-        
-        .subscribe(res => {
-          console.log(res.status);
-          if(res.status == 200){
-            this.error=false;
-            console.log(res.body);
-            const token=res.body.token
-            console.log(token);
-            const tokenInfo = this.getDecodedAccessToken(token);
-            console.log(tokenInfo);
-            this.socket.connect();
-            this.cookieService.set("token",token);
-            this.cookieService.set("payload",JSON.stringify(
-              this.getDecodedAccessToken(token)));
-              
-            this.router.navigate(["../home"]).then(() => {
-              window.location.reload();
-             });
-          }
-          },
-          (errorRes:HttpErrorResponse) => {
-              this.error=true;
-              this.errorMsg=errorRes.error.error
-          
-          });
+       
+          this.loginApi();
+          this.setUserSettings();
         
         
     }else{
@@ -100,6 +77,60 @@ export class LoginComponent implements OnInit {
     }
     return false;
   }
+
+  private loginApi(){
+    this.httpService.login({"email":this.inputEmail,"password":this.inputPass})
+        
+    .subscribe(res => {
+      console.log(res.status);
+      if(res.status == 200){
+        document.dispatchEvent(new Event('tokenReady'));
+        this.error=false;
+        console.log(res.body);
+        const token=res.body.token
+        console.log(token);
+        const tokenInfo = this.getDecodedAccessToken(token);
+        console.log(tokenInfo);
+        
+        this.cookieService.set("token",token);
+        
+        this.cookieService.set("payload",JSON.stringify(this.getDecodedAccessToken(token)));
+        this.socket.connect();
+        this.router.navigate(["../home"]);
+      }
+      },
+      (errorRes:HttpErrorResponse) => {
+          this.error=true;
+          this.errorMsg=errorRes.error.error
+      
+      });
+  }
+
+  private setUserSettings(){
+    document.addEventListener('tokenReady',()=>{
+      console.log("tokenReady");
+      
+      this.httpService.getUserByEmail(this.cookieService.get('token'),this.inputEmail)
+      .subscribe(res => {
+        console.log(res.status);
+        if(res.status == 200){
+          let user = res.body[0];
+          console.log(res.body);
+          
+          localStorage.setItem('theme',JSON.stringify(user.theme));
+          localStorage.setItem('bg_color',JSON.stringify(user.bgColor));
+          localStorage.setItem('bg',JSON.stringify(user.background));
+          document.dispatchEvent(new Event('startSettings'));
+        }
+        },
+        (errorRes:HttpErrorResponse) => {
+            this.error=true;
+            this.errorMsg=errorRes.error.error
+        
+        });
+    });
+    }
+    
 
 
 }
