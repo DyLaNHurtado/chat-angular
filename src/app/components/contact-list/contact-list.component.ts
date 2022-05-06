@@ -95,7 +95,6 @@ export class ContactListComponent implements OnInit {
       );
       
     });
-    
   }
 
   private setTheme() {

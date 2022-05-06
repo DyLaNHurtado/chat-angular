@@ -6,10 +6,18 @@
   }"
   fxLayoutAlign="center center"
 >
-  <mat-card class="box">
-    <div>
-      <button mat-icon-button (click)="openSnackBar()">
+  <mat-card class="box" fxLayout="column">
+    <div
+      class="edit-button"
+      fxLayout="row"
+      fxFlex="100"
+      fxLayoutAlign="space-between center"
+    >
+      <button mat-icon-button (click)="back()">
         <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <button mat-icon-button (click)="save()">
+        <mat-icon>done</mat-icon>
       </button>
     </div>
     <mat-card-header fxLayout="column" fxLayoutAlign="center center">

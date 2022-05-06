@@ -48,8 +48,7 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  openSnackBar() {
-    let user = 
+  save() {
     this.httpService.editSettings({"theme":JSON.parse(localStorage.getItem('theme')),"background":JSON.parse(localStorage.getItem('bg')),"bgColor":JSON.parse(localStorage.getItem('bg_color'))},JSON.parse(this.cookieService.get('payload')).id)
     .subscribe(res => {
       if(res.status==200){
@@ -57,10 +56,12 @@ export class SettingsComponent implements OnInit {
         this.router.navigate(["../home"])
       }else{
         this._snackBar.open("❌ Error not Saved! ", "Ok",{duration:3000});
-        this.router.navigate(["../home"])
       }
     });
     
+  }
+  back() {
+    this.router.navigate(["../home"]);
   }
 
 }

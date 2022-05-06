@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
     .subscribe(res => {
       console.log(res.status);
       if(res.status == 200){
-        document.dispatchEvent(new Event('tokenReady'));
+        
         this.error=false;
         console.log(res.body);
         const token=res.body.token
@@ -95,6 +95,7 @@ export class LoginComponent implements OnInit {
         this.cookieService.set("token",token);
         
         this.cookieService.set("payload",JSON.stringify(this.getDecodedAccessToken(token)));
+        document.dispatchEvent(new Event('tokenReady'));
         this.socket.connect();
         this.router.navigate(["../home"]);
       }
