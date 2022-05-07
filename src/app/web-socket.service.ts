@@ -31,11 +31,7 @@ export class SocketProviderConnect  extends Socket{
    * una vez sea recibido va a emitir por nuestro "outEven"
    */
   }
-  public sendChatSelected(chatId:string){
-    console.log(chatId);
-    
-    this.ioSocket.emit('chatSelected', chatId);
-  }
+
 
      /**
      * ---------------- EMITIR-------------------

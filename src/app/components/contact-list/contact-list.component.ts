@@ -4,23 +4,16 @@ import {
   EventEmitter,
   OnInit,
   Output,
-  SecurityContext,
   ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectionList } from '@angular/material/list';
-import { DomSanitizer } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, of, Subject } from 'rxjs';
 import {
-  concatMap,
-  delay,
-  first,
   map,
   startWith,
-  take,
-  takeUntil,
 } from 'rxjs/operators';
 import { HttpclientService } from 'src/app/httpclient.service';
 import { SocketProviderConnect } from 'src/app/web-socket.service';
@@ -40,17 +33,11 @@ export class ContactListComponent implements OnInit {
   themeDark: boolean;
   user: any;
   contactObjectsList = [];
-  static base64data: any;
-  index: number;
-  avatar: string;
-  avatarList: string[] = [];
-  cont=0;
 
   constructor(
     public dialog: MatDialog,
     private cookieService: CookieService,
     public httpService: HttpclientService,
-    private _sanitizer: DomSanitizer,
     public socket:SocketProviderConnect
   ) {
     this.myControl = new FormControl();
@@ -74,10 +61,6 @@ export class ContactListComponent implements OnInit {
               return user.name;
             });
             this.contactObjectsList = this.user.contacts;
-            this.avatarList = this.user.contacts.map(
-              (contact) => contact.avatar
-            );
-            console.log(this.avatarList);
 
             document.dispatchEvent(new Event('gotUsersCL'));
           }
@@ -91,7 +74,58 @@ export class ContactListComponent implements OnInit {
         startWith(''),
         map((value) => this._filter(value))
       );
-      
+
+
+      this.socket.emit('askWhoAreConnected',this.user.name);
+      this.socket.on('anwserWhoAreConnected',(usersConnected) =>{
+        let contacts = document.getElementsByClassName("contact");
+        for (const name of usersConnected) {
+          Array.from(contacts).forEach((el) => {
+            if(el.children[0].innerHTML==name){
+              el.children[1].innerHTML="🟢";
+            }
+        });
+        }
+        
+      });
+
+
+      this.socket.on('userConnected',(id) => {
+        let contacts = document.getElementsByClassName("contact");
+        let userConnected;
+        for (const e of this.contactObjectsList) {
+          if(e._id==id){
+            userConnected=e;
+
+          }
+        }
+        
+        Array.from(contacts).forEach((el) => {
+          if(el.children[0].innerHTML==userConnected.name){
+            el.children[1].innerHTML="🟢";
+          }
+      });
+        
+      });
+
+
+      this.socket.on('userDisconnected',(id) => {
+        let contacts = document.getElementsByClassName("contact");
+        let userConnected;
+        for (const e of this.contactObjectsList) {
+          if(e._id==id){
+            userConnected=e;
+
+          }
+        }
+        
+        Array.from(contacts).forEach((el) => {
+          if(el.children[0].innerHTML==userConnected.name){
+            el.children[1].innerHTML="🔴";
+          }
+      });
+      });
+
     });
   }
 
@@ -134,7 +168,6 @@ export class ContactListComponent implements OnInit {
           this.getIndexByName(this.contact.selectedOptions.selected[0].value)
         ]._id)){
         chatId = chat._id;
-        this.socket.sendChatSelected(chatId);
       }
     }
     localStorage.setItem('chatId',JSON.stringify(chatId));
