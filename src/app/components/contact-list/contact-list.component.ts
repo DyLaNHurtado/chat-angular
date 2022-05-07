@@ -23,6 +23,7 @@ import {
   takeUntil,
 } from 'rxjs/operators';
 import { HttpclientService } from 'src/app/httpclient.service';
+import { SocketProviderConnect } from 'src/app/web-socket.service';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 
 @Component({
@@ -44,13 +45,13 @@ export class ContactListComponent implements OnInit {
   avatar: string;
   avatarList: string[] = [];
   cont=0;
-  exampleList=[1,2,'new']
 
   constructor(
     public dialog: MatDialog,
     private cookieService: CookieService,
     public httpService: HttpclientService,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    public socket:SocketProviderConnect
   ) {
     this.myControl = new FormControl();
   }
@@ -61,9 +62,6 @@ export class ContactListComponent implements OnInit {
     this.setContactList();
   }
 
-
-
-    
 
   private setContactList() {
     this.httpService
@@ -122,10 +120,26 @@ export class ContactListComponent implements OnInit {
     );
   }
   public sendName() {
+    console.log(this.user);
+    console.log(this.user.chats);
+    console.log(this.contactObjectsList[
+      this.getIndexByName(this.contact.selectedOptions.selected[0].value)
+    ]._id);
+    console.log(this.user._id);
+    
+    let chatId;
+    for (const chat of this.user.chats) {
+      if(chat.members.includes(this.user._id) &&
+        chat.members.includes(this.contactObjectsList[
+          this.getIndexByName(this.contact.selectedOptions.selected[0].value)
+        ]._id)){
+        chatId = chat._id;
+        this.socket.sendChatSelected(chatId);
+      }
+    }
+    localStorage.setItem('chatId',JSON.stringify(chatId));
     this.selectContact.emit(
-      this.contactObjectsList[
-        this.getIndexByName(this.contact.selectedOptions.selected[0].value)
-      ]
+      this.contactObjectsList[this.getIndexByName(this.contact.selectedOptions.selected[0].value)]
     );
   }
 

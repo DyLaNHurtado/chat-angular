@@ -79,14 +79,12 @@ export class MainComponent implements OnInit {
       if(res.status == 200){
         this.user=res.body[0];
         console.log(this.user);
-        
-        
+
         let payload = this.cookieService.get('payload');
-        if(this.user.chat!=[] || this.user.chat){ 
+          
         }
         
         document.dispatchEvent(new Event("gotUserMain"));
-  }
  },
  (errorRes:HttpErrorResponse) => {
    console.error(errorRes);

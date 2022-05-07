@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(public socket:SocketProviderConnect) { }
   
   ngOnInit() {
-    this.contact= JSON.parse(localStorage.getItem('last'));
+    this.contact= JSON.parse(localStorage.getItem('contact'));
     if(this.contact=="" || this.contact==undefined){
       this.contactSeleted=false;
     }else{
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   }
   public selectContact(contact:any){
     this.contact=contact
-    localStorage.setItem('last',JSON.stringify(this.contact));
+    localStorage.setItem('contact',JSON.stringify(this.contact));
     this.contactSeleted=true;
     document.dispatchEvent(new Event("userSelected"));
     
