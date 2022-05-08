@@ -68,7 +68,7 @@ export class MainComponent implements OnInit {
   }
 
   private resetLocalStorage(){
-    localStorage.setItem('last',JSON.stringify(""));
+    localStorage.setItem('contact',JSON.stringify(""));
   }
 
   private getImageApi(){

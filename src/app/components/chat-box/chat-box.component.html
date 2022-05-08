@@ -8,7 +8,7 @@
     </div>
     <div fxLayout="column">
       <span class="name">{{ contact.name }}</span>
-      <span class="status">{{contact.status}} 📝 Writing ...</span>
+      <span class="status">{{ isWritting ?'📝 Writing ...'  : contact.status }}</span>
     </div>
   </div>
   <div class="content-chat" [style]="getColor()">
@@ -47,6 +47,8 @@
           name="textarea"
           [(ngModel)]="textArea"
           formControlName="input"
+          (focus)="onFocus()"
+          (blur)="onNotFocus()"
         />
 
         <button mat-icon-button class="send-button" (click)="sendMessage()">

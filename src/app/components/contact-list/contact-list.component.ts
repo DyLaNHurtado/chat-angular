@@ -109,18 +109,17 @@ export class ContactListComponent implements OnInit {
       });
 
 
-      this.socket.on('userDisconnected',(id) => {
+      this.socket.on('userDisconnected',(id,usersConnected) => {
         let contacts = document.getElementsByClassName("contact");
-        let userConnected;
         for (const e of this.contactObjectsList) {
           if(e._id==id){
-            userConnected=e;
+            usersConnected=e;
 
           }
         }
         
         Array.from(contacts).forEach((el) => {
-          if(el.children[0].innerHTML==userConnected.name){
+          if(el.children[0].innerHTML==usersConnected.name){
             el.children[1].innerHTML="🔴";
           }
       });
@@ -161,16 +160,16 @@ export class ContactListComponent implements OnInit {
     ]._id);
     console.log(this.user._id);
     
-    let chatId;
     for (const chat of this.user.chats) {
       if(chat.members.includes(this.user._id) &&
         chat.members.includes(this.contactObjectsList[
           this.getIndexByName(this.contact.selectedOptions.selected[0].value)
         ]._id)){
-        chatId = chat._id;
+          localStorage.setItem('chatId',JSON.stringify(chat._id));
       }
     }
-    localStorage.setItem('chatId',JSON.stringify(chatId));
+    
+  
     this.selectContact.emit(
       this.contactObjectsList[this.getIndexByName(this.contact.selectedOptions.selected[0].value)]
     );

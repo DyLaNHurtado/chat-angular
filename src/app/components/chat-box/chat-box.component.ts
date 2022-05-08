@@ -15,6 +15,7 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpclientService } from 'src/app/httpclient.service';
+import { SocketProviderConnect } from 'src/app/web-socket.service';
 
 @Component({
   selector: 'app-chat-box',
@@ -31,11 +32,13 @@ export class ChatBoxComponent implements OnInit {
   static base64data: any;
   avatar: string =
     'https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif';
+  isWritting:boolean=false;
   constructor(
     public dialog: MatDialog,
     private cookieService: CookieService,
     public httpService: HttpclientService,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    public socket:SocketProviderConnect
   ) {}
 
   ngOnInit() {
@@ -46,10 +49,18 @@ export class ChatBoxComponent implements OnInit {
     this.getImageApi();
     document.addEventListener('userSelected',()=>{
       console.log("gsf");
-      this.contact=JSON.parse(localStorage.getItem('last'));
+      this.contact=JSON.parse(localStorage.getItem('contact'));
       this.getImageApi();
     });
+    this.socket.on('writting',()=>{
+      console.log("writting");
       
+      this.isWritting=true;
+    });
+    this.socket.on('notWritting',()=>{
+      console.log("nowritting");
+      this.isWritting=false;
+    })
     
   }
 
@@ -121,6 +132,16 @@ export class ChatBoxComponent implements OnInit {
       this.entityForm.get('input').setValue('');
       this.isEmojiPickerVisible = false;
     }
+  }
+
+  public onFocus(){
+    console.log(localStorage.getItem('chatId'));
+    
+    this.socket.emit('onInputFocus', JSON.parse(localStorage.getItem('chatId')));
+  }
+
+  public onNotFocus(){
+    this.socket.emit('onInputNotFocus', JSON.parse(localStorage.getItem('chatId')));
   }
 
   public openImageDialog() {
