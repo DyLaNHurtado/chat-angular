@@ -15,7 +15,7 @@
     <div class="messages-content" [style]="getBg()">
       <app-chat-message *ngFor="let message of chatMessagesList"
         [text]="message.text"
-        [time]="message.createdAt"
+        [time]="message.time"
       ></app-chat-message>
     </div>
   </div>

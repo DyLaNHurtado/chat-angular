@@ -135,8 +135,7 @@ export class ChatBoxComponent implements OnInit {
       this.httpService.postMessage({"text":this.input.trim(),"author":JSON.parse(this.cookieService.get('payload')).id,"chat":JSON.parse(localStorage.getItem('chatId'))})
       .subscribe((res)=> {
         let newMessage = res.body;
-        console.log(newMessage.text);
-        
+        newMessage.time=`${('0'+(new Date().getHours())).slice(-2)}:${('0'+(new Date().getMinutes())).slice(-2)}`;
         this.chatMessagesList.push(newMessage);
       });
       
