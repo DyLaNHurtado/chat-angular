@@ -26,6 +26,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatIconModule,
     ChatMessageModule,
     MatDialogModule,
+    
   ],
   declarations: [ChatBoxComponent],
   exports:[ChatBoxComponent],

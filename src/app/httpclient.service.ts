@@ -49,5 +49,9 @@ export class HttpclientService {
     return this.http.get(this.url+`user/full-data/${idUser}`,{ observe: 'response' });
   }
 
+  public postMessage(body:any){
+    return this.http.post<any>(this.url+`message`,body,{ observe: 'response' });
+  }
+
 
 }

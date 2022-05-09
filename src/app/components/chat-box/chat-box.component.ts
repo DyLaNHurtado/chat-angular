@@ -5,6 +5,8 @@ import {
   Input,
   OnInit,
   SecurityContext,
+  ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import {
@@ -16,6 +18,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpclientService } from 'src/app/httpclient.service';
 import { SocketProviderConnect } from 'src/app/web-socket.service';
+import { ChatMessageComponent } from '../chat-message/chat-message.component';
 
 @Component({
   selector: 'app-chat-box',
@@ -33,12 +36,15 @@ export class ChatBoxComponent implements OnInit {
   avatar: string =
     'https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif';
   isWritting:boolean=false;
+  chatMessagesList=[];
+
   constructor(
     public dialog: MatDialog,
     private cookieService: CookieService,
     public httpService: HttpclientService,
     private _sanitizer: DomSanitizer,
-    public socket:SocketProviderConnect
+    public socket:SocketProviderConnect,
+    public viewContainerRef: ViewContainerRef
   ) {}
 
   ngOnInit() {
@@ -52,16 +58,13 @@ export class ChatBoxComponent implements OnInit {
       this.contact=JSON.parse(localStorage.getItem('contact'));
       this.getImageApi();
     });
-    this.socket.on('writting',()=>{
-      console.log("writting");
-      
+    this.socket.on('writting',()=>{      
       this.isWritting=true;
     });
     this.socket.on('notWritting',()=>{
-      console.log("nowritting");
       this.isWritting=false;
-    })
-    
+    });
+
   }
 
   public base64dataToImage(): void {
@@ -128,14 +131,20 @@ export class ChatBoxComponent implements OnInit {
   public sendMessage() {
     this.input = this.entityForm.get('input').value;
     if (this.input.trim() != '') {
-      alert(this.input.trim());
-      this.entityForm.get('input').setValue('');
+
+      this.httpService.postMessage({"text":this.input.trim(),"author":JSON.parse(this.cookieService.get('payload')).id,"chat":JSON.parse(localStorage.getItem('chatId'))})
+      .subscribe((res)=> {
+        let newMessage = res.body;
+        console.log(newMessage.text);
+        
+        this.chatMessagesList.push(newMessage);
+      });
+      
       this.isEmojiPickerVisible = false;
     }
   }
 
   public onFocus(){
-    console.log(localStorage.getItem('chatId'));
     
     this.socket.emit('onInputFocus', JSON.parse(localStorage.getItem('chatId')));
   }
@@ -168,3 +177,4 @@ export class ImageDialog {
     private dialogRef: MatDialogRef<ImageDialog>
   ) {}
 }
+

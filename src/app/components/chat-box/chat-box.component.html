@@ -13,9 +13,9 @@
   </div>
   <div class="content-chat" [style]="getColor()">
     <div class="messages-content" [style]="getBg()">
-      <app-chat-message
-        [text]="'Hello World!'"
-        [time]="'18:30'"
+      <app-chat-message *ngFor="let message of chatMessagesList"
+        [text]="message.text"
+        [time]="message.createdAt"
       ></app-chat-message>
     </div>
   </div>
