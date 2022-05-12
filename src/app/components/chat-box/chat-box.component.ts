@@ -179,7 +179,7 @@ export class ChatBoxComponent implements OnInit {
         this.chatMessagesList.push(newMessage);
         this.scrollToBottom();
       });
-      
+      this.entityForm.get('input').setValue('');
       this.isEmojiPickerVisible = false;
     }
   }
