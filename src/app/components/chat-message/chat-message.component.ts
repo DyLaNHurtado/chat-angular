@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-chat-message',
@@ -9,9 +10,12 @@ export class ChatMessageComponent implements OnInit {
 //iNPUTS USUARIOS HORA ETC
   @Input () text: string;
   @Input () time:string;
-  constructor() { }
+  @Input() author:string;
+  userId:string;
+  constructor(private cookieService: CookieService) { }
   
   ngOnInit() {
+    this.userId=this.userId=JSON.parse(this.cookieService.get('payload')).id;
   }
 
 }

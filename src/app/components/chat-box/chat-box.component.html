@@ -16,6 +16,7 @@
       <app-chat-message *ngFor="let message of chatMessagesList"
         [text]="message.text"
         [time]="message.time"
+        [author]="message.author"
       ></app-chat-message>
     </div>
   </div>
