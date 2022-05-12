@@ -59,7 +59,7 @@ export class ContactListComponent implements OnInit {
             this.user = res.body;
             this.contactList = this.user.contacts.map((user) => {
               return user.name;
-            });
+            }); 
             this.contactObjectsList = this.user.contacts;
 
             document.dispatchEvent(new Event('gotUsersCL'));

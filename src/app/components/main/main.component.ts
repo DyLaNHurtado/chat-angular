@@ -56,6 +56,7 @@ export class MainComponent implements OnInit {
     this.router.navigate(["../profile"]);
   }
   public goLogout(){
+    this.socket.emit('removeConnected',this.user.name);
     this.socket.disconnect();
     this.router.navigate(["../login"]);
     this.resetLocalStorage();

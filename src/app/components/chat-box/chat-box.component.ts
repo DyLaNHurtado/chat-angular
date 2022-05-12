@@ -36,7 +36,7 @@ export class ChatBoxComponent implements OnInit {
   avatar: string =
     'https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif';
   isWritting:boolean=false;
-  chatMessagesList=[];
+  chatMessagesList:any[]=[];
 
   constructor(
     public dialog: MatDialog,
@@ -57,6 +57,21 @@ export class ChatBoxComponent implements OnInit {
       console.log("gsf");
       this.contact=JSON.parse(localStorage.getItem('contact'));
       this.getImageApi();
+      this.chatMessagesList=[];
+      this.httpService
+      .getAllMessageByChatId(JSON.parse(localStorage.getItem('chatId')))
+      .subscribe(
+        (res) => {
+          if (res.status == 200) {
+            this.chatMessagesList.concat(res.body);
+
+            //document.dispatchEvent(new Event('gotUsersCL'));
+          }
+        },
+        (errorRes: HttpErrorResponse) => {
+          console.error(errorRes);
+        }
+      );
     });
     this.socket.on('writting',()=>{      
       this.isWritting=true;

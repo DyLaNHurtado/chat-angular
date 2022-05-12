@@ -53,5 +53,9 @@ export class HttpclientService {
     return this.http.post<any>(this.url+`message`,body,{ observe: 'response' });
   }
 
+  public getAllMessageByChatId(chatId:string){
+    return this.http.get(this.url+`message/chat/${chatId}`,{ observe: 'response' });
+  }
+
 
 }
