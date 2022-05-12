@@ -5,7 +5,6 @@ import {
   Input,
   OnInit,
   SecurityContext,
-  ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -52,27 +51,20 @@ export class ChatBoxComponent implements OnInit {
     this.entityForm = new FormGroup({
       input: new FormControl('', []),
     });
+    this.getMessages();
     this.getImageApi();
+    
+    
+    
     document.addEventListener('userSelected',()=>{
       console.log("gsf");
       this.contact=JSON.parse(localStorage.getItem('contact'));
+      this.getMessages();
       this.getImageApi();
-      this.chatMessagesList=[];
-      this.httpService
-      .getAllMessageByChatId(JSON.parse(localStorage.getItem('chatId')))
-      .subscribe(
-        (res) => {
-          if (res.status == 200) {
-            this.chatMessagesList.concat(res.body);
-
-            //document.dispatchEvent(new Event('gotUsersCL'));
-          }
-        },
-        (errorRes: HttpErrorResponse) => {
-          console.error(errorRes);
-        }
-      );
     });
+      
+      
+      
     this.socket.on('writting',()=>{      
       this.isWritting=true;
     });
@@ -82,6 +74,36 @@ export class ChatBoxComponent implements OnInit {
 
   }
 
+  private getMessages(){
+
+      console.log(this.chatMessagesList);
+      this.httpService
+      .getAllMessageByChatId(JSON.parse(localStorage.getItem('chatId')))
+      .subscribe(
+        (res) => {
+          console.log(res.body);
+          
+          if (res.status == 200) {
+            let arr:any[]=[]
+            arr.push(res.body)
+            this.chatMessagesList=arr[0];
+              
+            this.scrollToBottom();
+              
+            //document.dispatchEvent(new Event('gotUsersCL'));
+          }
+        },
+        (errorRes: HttpErrorResponse) => {
+          console.error(errorRes);
+        }
+      );        
+  }
+  private scrollToBottom(){
+    setTimeout(()=>{
+      let div = document.getElementById('messages-content');
+      div.scrollTop = div.scrollHeight;
+    })
+  }
   public base64dataToImage(): void {
     if (!ChatBoxComponent.base64data) {
       console.log('nooo');
@@ -105,6 +127,7 @@ export class ChatBoxComponent implements OnInit {
         .subscribe(
           (res) => {
             if (res.status == 200) {
+              
               var reader = new FileReader();
               reader.readAsDataURL(res.body);
               reader.onload = () => {
@@ -116,6 +139,7 @@ export class ChatBoxComponent implements OnInit {
                 console.log(res.body);
               });
             }
+            
           },
           (errorRes: HttpErrorResponse) => {
             console.error(errorRes);
@@ -124,6 +148,7 @@ export class ChatBoxComponent implements OnInit {
     } else {
       this.avatar = this.contact.avatar;
     }
+    
   }
 
   private setTheme() {
@@ -152,6 +177,7 @@ export class ChatBoxComponent implements OnInit {
         let newMessage = res.body;
         newMessage.time=`${('0'+(new Date().getHours())).slice(-2)}:${('0'+(new Date().getMinutes())).slice(-2)}`;
         this.chatMessagesList.push(newMessage);
+        this.scrollToBottom();
       });
       
       this.isEmojiPickerVisible = false;

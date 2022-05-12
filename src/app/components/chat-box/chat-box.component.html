@@ -11,8 +11,8 @@
       <span class="status">{{ isWritting ?'📝 Writing ...'  : contact.status }}</span>
     </div>
   </div>
-  <div class="content-chat" [style]="getColor()">
-    <div class="messages-content" [style]="getBg()">
+  <div class="content-chat" id="content-chat" [style]="getColor()">
+    <div class="messages-content" id="messages-content" [style]="getBg()">
       <app-chat-message *ngFor="let message of chatMessagesList"
         [text]="message.text"
         [time]="message.time"

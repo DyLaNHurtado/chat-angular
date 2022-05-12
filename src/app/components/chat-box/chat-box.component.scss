@@ -64,9 +64,9 @@ img {
     padding-right: 17px;
     padding-left: 10px;
     border-left: 2px solid black;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: auto;
 }
+
 .emoji-mart{
     position: fixed;
     bottom: 8em;
