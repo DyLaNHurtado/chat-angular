@@ -1,6 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpclientService } from 'src/app/httpclient.service';
 
 @Component({
   selector: 'app-add-dialog',
@@ -13,7 +16,8 @@ export class AddDialogComponent implements OnInit {
   errorMsg:string;
   entityForm:FormGroup;
   addInput:string;
-  constructor(private dialogRef: MatDialogRef<AddDialogComponent>) { }
+  constructor(private dialogRef: MatDialogRef<AddDialogComponent>,private cookieService: CookieService,
+    public httpService: HttpclientService) { }
 
   ngOnInit() {
     this.error=false;
@@ -31,9 +35,22 @@ export class AddDialogComponent implements OnInit {
       this.success=false;
       this.errorMsg="❌ This is not an email"
     }else{
-      this.error=false;
-      this.success=true;
-      alert("bien");
+      
+      this.httpService.addContact({'email':this.addInput},JSON.parse(this.cookieService.get('payload')).id)
+      .subscribe(
+        (res) => {
+          console.log(res.body);
+          
+          if (res.status == 200) {
+            this.error=false;
+            this.success=true;
+            document.dispatchEvent(new Event('contactAdded'));
+          }
+        },
+        (errorRes: HttpErrorResponse) => {
+          console.error(errorRes);
+        }
+      );  
       this.errorMsg="✅ User added!"
       setTimeout(()=>this.dialogRef.close(),500);
     }

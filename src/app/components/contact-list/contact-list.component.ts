@@ -47,6 +47,9 @@ export class ContactListComponent implements OnInit {
     this.setTheme();
     this.myControl = new FormControl();
     this.setContactList();
+    document.addEventListener('contactAdded',()=>{
+      this.setContactList();
+    })
   }
 
 

@@ -49,6 +49,10 @@ export class HttpclientService {
     return this.http.get(this.url+`user/full-data/${idUser}`,{ observe: 'response' });
   }
 
+  public addContact(body:any,userId:string){
+    return this.http.put<any>(this.url+`user/add-contact/${userId}`,body,{ observe: 'response' });
+  }
+
   public postMessage(body:any){
     return this.http.post<any>(this.url+`message`,body,{ observe: 'response' });
   }
