@@ -172,7 +172,7 @@ export class ChatBoxComponent implements OnInit {
     this.input = this.entityForm.get('input').value;
     if (this.input.trim() != '') {
 
-      this.httpService.postMessage({"text":this.input.trim(),"author":JSON.parse(this.cookieService.get('payload')).id,"chat":JSON.parse(localStorage.getItem('chatId'))})
+      this.httpService.postMessage({"text":this.input.trim(),"author":JSON.parse(this.cookieService.get('payload')).id,"chat":JSON.parse(localStorage.getItem('chatId')),"time":`${('0'+(new Date().getHours())).slice(-2)}:${('0'+(new Date().getMinutes())).slice(-2)}`})
       .subscribe((res)=> {
         let newMessage = res.body;
         newMessage.time=`${('0'+(new Date().getHours())).slice(-2)}:${('0'+(new Date().getMinutes())).slice(-2)}`;
