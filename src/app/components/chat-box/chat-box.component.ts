@@ -90,7 +90,6 @@ export class ChatBoxComponent implements OnInit {
               
             this.scrollToBottom();
               
-            //document.dispatchEvent(new Event('gotUsersCL'));
           }
         },
         (errorRes: HttpErrorResponse) => {
