@@ -18,7 +18,6 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatIconModule
   ],
   declarations: [AddDialogComponent],
   exports:[AddDialogComponent]

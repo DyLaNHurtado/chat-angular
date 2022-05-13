@@ -18,10 +18,7 @@
 }
 
   
-.my-message{
-    background-color: #e0a963;
-}
-     
-.your-message{
-    background-color: aqua;
-}
+.my-message mat-card{
+    float: right;
+    } 
+.your-message {}
