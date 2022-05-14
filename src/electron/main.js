@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow,dialog } = require("electron");
 const path = require('path');
 const url = require('url');
 let appWin;
@@ -9,7 +9,7 @@ createWindow = () => {
         height: 800,
         minWidth:710,
         minHeight:710,
-        title: "Angular and Electron",
+        title: "Cosmos Desktop",
         resizable: true,
         icon: "https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/logo.png",
         webPreferences: {
@@ -27,6 +27,16 @@ createWindow = () => {
     appWin.on("closed", () => {
         appWin = null;
     });
+    appWin.on('close', (event) =>{
+        const resDialog = dialog.showMessageBoxSync(appWin,{
+            message : ' Do you want to leave Cosmos? ',
+            buttons:['Yes','No']
+        });
+        if(resDialog === 1){
+            console.log("1");
+           event.preventDefault();
+        }
+    })
 }
 
 app.on("ready", createWindow);
