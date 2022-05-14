@@ -10,6 +10,7 @@ createWindow = () => {
         minWidth:710,
         minHeight:710,
         title: "Cosmos Desktop",
+        show:false,
         resizable: true,
         icon: "https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/logo.png",
         webPreferences: {
@@ -36,7 +37,10 @@ createWindow = () => {
             console.log("1");
            event.preventDefault();
         }
-    })
+    });
+    appWin.on('ready-to-show',()=>{
+        appWin.show();
+    });
 }
 
 app.on("ready", createWindow);
