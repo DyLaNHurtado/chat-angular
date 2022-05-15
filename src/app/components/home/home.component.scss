@@ -7,7 +7,10 @@
     background-color: #e1e1e1;
 }
 .my-dark-theme{
-    background-color: #242638;
+    background: linear-gradient(to bottom, #1f1f1f, #2e0650);
+}
+.my-dark-theme .contact-list{
+    background: linear-gradient(to bottom, #1f1f1f, #2e0650);
 }
 
 .not-selected{

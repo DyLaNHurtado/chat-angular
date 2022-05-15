@@ -18,7 +18,15 @@
 }
 
   
+.my-message {
+    box-sizing: border-box;
+    display: flex;
+    place-content: flex-end end;
+    align-items: flex-end;
+} 
 .my-message mat-card{
-    float: right;
-    } 
-.your-message {}
+    background: linear-gradient(to bottom, #f18f70, #e6cd66);
+} 
+.your-message mat-card {
+    background: linear-gradient(to bottom, #f7c5f7, #98a8e6);
+}

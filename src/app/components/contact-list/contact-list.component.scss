@@ -20,11 +20,11 @@ p{
 }
 
 .my-dark-theme{
-    background-color: #282438;
+    background: linear-gradient(to bottom, #1f1f1f, #2e0650);
 }
 
 .my-dark-theme .search-autocomplete{
-    background-color: #242638;
+   background: linear-gradient(to bottom, #1f1f1f, #2e0650);
     margin:0
 }
 .button-add{
@@ -39,4 +39,21 @@ p{
     font-size: large;
 font-weight: bold;
 font-family: Arial, Helvetica, sans-serif;
+}
+.my-dark-theme mat-selection-list .contact-option{
+    background: linear-gradient(to right, #310855, #420b71);
+}
+.my-dark-theme mat-selection-list .contact-option:hover{
+    background: linear-gradient(to right,  #b27866, #b6a45e);
+    
+}
+.my-dark-theme mat-selection-list .contact-option:focus{
+    background: linear-gradient(to left, #c5694d, #bea644);
+    
+}
+.contact-option:hover{
+    background: linear-gradient(to right,  #f0af9b, #e4d390);
+}
+.contact-option:focus{
+    background: linear-gradient(to left, #f18f70, #e6cd66);
 }
