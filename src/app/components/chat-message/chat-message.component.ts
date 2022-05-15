@@ -8,9 +8,11 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ChatMessageComponent implements OnInit {
 //iNPUTS USUARIOS HORA ETC
-  @Input () text: string;
-  @Input () time:string;
+  @Input() text: string;
+  @Input() time:string;
   @Input() author:string;
+  @Input() equalDate:boolean;
+  @Input() date:string;
   userId:string;
   constructor(private cookieService: CookieService) { }
   

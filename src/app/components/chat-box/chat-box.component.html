@@ -8,15 +8,23 @@
     </div>
     <div fxLayout="column">
       <span class="name">{{ contact.name }}</span>
-      <span class="status">{{ isWritting ?'📝 Writing ...'  : contact.status }}</span>
+      <span class="status">{{
+        isWritting ? "📝 Writing ..." : contact.status
+      }}</span>
     </div>
   </div>
   <div class="content-chat" id="content-chat" [style]="getColor()">
     <div class="messages-content" id="messages-content" [style]="getBg()">
-      <app-chat-message *ngFor="let message of chatMessagesList"
+      <app-chat-message
+        *ngFor="let message of chatMessagesList; let i = index"
         [text]="message.text"
         [time]="message.time"
         [author]="message.author"
+        [equalDate]="
+          chatMessagesList[i].createdAt.substring(0, 10) ===
+          chatMessagesList[i - 1]?.createdAt.substring(0, 10)
+        "
+        [date]="message.createdAt.substring(0, 10)"
       ></app-chat-message>
     </div>
   </div>
