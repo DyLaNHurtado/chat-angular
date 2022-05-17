@@ -19,7 +19,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ProfileModule } from './components/profile/profile.module';
 
-
 import { SocketIoModule } from 'ngx-socket-io';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketProviderConnect } from './web-socket.service';

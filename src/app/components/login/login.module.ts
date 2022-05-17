@@ -21,9 +21,9 @@ import { HttpClientModule } from "@angular/common/http";
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   declarations: [LoginComponent],
-  exports:[LoginComponent]
+  exports:[LoginComponent],
 })
 export class LoginModule { }

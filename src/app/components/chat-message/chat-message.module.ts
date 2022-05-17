@@ -4,13 +4,15 @@ import { ChatMessageComponent } from './chat-message.component';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChatDateModule } from '../chat-date/chat-date.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
     CommonModule,
     FlexLayoutModule,
     MatCardModule,
-    ChatDateModule
+    ChatDateModule,
+    MatIconModule
 
   ],
   declarations: [ChatMessageComponent],

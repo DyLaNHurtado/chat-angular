@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,11 +6,8 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SocketProviderConnect } from 'src/app/web-socket.service';
 import jwt_decode from 'jwt-decode';
-import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
 import { HttpclientService } from 'src/app/httpclient.service';
-import { GoogleLoginService } from 'src/app/googleLogin.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -34,9 +31,8 @@ export class LoginComponent implements OnInit {
   public entityForm!: FormGroup;
   public inputEmail!: string;
   public inputPass!: string;
-  user:gapi.auth2.GoogleUser;
-  constructor(public dialog: MatDialog,private router:Router,private cookieService: CookieService,public socket:SocketProviderConnect,public httpService:HttpclientService
-    ,private loginGoogleService:GoogleLoginService, private ref: ChangeDetectorRef) {
+  constructor(public dialog: MatDialog,private router:Router,private cookieService: CookieService,public socket:SocketProviderConnect,public httpService:HttpclientService,
+  ) {
     
   }
 
@@ -47,9 +43,7 @@ export class LoginComponent implements OnInit {
       inputEmail: new FormControl("", [Validators.email,Validators.required]),
       inputPass: new FormControl("", [Validators.required])
     });
-    this.loginGoogleService.observable().subscribe(user => {
-      this.user = user;
-    });
+
   }
   private getDecodedAccessToken(token: string): any {
     try {
@@ -133,15 +127,11 @@ export class LoginComponent implements OnInit {
         (errorRes:HttpErrorResponse) => {
             this.error=true;
             this.errorMsg=errorRes.error.error
-        
         });
     });
     }
     
-    loginWithGoogle(): void {
-      this.loginGoogleService.login();
-      this.router.navigate(["../home"]);
-    }
+
 
 
 }
