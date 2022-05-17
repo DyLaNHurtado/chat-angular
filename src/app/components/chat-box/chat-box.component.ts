@@ -182,7 +182,7 @@ export class ChatBoxComponent implements OnInit {
         newMessage.time=`${('0'+(new Date().getHours())).slice(-2)}:${('0'+(new Date().getMinutes())).slice(-2)}`;
         this.chatMessagesList.push(newMessage);
         this.scrollToBottom();
-        this.socket.emit('messageSent',JSON.parse(localStorage.getItem('chatId')));
+        this.socket.emit('messageSent',(JSON.parse(localStorage.getItem('chatId')),this.userId));
       });
       this.entityForm.get('input').setValue('');
       this.isEmojiPickerVisible = false;

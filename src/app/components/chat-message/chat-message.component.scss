@@ -26,7 +26,10 @@
 } 
 .my-message mat-card{
     background: linear-gradient(to bottom, #f18f70, #e6cd66);
+    box-shadow: 1px 2px 2px #888888;
 } 
 .your-message mat-card {
     background: linear-gradient(to bottom, #f7c5f7, #98a8e6);
+    box-shadow: 1px 2px 2px #888888;
+    
 }

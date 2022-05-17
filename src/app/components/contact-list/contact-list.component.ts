@@ -84,8 +84,8 @@ export class ContactListComponent implements OnInit {
         let contacts = document.getElementsByClassName("contact");
         for (const name of usersConnected) {
           Array.from(contacts).forEach((el) => {
-            if(el.children[0].innerHTML==name){
-              el.children[1].innerHTML="🟢";
+            if(el.children[1].innerHTML==name){
+              el.children[0].innerHTML="🟢";
             }
         });
         }
@@ -99,13 +99,12 @@ export class ContactListComponent implements OnInit {
         for (const e of this.contactObjectsList) {
           if(e._id==id){
             userConnected=e;
-
           }
         }
         
         Array.from(contacts).forEach((el) => {
-          if(el.children[0].innerHTML==userConnected.name){
-            el.children[1].innerHTML="🟢";
+          if(el.children[1].innerHTML==userConnected.name){
+            el.children[0].innerHTML="🟢";
           }
       });
         
@@ -122,12 +121,15 @@ export class ContactListComponent implements OnInit {
         }
         
         Array.from(contacts).forEach((el) => {
-          if(el.children[0].innerHTML==usersConnected.name){
-            el.children[1].innerHTML="🔴";
+          if(el.children[1].innerHTML==usersConnected.name){
+            el.children[0].innerHTML="🔴";
           }
       });
       });
 
+      this.socket.on('messageSentCL',(userId)=>{
+        
+      });
     });
   }
 

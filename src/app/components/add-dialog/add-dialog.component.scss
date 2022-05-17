@@ -4,7 +4,9 @@
 }
 button{
   background: linear-gradient(to bottom, #f18f70, #e6cd66);
-  border: 2px solid black;
+}
+button:hover{
+  background: linear-gradient(to bottom, #e6cd66,#f18f70);
 }
 .span{
     color: rgb(245, 55, 55);

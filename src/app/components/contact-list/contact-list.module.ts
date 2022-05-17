@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddDialogModule } from '../add-dialog/add-dialog.module';
+import {MatBadgeModule} from '@angular/material/badge'; 
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AddDialogModule } from '../add-dialog/add-dialog.module';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    AddDialogModule
+    AddDialogModule,
+    MatBadgeModule
   ],
   declarations: [ContactListComponent],
   exports:[ContactListComponent]
