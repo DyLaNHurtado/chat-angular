@@ -50,7 +50,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatMenuModule,
     MatToolbarModule,
     SocketIoModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [SocketProviderConnect, CookieService],
   bootstrap: [AppComponent]

@@ -18,7 +18,4 @@ splash.center();
 splash.on('ready-to-show',()=>{
     splash.show();
 });
-splash.on("closed", () => {
-    splash = null;
-});
 module.exports=splash;

@@ -19,9 +19,6 @@ appWin.setMenu(null);
 
     appWin.webContents.openDevTools();
 
-    appWin.on("closed", () => {
-        appWin = null;
-    });
     appWin.on('close', (event) =>{
         const resDialog = dialog.showMessageBoxSync(appWin,{
             message : ' Do you want to leave Cosmos? ',

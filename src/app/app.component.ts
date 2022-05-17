@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { GoogleLoginService } from './googleLogin.service';
 
 
 @Component({
@@ -6,10 +7,17 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'Cosmos';
-  constructor(){
+  
+  constructor(private loginGoogleService:GoogleLoginService, private ref: ChangeDetectorRef){
 
+  }
+  ngOnInit(): void {
+    
+  }
+  logout(){
+    this.loginGoogleService.logout();
   }
 }
 
