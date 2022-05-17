@@ -38,7 +38,7 @@ appWin.setMenu(null);
             splash.close();
             appWin.show();
             appWin.focus();
-        },10000);
+        },5000);
     });
 
 module.exports=appWin;

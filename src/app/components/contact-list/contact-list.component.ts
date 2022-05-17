@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { JSDocTag } from '@angular/compiler/src/output/output_ast';
 import {
   Component,
   EventEmitter,
@@ -47,6 +48,8 @@ export class ContactListComponent implements OnInit {
     this.setTheme();
     this.myControl = new FormControl();
     this.setContactList();
+    
+    
     document.addEventListener('contactAdded',()=>{
       this.setContactList();
     })
@@ -64,7 +67,6 @@ export class ContactListComponent implements OnInit {
               return user.name;
             }); 
             this.contactObjectsList = this.user.contacts;
-
             document.dispatchEvent(new Event('gotUsersCL'));
           }
         },
@@ -78,10 +80,10 @@ export class ContactListComponent implements OnInit {
         map((value) => this._filter(value))
       );
 
+      let contacts = document.getElementsByClassName("contact");
 
       this.socket.emit('askWhoAreConnected',this.user.name);
       this.socket.on('anwserWhoAreConnected',(usersConnected) =>{
-        let contacts = document.getElementsByClassName("contact");
         for (const name of usersConnected) {
           Array.from(contacts).forEach((el) => {
             if(el.children[1].innerHTML==name){
@@ -89,12 +91,20 @@ export class ContactListComponent implements OnInit {
             }
         });
         }
-        
+          Array.from(contacts).forEach((el)=>{
+            if(el.children[2].children[0].innerHTML=='0'){
+              el.children[2].children[0].classList.add("hide-nmessage");
+            }else{
+              el.children[2].children[0].classList.add("show-nmessage");
+            }
+      });
+
       });
 
 
       this.socket.on('userConnected',(id) => {
         let contacts = document.getElementsByClassName("contact");
+        
         let userConnected;
         for (const e of this.contactObjectsList) {
           if(e._id==id){
@@ -126,13 +136,32 @@ export class ContactListComponent implements OnInit {
           }
       });
       });
-
-      this.socket.on('messageSentCL',(userId)=>{
+      
+      console.log("hola");
+      this.socket.on('messageSentCL',(idChat,userId)=>{
+        console.log("hola");
         
+        let contacts = document.getElementsByClassName("contact");
+    
+          Array.from(contacts).forEach((el)=>{
+            console.log(this.getUsername(userId));
+            console.log(JSON.parse(localStorage.getItem('chatId')),idChat);
+            
+            if(el.children[1].innerHTML==this.getUsername(userId) && JSON.parse(localStorage.getItem('chatId'))!=idChat){
+              el.children[2].children[0].innerHTML = (parseInt(el.children[2].children[0].innerHTML ) + 1).toString();
+              if(el.children[2].children[0].innerHTML >='0'){
+                el.children[2].children[0].classList.replace("hide-nmessage","show-nmessage");
+              }
+            }
+        })
       });
     });
   }
 
+  private getUsername(userId:string):any{
+    return this.contactObjectsList.filter(el=>el._id===userId)
+    .map(el=>{return el.name})[0];
+  }
   private setTheme() {
     if (JSON.parse(localStorage.getItem('theme')) == 1) {
       this.themeDark = true;
@@ -171,6 +200,15 @@ export class ContactListComponent implements OnInit {
           this.getIndexByName(this.contact.selectedOptions.selected[0].value)
         ]._id)){
           localStorage.setItem('chatId',JSON.stringify(chat._id));
+
+          let contacts = document.getElementsByClassName("contact");
+          Array.from(contacts).forEach((el)=>{
+            if(el.children[1].innerHTML==this.contact.selectedOptions.selected[0].value){
+              el.children[2].children[0].innerHTML="0";
+              el.children[2].children[0].classList.replace("show-nmessage","hide-nmessage");
+              
+            }
+          })
       }
     }
     

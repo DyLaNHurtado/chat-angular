@@ -61,10 +61,17 @@ font-family: Arial, Helvetica, sans-serif;
     background: linear-gradient(to left, #f18f70, #e6cd66);
 }
 .n-messages{
-    height: 100px;
-    width: 100px;
+    font-family: 'Lastica';
+    font-size: 0.8em;
     background: linear-gradient(to bottom, #f7c5f7, #98a8e6);
     padding: 0.4em 0.6em;
     border-radius: 10px;
     box-shadow: 1px 2px 2px #888888;
+    display: none;
+}
+.hide-nmessage{
+    display: none;
+}
+.show-nmessage{
+    display: inline;
 }
