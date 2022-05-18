@@ -43,6 +43,7 @@ export class VideocallComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.addIncominMessageHandler();
     this.requestMediaDevices();
+    
   }
 
   async call(): Promise<void> {
@@ -162,6 +163,7 @@ export class VideocallComponent implements AfterViewInit {
       this.localStream = await navigator.mediaDevices.getUserMedia(mediaConstraints);
       // pause all tracks
       this.startLocalVideo();
+      this.call();
     } catch (e) {
       console.error(e);
       alert(`getUserMedia() error: ${e.name}`);
@@ -188,6 +190,14 @@ export class VideocallComponent implements AfterViewInit {
     this.localVideoActive = false;
   }
 
+  onLocalVideoButton():void{
+    if(!this.localVideoActive){
+      this.startLocalVideo();
+    }else{
+      this.pauseLocalVideo();
+    }
+  }
+
   private createPeerConnection(): void {
     console.log('creating PeerConnection...');
     this.peerConnection = new RTCPeerConnection(ENV_RTCPeerConfiguration);
@@ -198,7 +208,7 @@ export class VideocallComponent implements AfterViewInit {
     this.peerConnection.ontrack = this.handleTrackEvent;
   }
 
-  private closeVideoCall(): void {
+  public closeVideoCall(): void {
     console.log('Closing call');
 
     if (this.peerConnection) {

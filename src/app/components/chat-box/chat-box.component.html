@@ -2,6 +2,7 @@
   class="chat-box"
   [ngClass]="{ 'my-light-theme': !themeDark, 'my-dark-theme': themeDark }"
 >
+
   <div class="header" fxLayout="row">
     <div class="img-wrapper" (click)="openImageDialog()">
       <img [src]="avatar" alt="avatar" />
@@ -12,6 +13,11 @@
         isWritting ? "📝 Writing ..." : contact.status
       }}</span>
     </div>
+    <div fxLayout="row" fxFlex="100" fxLayoutAlign="end center" class="header-actions">
+      <button mat-icon-button><mat-icon class="icon">phone</mat-icon></button>
+      <button mat-icon-button><mat-icon class="icon">more_vert</mat-icon></button>
+    </div>
+    
   </div>
   <div class="content-chat" id="content-chat" [style]="getColor()">
     <div class="messages-content" id="messages-content" [style]="getBg()">
@@ -38,7 +44,13 @@
       emoji="point_up"
       color="#e0a963"
     ></emoji-mart>
-    <div class="input-box">
+    <div class="input-box" fxLayoutAlign="center center">
+      <button class="audio-button"
+        mat-mini-fab
+        class="audio-button"
+      >
+        <mat-icon style="color: white;" >keyboard_voice</mat-icon>
+      </button>
       <button
         class="emoji-button"
         mat-icon-button
@@ -61,7 +73,7 @@
         />
 
         <button mat-icon-button class="send-button" (click)="sendMessage()">
-          <mat-icon class="send-icon">send</mat-icon>
+          <mat-icon class="icon">send</mat-icon>
         </button>
       </form>
     </div>

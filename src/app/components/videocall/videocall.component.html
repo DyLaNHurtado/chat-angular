@@ -8,6 +8,6 @@
   </div>
     
 </div>
-<button mat-raised-button color="primary" (click)="pauseLocalVideo()" [disabled]="!localVideoActive">Stop Local</button>
-<button mat-raised-button color="primary" (click)="call()" [disabled]="inCall || !localVideoActive">Call</button>
+<button mat-raised-button color="primary" (click)="onLocalVideoButton()"><mat-icon>{{localVideoActive ? 'videocam' : 'videocam_off'}}</mat-icon></button>
 <button mat-raised-button color="primary" (click)="hangUp()" [disabled]="!inCall">HangUp</button>
+<button mat-raised-button color="warn" (click)="closeVideoCall()"><mat-icon>phone_missed</mat-icon></button>
