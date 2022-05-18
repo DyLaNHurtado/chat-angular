@@ -1,0 +1,13 @@
+<div fxLayout="row" fxFlex="100">
+  <div fxFlex="50"></div>
+    <p class="video-description">local:</p>
+    <video #local_video [autoplay]="true" [muted]="true"></video>
+  <div fxFlex="50">
+    <p class="video-description">remote:</p>
+    <video #received_video [autoplay]="true"></video>
+  </div>
+    
+</div>
+<button mat-raised-button color="primary" (click)="pauseLocalVideo()" [disabled]="!localVideoActive">Stop Local</button>
+<button mat-raised-button color="primary" (click)="call()" [disabled]="inCall || !localVideoActive">Call</button>
+<button mat-raised-button color="primary" (click)="hangUp()" [disabled]="!inCall">HangUp</button>
