@@ -19,6 +19,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpclientService } from 'src/app/httpclient.service';
 import { SocketProviderConnect } from 'src/app/web-socket.service';
+import { AudioDialogComponent } from '../audio-dialog/audio-dialog.component';
 
 @Component({
   selector: 'app-chat-box',
@@ -232,6 +233,12 @@ export class ChatBoxComponent implements OnInit {
   public call(){
     this.isCalling.emit(true);
     console.log("onCalling",this.isCalling);
+  }
+
+  public openAudioDialog() {
+    this.dialog.open(AudioDialogComponent,{
+      disableClose:true
+    });
   }
 
 }

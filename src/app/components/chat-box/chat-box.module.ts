@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import {ChatMessageModule} from '../chat-message/chat-message.module'
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { AudioDialogModule } from '../audio-dialog/audio-dialog.module';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { MatMenuModule } from '@angular/material/menu';
     ChatMessageModule,
     MatMenuModule,
     MatDialogModule,
+    AudioDialogModule
     
   ],
   declarations: [ChatBoxComponent],
