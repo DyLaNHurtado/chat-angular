@@ -11,7 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import {ChatMessageModule} from '../chat-message/chat-message.module'
 import { MatDialogModule } from '@angular/material/dialog';
-import { ChatDateModule } from '../chat-date/chat-date.module';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   imports: [
@@ -26,6 +26,7 @@ import { ChatDateModule } from '../chat-date/chat-date.module';
     MatCardModule,
     MatIconModule,
     ChatMessageModule,
+    MatMenuModule,
     MatDialogModule,
     
   ],

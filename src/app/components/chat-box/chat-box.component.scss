@@ -48,9 +48,14 @@ img {
     display: flex;
 
 }
+
 .audio-button{
     background: linear-gradient(to bottom, #f18f70, #e6cd66);
 
+}
+
+.audio-button:focus{
+    background: linear-gradient(to bottom, #e6a066 , #a31b6f);
 }
 
 .icon{
@@ -154,6 +159,11 @@ img {
         border-radius: 8px;
         box-sizing: border-box;
         background-color: #c8c8c8;
+}
+
+.menu-option{
+    text-align: center;
+    font-weight: bold;
 }
 
 

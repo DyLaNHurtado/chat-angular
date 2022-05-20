@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   errorMsg:string;
   errorStateMatcher = new MyErrorStateMatcher();
   hide = true;
+  onCalling:boolean=false;
   @Output() setRegister = new EventEmitter();
   public entityForm!: FormGroup;
   public inputEmail!: string;

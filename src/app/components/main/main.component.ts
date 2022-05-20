@@ -3,7 +3,6 @@ import { Component, OnInit, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { elementAt } from 'rxjs/operators';
 import { HttpclientService } from 'src/app/httpclient.service';
 import { SocketProviderConnect } from 'src/app/web-socket.service';
 

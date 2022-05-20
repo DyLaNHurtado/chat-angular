@@ -1,9 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   Component,
+  EventEmitter,
   Inject,
   Input,
   OnInit,
+  Output,
   SecurityContext,
   ViewContainerRef,
 } from '@angular/core';
@@ -17,7 +19,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpclientService } from 'src/app/httpclient.service';
 import { SocketProviderConnect } from 'src/app/web-socket.service';
-import { ChatMessageComponent } from '../chat-message/chat-message.component';
 
 @Component({
   selector: 'app-chat-box',
@@ -26,6 +27,7 @@ import { ChatMessageComponent } from '../chat-message/chat-message.component';
 })
 export class ChatBoxComponent implements OnInit {
   @Input() contact: any;
+  @Output() isCalling = new EventEmitter();
   public textArea: string = '';
   public isEmojiPickerVisible: boolean;
   public themeDark: boolean;
@@ -36,6 +38,7 @@ export class ChatBoxComponent implements OnInit {
     'https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif';
   isWritting:boolean=false;
   chatMessagesList:any[]=[];
+  
   userId:string;
 
   constructor(
@@ -206,6 +209,27 @@ export class ChatBoxComponent implements OnInit {
       data: { img: this.avatar },
     });
   }
+
+  public cleanMessages(){
+    this.httpService
+      .deleteChatMessages(JSON.parse(localStorage.getItem('chatId')))
+      .subscribe(
+        (res) => {
+          console.log(res.body);
+          
+          if (res.status == 200) {
+            this.chatMessagesList=[];
+            this.scrollToBottom();
+              
+          }
+        },
+        (errorRes: HttpErrorResponse) => {
+          console.error(errorRes);
+        }
+      );        
+  }
+
+
 }
 
 @Component({

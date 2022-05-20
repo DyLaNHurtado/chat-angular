@@ -61,5 +61,9 @@ export class HttpclientService {
     return this.http.get(this.url+`message/chat/${chatId}`,{ observe: 'response' });
   }
 
+  public deleteChatMessages(chatId:string){
+    return this.http.delete<any>(this.url+`chat/${chatId}`,{ observe: 'response' });
+  }
+
 
 }
