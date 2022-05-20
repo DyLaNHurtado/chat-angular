@@ -51,12 +51,6 @@
       color="#e0a963"
     ></emoji-mart>
     <div class="input-box" fxLayoutAlign="center center">
-      <button class="audio-button"
-        mat-mini-fab
-        class="audio-button"
-      >
-        <mat-icon style="color: white;" >keyboard_voice</mat-icon>
-      </button>
       <button
         class="emoji-button"
         mat-icon-button
@@ -76,12 +70,15 @@
           formControlName="input"
           (focus)="onFocus()"
           (blur)="onNotFocus()"
+          (keyup.enter)="sendMessage()"
         />
-
-        <button mat-icon-button class="send-button" (click)="sendMessage()">
-          <mat-icon class="icon">send</mat-icon>
-        </button>
       </form>
+      <button class="audio-button"
+        mat-fab
+        class="audio-button"
+      >
+        <mat-icon style="color: white;" >keyboard_voice</mat-icon>
+      </button>
     </div>
   </div>
 </div>
