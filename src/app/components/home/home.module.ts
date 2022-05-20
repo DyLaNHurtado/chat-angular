@@ -5,6 +5,7 @@ import { ChatBoxModule } from '../chat-box/chat-box.module';
 import { ContactListModule } from '../contact-list/contact-list.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NotSelectedModule } from '../not-selected/not-selected.module';
+import { VideocallModule } from '../videocall/videocall.module';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { NotSelectedModule } from '../not-selected/not-selected.module';
     FlexLayoutModule,
     ChatBoxModule,
     ContactListModule,
-    NotSelectedModule
+    NotSelectedModule,
+    VideocallModule
   ],
   declarations: [HomeComponent],
   exports:[HomeComponent]

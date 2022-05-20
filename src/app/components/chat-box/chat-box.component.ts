@@ -229,6 +229,10 @@ export class ChatBoxComponent implements OnInit {
       );        
   }
 
+  public call(){
+    this.isCalling.emit(true);
+    console.log("onCalling",this.isCalling);
+  }
 
 }
 

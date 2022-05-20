@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
   contact:string;
   themeDark:boolean;
   contactSeleted:boolean;
+  isCalling:boolean=false;
   constructor(public socket:SocketProviderConnect) { }
   
   ngOnInit() {
@@ -35,6 +36,11 @@ export class HomeComponent implements OnInit {
     this.contactSeleted=true;
     document.dispatchEvent(new Event("userSelected"));
     
+  }
+
+  public onCalling(option:any){
+    console.log(option);
+    this.isCalling=option;
   }
 
 }

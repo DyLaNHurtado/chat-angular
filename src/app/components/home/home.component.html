@@ -2,14 +2,17 @@
   fxLayout="column"
   [ngClass]="{ 'my-light-theme': !themeDark, 'my-dark-theme': themeDark }"
 >
-  <div class="home-wrapper" fxLayout="row">
+  <div class="home-wrapper" fxLayout="row" >
     <app-contact-list
+    *ngIf="!isCalling"
     (selectContact)="selectContact($event)"
       fxFlex="30"
       [ngClass]="{ 'my-light-theme': !themeDark, 'my-dark-theme': themeDark }"
       class="contact-list"
+      
     ></app-contact-list>
-    <app-chat-box *ngIf="contactSeleted" fxFlex="70" [contact]="contact" class="chat-box"></app-chat-box>
+    <app-videocall *ngIf="isCalling" (isCalling)="onCalling($event)" fxFlex="30" ></app-videocall>
+    <app-chat-box *ngIf="contactSeleted" fxFlex="70" [contact]="contact" class="chat-box" (isCalling)="onCalling($event)"></app-chat-box>
     <app-not-selected *ngIf="!contactSeleted" fxFlex="70" class="not-selected"></app-not-selected>
   </div>
 </div>

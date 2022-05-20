@@ -14,7 +14,7 @@
       }}</span>
     </div>
     <div fxLayout="row" fxFlex="100" fxLayoutAlign="end center" class="header-actions">
-      <button mat-icon-button><mat-icon class="icon">phone</mat-icon></button>
+      <button mat-icon-button (click)="call()"><mat-icon class="icon">phone</mat-icon></button>
       <button mat-icon-button [matMenuTriggerFor]="beforeMenu"><mat-icon class="icon">more_vert</mat-icon></button>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
         <button mat-menu-item (click)="cleanMessages()" >

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { DataService, Message } from './data.service';
 
@@ -30,6 +30,7 @@ export class VideocallComponent implements AfterViewInit {
   @ViewChild('local_video') localVideo: ElementRef;
   @ViewChild('received_video') remoteVideo: ElementRef;
 
+  @Output() isCalling = new EventEmitter();
   private peerConnection: RTCPeerConnection;
 
   private localStream: MediaStream;
@@ -229,6 +230,7 @@ export class VideocallComponent implements AfterViewInit {
       this.peerConnection = null;
 
       this.inCall = false;
+      this.isCalling.emit(this.inCall);
     }
   }
 
