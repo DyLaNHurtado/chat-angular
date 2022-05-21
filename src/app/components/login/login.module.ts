@@ -9,7 +9,6 @@ import {MatInputModule} from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button'; 
 import { HttpClientModule } from "@angular/common/http";
-import { VideocallModule } from '../videocall/videocall.module';
 
 @NgModule({
   imports: [
@@ -23,7 +22,6 @@ import { VideocallModule } from '../videocall/videocall.module';
     MatIconModule,
     MatButtonModule,
     HttpClientModule,
-    VideocallModule
   ],
   declarations: [LoginComponent],
   exports:[LoginComponent],
