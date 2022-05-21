@@ -32,7 +32,9 @@ appWin.setMenu(null);
     appWin.on('ready-to-show',()=>{
         const splash = require('./splash');
         setTimeout(()=>{
-            splash.close();
+            if(splash.isClosable){
+                splash.close();
+            }
             appWin.show();
             appWin.focus();
         },5000);

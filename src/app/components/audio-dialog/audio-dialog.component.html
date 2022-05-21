@@ -1,3 +1,27 @@
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  <button mat-button (click)="close()">Cancel</button>
-  <button mat-button (click)="send()">Enviar</button>
+<div
+  class="audio-dialog-container"
+  fxLayout="column"
+  fxLayoutAlign="end center"
+>
+  <h2>
+    {{
+      (minutes > 9 ? minutes : "0" + minutes) +
+        ":" +
+        (seconds > 9 ? seconds : "0" + seconds)
+    }}
+  </h2>
+  <p>🎤 Recording audio...</p>
+  <mat-progress-bar
+    class="progressbar"
+    color="accent"
+    mode="indeterminate"
+  ></mat-progress-bar>
+  <div fxLayout="row" class="buttons" fxLayoutAlign="space-between end">
+    <button mat-raised-button (click)="close()" color="warn" fxFlex="45">
+      Cancel
+    </button>
+    <button mat-raised-button (click)="send()" color="primary" fxFlex="45">
+      Send
+    </button>
+  </div>
+</div>
