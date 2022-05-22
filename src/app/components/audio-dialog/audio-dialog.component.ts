@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ChangeDetectorRef, Component, OnInit, SecurityContext } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
 import { NgAudioRecorderService, OutputFormat } from 'ng-audio-recorder';
+import { CookieService } from 'ngx-cookie-service';
+import { HttpclientService } from 'src/app/httpclient.service';
 
 @Component({
   selector: 'app-audio-dialog',
@@ -11,8 +15,12 @@ export class AudioDialogComponent implements OnInit {
   minutes:number; 
   seconds:number;
   interval;
+  lastAudio:any;
+  audioTest:string="";
+  static base64data:any;
+  isRecording:boolean=true;
   
-  constructor(private dialogRef: MatDialogRef<AudioDialogComponent>,private audioRecorderService: NgAudioRecorderService) {
+  constructor(private dialogRef: MatDialogRef<AudioDialogComponent>,private audioRecorderService: NgAudioRecorderService,private cookieService:CookieService,public httpService:HttpclientService,private _sanitizer: DomSanitizer,private ref: ChangeDetectorRef) {
     this.seconds=0;
     this.minutes=0;
    }
@@ -24,16 +32,15 @@ export class AudioDialogComponent implements OnInit {
     });
   }
   private startRecording():void {
-    
+      this.isRecording=true;
       this.audioRecorderService.startRecording();
-    
-    
   }
 
   private sendRecording():void {
+    this.isRecording=false;
     this.audioRecorderService.stopRecording(OutputFormat.WEBM_BLOB).then((output) => {
       console.log(output);
-      
+      this.uploadMediaApi(output);
      // do post output steps
   }).catch(errrorCase => {
       console.error(errrorCase);
@@ -41,6 +48,7 @@ export class AudioDialogComponent implements OnInit {
 }
 
 private stopRecording():void {
+  this.isRecording=false;
   this.audioRecorderService.stopRecording(OutputFormat.WEBM_BLOB);
 }
 
@@ -63,7 +71,82 @@ private stopRecording():void {
   send():void{
     clearInterval(this.interval);
     this.sendRecording();
-    const dialogResponse = this.dialogRef.close();
   }
+  
+  private uploadMediaApi(output){
+    const fd = new FormData();
+    fd.append('media', output, "media.webm");
+  console.log(JSON.parse(this.cookieService.get('payload')).id); 
+  console.log(this.cookieService.get('token'));
+  
+   this.httpService.uploadMedia(JSON.parse(localStorage.getItem('chatId')),fd)
+  .subscribe(res => {
+    console.log(res.status);
+    if(res.status == 200){
+      document.dispatchEvent(new Event("audioUploadedDialog"));
+    }
+    },
+    (errorRes:HttpErrorResponse) => {
+      console.error(errorRes);
+    });
+    document.addEventListener('audioUploadedDialog',()=>{this.getMediaApi();}); 
+  }
+
+
+
+  private getMediaApi(){
+    
+    this.httpService.getLastAudio()
+    .subscribe(res => {
+      console.log(res.status);
+      if(res.status == 200){
+        this.lastAudio=res.body;
+        console.log(this.lastAudio);
+        document.dispatchEvent(new Event("gotUserAudioDialog"));
+      }
+      },
+      (errorRes:HttpErrorResponse) => {
+        console.log(errorRes);
+      });
+       
+
+
+  document.addEventListener('gotUserAudioDialog',()=>{
+    this.httpService.getFile(this.lastAudio.url.replace("uploads/",""))
+      .subscribe(res => {
+       if(res.status == 200){
+         var reader = new FileReader();
+         reader.readAsDataURL(res.body);
+           reader.onload = () => {
+             AudioDialogComponent.base64data = reader.result;
+             document.dispatchEvent(new Event("avatarReadedAudioDialog"));
+           }
+           document.addEventListener('avatarReadedAudioDialog',()=>{
+             this.base64dataToImage();
+            });
+       }
+       },
+       (errorRes:HttpErrorResponse) => {
+         console.error(errorRes);
+       });
+    });
+  }
+
+  public base64dataToImage() : void {
+
+    if(!AudioDialogComponent.base64data){
+      console.log("nooo");
+      this.getMediaApi();
+    }else{
+      console.log("siiii");
+      
+      this.audioTest = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(AudioDialogComponent.base64data));
+      let audioHtml  =  <HTMLVideoElement> document.getElementById('audio');
+      audioHtml.pause();
+      audioHtml.load();
+      this.ref.detectChanges();
+      console.log(this.audioTest);
+    }
+}
 
 }

@@ -1,4 +1,5 @@
 <div
+  *ngIf="isRecording"
   class="audio-dialog-container"
   fxLayout="column"
   fxLayoutAlign="end center"
@@ -24,4 +25,17 @@
       Send
     </button>
   </div>
+</div>
+
+<div
+  *ngIf="!isRecording"
+  class="audio-dialog-container"
+  fxLayout="column"
+  fxLayoutAlign="end center"
+>
+  <p>✅ Audio Recorded!</p>
+  <audio id="audio" controls>
+    <source [src]="audioTest" />
+  </audio>
+  <button mat-raised-button (click)="close()" color="primary">Close</button>
 </div>

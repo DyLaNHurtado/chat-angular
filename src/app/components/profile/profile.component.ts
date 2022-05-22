@@ -162,7 +162,7 @@ public back(){
 
     private uploadImageApi(file){
       const fd = new FormData();
-      fd.append('avatar', file, file.name)
+      fd.append('avatar', file, file.name);
     console.log(JSON.parse(this.cookieService.get('payload')).id); 
     console.log(this.cookieService.get('token'));
     

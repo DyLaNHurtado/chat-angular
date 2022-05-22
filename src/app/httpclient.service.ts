@@ -68,6 +68,9 @@ export class HttpclientService {
   public uploadMedia(chatId:string,formdata:FormData){
     return this.http.put<any>(this.url+`user/upload-media/${chatId}`,formdata,{observe: 'response' });
   }
+  public getLastAudio(){
+    return this.http.get(this.url+`message/last/audio`,{ observe: 'response' });
+  }
 
 
 }
