@@ -166,7 +166,7 @@ public back(){
     console.log(JSON.parse(this.cookieService.get('payload')).id); 
     console.log(this.cookieService.get('token'));
     
-     this.httpService.uploadAvatar(JSON.parse(this.cookieService.get('payload')).id,fd)
+     this.httpService.uploadImage(JSON.parse(this.cookieService.get('payload')).id,fd)
     .subscribe(res => {
       console.log(res.status);
       if(res.status == 200){
@@ -210,7 +210,7 @@ public back(){
 
     document.addEventListener('gotUserProfile',()=>{
         if(!this.user.avatar.includes("https://ui-avatars.com/api/")){
-      this.httpService.getAvatar(this.user.avatar.replace("uploads/",""))
+      this.httpService.getFile(this.user.avatar.replace("uploads/",""))
         .subscribe(res => {
          if(res.status == 200){
            var reader = new FileReader();

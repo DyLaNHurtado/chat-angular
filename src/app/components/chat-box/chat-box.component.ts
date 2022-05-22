@@ -86,7 +86,8 @@ export class ChatBoxComponent implements OnInit {
   private getMessages(){
 
       console.log(this.chatMessagesList);
-      this.httpService
+      setTimeout(()=>{
+        this.httpService
       .getAllMessageByChatId(JSON.parse(localStorage.getItem('chatId')))
       .subscribe(
         (res) => {
@@ -105,6 +106,8 @@ export class ChatBoxComponent implements OnInit {
           console.error(errorRes);
         }
       );        
+      });
+      
   }
   private scrollToBottom(){
     setTimeout(()=>{
@@ -131,7 +134,7 @@ export class ChatBoxComponent implements OnInit {
   private getImageApi() {
     if (!this.contact.avatar.includes('https://ui-avatars.com/api/')) {
       this.httpService
-        .getAvatar(this.contact.avatar.replace('uploads/', ''))
+        .getFile(this.contact.avatar.replace('uploads/', ''))
         .subscribe(
           (res) => {
             if (res.status == 200) {

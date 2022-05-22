@@ -27,14 +27,14 @@ export class HttpclientService {
     return this.http.get<any>(this.url+`user/${email}`,{ headers: headers,observe: 'response' });
   }
 
-  public getAvatar(avatarName:string){
+  public getFile(fileName:string){
     
-    return this.http.get(this.url+`user/avatar/${avatarName}`,{observe: 'response',responseType: 'blob' });
+    return this.http.get(this.url+`user/file/${fileName}`,{observe: 'response',responseType: 'blob' });
   }
 
-  public uploadAvatar(userId:string,formdata:FormData){
+  public uploadImage(userId:string,formdata:FormData){
 
-    return this.http.put<any>(this.url+`user/upload-avatar/${userId}`,formdata,{observe: 'response' });
+    return this.http.put<any>(this.url+`user/upload-image/${userId}`,formdata,{observe: 'response' });
   }
 
   public editProfile(body:any,idUser:string){
@@ -63,6 +63,10 @@ export class HttpclientService {
 
   public deleteChatMessages(chatId:string){
     return this.http.delete<any>(this.url+`chat/${chatId}`,{ observe: 'response' });
+  }
+
+  public uploadMedia(chatId:string,formdata:FormData){
+    return this.http.put<any>(this.url+`user/upload-media/${chatId}`,formdata,{observe: 'response' });
   }
 
 

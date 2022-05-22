@@ -92,7 +92,7 @@ export class MainComponent implements OnInit {
 
   document.addEventListener('gotUserMain',()=>{
     if(!this.user.avatar.includes("https://ui-avatars.com/api/")){
-  this.httpService.getAvatar(this.user.avatar.replace("uploads/",""))
+  this.httpService.getFile(this.user.avatar.replace("uploads/",""))
     .subscribe(res => {
      if(res.status == 200){
        var reader = new FileReader();
