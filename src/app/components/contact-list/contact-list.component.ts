@@ -113,12 +113,14 @@ export class ContactListComponent implements OnInit {
             userConnected=e;
           }
         }
+        if(userConnected!=undefined){
+          Array.from(contacts).forEach((el) => {
+            if(el.children[1].innerHTML==userConnected.name){
+              el.children[0].innerHTML="🟢";
+            }
+        });
+        }
         
-        Array.from(contacts).forEach((el) => {
-          if(el.children[1].innerHTML==userConnected.name){
-            el.children[0].innerHTML="🟢";
-          }
-      });
         
       });
 
