@@ -50,7 +50,8 @@ export class ContactListComponent implements OnInit {
     this.setContactList();
     
     
-    document.addEventListener('contactAdded',()=>{
+    document.addEventListener('contactAdded',(event)=>{
+      event.stopPropagation();
       this.setContactList();
     })
   }
@@ -67,14 +68,15 @@ export class ContactListComponent implements OnInit {
               return user.name;
             }); 
             this.contactObjectsList = this.user.contacts;
-            document.dispatchEvent(new Event('gotUsersCL'));
+            document.dispatchEvent(new Event('gotUsersCL',{bubbles:false,cancelable:true}));
           }
         },
         (errorRes: HttpErrorResponse) => {
           console.error(errorRes);
         }
       );
-    document.addEventListener('gotUsersCL', () => {
+    document.addEventListener('gotUsersCL', (event) => {
+      event.stopPropagation();
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),
         map((value) => this._filter(value))

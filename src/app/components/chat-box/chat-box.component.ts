@@ -61,8 +61,8 @@ export class ChatBoxComponent implements OnInit {
     this.getImageApi();
     
     
-    
-    document.addEventListener('userSelected',()=>{
+    document.addEventListener('userSelected',(event)=>{
+      event.stopPropagation();
       console.log("gsf");
       this.contact=JSON.parse(localStorage.getItem('contact'));
       this.getMessages();
@@ -80,7 +80,7 @@ export class ChatBoxComponent implements OnInit {
     this.socket.on('newMessage',()=>{
       this.getMessages();
     });
-
+    
   }
 
   private getMessages(){
@@ -143,9 +143,10 @@ export class ChatBoxComponent implements OnInit {
               reader.readAsDataURL(res.body);
               reader.onload = () => {
                 ChatBoxComponent.base64data = reader.result;
-                document.dispatchEvent(new Event('avatarReadedChatBox'));
+                document.dispatchEvent(new Event('avatarReadedChatBox',{bubbles:false,cancelable:true}));
               };
-              document.addEventListener('avatarReadedChatBox', () => {
+              document.addEventListener('avatarReadedChatBox', (event) => {
+                event.stopPropagation();
                 this.base64dataToImage();
                 console.log(res.body);
               });
@@ -183,7 +184,7 @@ export class ChatBoxComponent implements OnInit {
     this.input = this.entityForm.get('input').value;
     if (this.input.trim() != '') {
 
-      this.httpService.postMessage({"text":this.input.trim(),"author":this.userId,"chat":JSON.parse(localStorage.getItem('chatId')),"time":`${('0'+(new Date().getHours())).slice(-2)}:${('0'+(new Date().getMinutes())).slice(-2)}`})
+      this.httpService.postMessage({"type":"text","text":this.input.trim(),"author":this.userId,"chat":JSON.parse(localStorage.getItem('chatId')),"time":`${('0'+(new Date().getHours())).slice(-2)}:${('0'+(new Date().getMinutes())).slice(-2)}`})
       .subscribe((res)=> {
         let newMessage = res.body;
         newMessage.time=`${('0'+(new Date().getHours())).slice(-2)}:${('0'+(new Date().getMinutes())).slice(-2)}`;

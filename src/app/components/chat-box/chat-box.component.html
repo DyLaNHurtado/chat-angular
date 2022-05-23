@@ -37,6 +37,8 @@
           chatMessagesList[i - 1]?.createdAt.substring(0, 10)
         "
         [date]="message.createdAt.substring(0, 10)"
+        [type]="message.type"
+        [url]="message.url"
       ></app-chat-message>
     </div>
   </div>

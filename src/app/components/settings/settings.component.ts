@@ -16,7 +16,10 @@ export class SettingsComponent implements OnInit {
   
   ngOnInit() {
       this.setTheme();
-      window.addEventListener("storage", this.setTheme, false);
+      window.addEventListener("storage", (event)=>{
+        event.stopPropagation();
+        this.setTheme
+      }, false);
   }
 
   public onSetBackground(background:string){
@@ -28,12 +31,12 @@ export class SettingsComponent implements OnInit {
   
   public onSetLightTheme(){
     localStorage.setItem('theme', JSON.stringify(0));
-    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event('storage',{bubbles:false,cancelable:true}));
   }
 
   public onSetDarkTheme(){
     localStorage.setItem('theme', JSON.stringify(1));
-    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event('storage',{bubbles:false,cancelable:true}));
   }
 
   public getColor(){

@@ -44,7 +44,7 @@ export class AddDialogComponent implements OnInit {
           if (res.status == 200) {
             this.error=false;
             this.success=true;
-            document.dispatchEvent(new Event('contactAdded'));
+            document.dispatchEvent(new Event('contactAdded',{bubbles:false,cancelable:true}));
           }
         },
         (errorRes: HttpErrorResponse) => {

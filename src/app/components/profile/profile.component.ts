@@ -171,7 +171,7 @@ public back(){
       console.log(res.status);
       if(res.status == 200){
         this.error=false;
-        document.dispatchEvent(new Event("avatarUploadedProfile"));
+        document.dispatchEvent(new Event("avatarUploadedProfile",{bubbles:false,cancelable:true}));
       }
       },
       (errorRes:HttpErrorResponse) => {
@@ -182,7 +182,9 @@ public back(){
       });
 
       
-      document.addEventListener('avatarUploadedProfile',()=>{this.getImageApi();}); 
+      document.addEventListener('avatarUploadedProfile',(event)=>{
+        event.stopPropagation();
+        this.getImageApi();}); 
     }
 
 
@@ -197,7 +199,7 @@ public back(){
           this.error=false;
           this.user=res.body[0];
           console.log(this.user);
-          document.dispatchEvent(new Event("gotUserProfile"));
+          document.dispatchEvent(new Event("gotUserProfile",{bubbles:false,cancelable:true}));
         }
         },
         (errorRes:HttpErrorResponse) => {
@@ -208,7 +210,8 @@ public back(){
          
 
 
-    document.addEventListener('gotUserProfile',()=>{
+    document.addEventListener('gotUserProfile',(event)=>{
+      event.stopPropagation();
         if(!this.user.avatar.includes("https://ui-avatars.com/api/")){
       this.httpService.getFile(this.user.avatar.replace("uploads/",""))
         .subscribe(res => {
@@ -217,9 +220,10 @@ public back(){
            reader.readAsDataURL(res.body);
              reader.onload = () => {
                ProfileComponent.base64data = reader.result;
-               document.dispatchEvent(new Event("avatarReadedProfile"));
+               document.dispatchEvent(new Event("avatarReadedProfile",{bubbles:false,cancelable:true}));
              }
-             document.addEventListener('avatarReadedProfile',()=>{
+             document.addEventListener('avatarReadedProfile',(event)=>{
+              event.stopPropagation();
                this.base64dataToImage();
               });
          }

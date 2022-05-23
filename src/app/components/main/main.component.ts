@@ -21,12 +21,16 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.getImageApi();
-    document.addEventListener('startSettings',()=>{
+    document.addEventListener('startSettings',(event)=>{
+      event.stopPropagation();
       this.setTheme();
       window.location.reload();
     });
     
-    window.addEventListener("storage", this.setTheme, false);
+    window.addEventListener("storage",(event)=>{
+      event.stopPropagation();
+      this.setTheme;
+    } , false);
   }
 
   public base64dataToImage() : void {
@@ -84,13 +88,14 @@ export class MainComponent implements OnInit {
           
         }
         
-        document.dispatchEvent(new Event("gotUserMain"));
+        document.dispatchEvent(new Event("gotUserMain",{bubbles:false,cancelable:true}));
  },
  (errorRes:HttpErrorResponse) => {
    console.error(errorRes);
  });
 
-  document.addEventListener('gotUserMain',()=>{
+  document.addEventListener('gotUserMain',(event)=>{
+    event.stopPropagation();
     if(!this.user.avatar.includes("https://ui-avatars.com/api/")){
   this.httpService.getFile(this.user.avatar.replace("uploads/",""))
     .subscribe(res => {
@@ -99,9 +104,10 @@ export class MainComponent implements OnInit {
        reader.readAsDataURL(res.body);
          reader.onload = () => {
            MainComponent.base64data = reader.result;
-           document.dispatchEvent(new Event("readedImageMain"));
+           document.dispatchEvent(new Event("readedImageMain",{bubbles:false,cancelable:true}));
          }
-         document.addEventListener('readedImageMain',()=>{
+         document.addEventListener('readedImageMain',(event)=>{
+          event.stopPropagation();
            this.base64dataToImage();
          });
      }

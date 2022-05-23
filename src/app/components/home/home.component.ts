@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
     this.contact=contact
     localStorage.setItem('contact',JSON.stringify(this.contact));
     this.contactSeleted=true;
-    document.dispatchEvent(new Event("userSelected"));
+    document.dispatchEvent(new Event("userSelected",{bubbles:false,cancelable:true}));
     
   }
 

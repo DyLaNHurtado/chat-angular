@@ -65,8 +65,8 @@ export class HttpclientService {
     return this.http.delete<any>(this.url+`chat/${chatId}`,{ observe: 'response' });
   }
 
-  public uploadMedia(chatId:string,formdata:FormData){
-    return this.http.put<any>(this.url+`user/upload-media/${chatId}`,formdata,{observe: 'response' });
+  public uploadMedia(chatId:string,userId:string,formdata:FormData){
+    return this.http.put<any>(this.url+`user/upload-media/${chatId}/${userId}`,formdata,{observe: 'response' });
   }
   public getLastAudio(){
     return this.http.get(this.url+`message/last/audio`,{ observe: 'response' });

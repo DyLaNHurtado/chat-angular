@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
         this.cookieService.set("token",token);
         
         this.cookieService.set("payload",JSON.stringify(this.getDecodedAccessToken(token)));
-        document.dispatchEvent(new Event('tokenReady'));
+        document.dispatchEvent(new Event('tokenReady',{bubbles:false,cancelable:true}));
         this.socket.connect();
         this.router.navigate(["../home"]);
       }
@@ -109,7 +109,8 @@ export class LoginComponent implements OnInit {
   }
 
   private setUserSettings(){
-    document.addEventListener('tokenReady',()=>{
+    document.addEventListener('tokenReady',(event)=>{
+      event.stopPropagation();
       console.log("tokenReady");
       
       this.httpService.getUserByEmail(this.cookieService.get('token'),this.inputEmail)
@@ -122,7 +123,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('theme',JSON.stringify(user.theme));
           localStorage.setItem('bg_color',JSON.stringify(user.bgColor));
           localStorage.setItem('bg',JSON.stringify(user.background));
-          document.dispatchEvent(new Event('startSettings'));
+          document.dispatchEvent(new Event('startSettings',{bubbles:false,cancelable:true}));
         }
         },
         (errorRes:HttpErrorResponse) => {
