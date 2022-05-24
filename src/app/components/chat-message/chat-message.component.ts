@@ -26,27 +26,31 @@ export class ChatMessageComponent implements OnInit {
   
   ngOnInit() {
     this.userId=this.userId=JSON.parse(this.cookieService.get('payload')).id;
+    this.getMediaApi();
   }
 
     private getMediaApi(){
-      this.httpService.getFile(this.url.replace("uploads/",""))
-      .subscribe(res => {
-       if(res.status == 200){
-         var reader = new FileReader();
-         reader.readAsDataURL(res.body);
-           reader.onload = () => {
-             AudioDialogComponent.base64data = reader.result;
-             document.dispatchEvent(new Event("mediaReadedChatMessage",{bubbles:false,cancelable:true}));
-           }
-           document.addEventListener('mediaReadedChatMessage',(event)=>{
-            event.stopPropagation();
-             this.base64dataToImage();
-            });
-       }
-       },
-       (errorRes:HttpErrorResponse) => {
-         console.error(errorRes);
-       });
+      if(this.url!==undefined){
+        this.httpService.getFile(this.url.replace("uploads/",""))
+        .subscribe(res => {
+         if(res.status == 200){
+           var reader = new FileReader();
+           reader.readAsDataURL(res.body);
+             reader.onload = () => {
+               AudioDialogComponent.base64data = reader.result;
+               document.dispatchEvent(new Event("mediaReadedChatMessage",{bubbles:false,cancelable:true}));
+             }
+             document.addEventListener('mediaReadedChatMessage',(event)=>{
+              event.stopPropagation();
+               this.base64dataToImage();
+              },{once:true});
+         }
+         },
+         (errorRes:HttpErrorResponse) => {
+           console.error(errorRes);
+         });
+      }
+      
 
     }
     public base64dataToImage() : void {
@@ -58,9 +62,10 @@ export class ChatMessageComponent implements OnInit {
         console.log("siiii");
         
         this.audioMedia = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(AudioDialogComponent.base64data));
-        let audioHtml  =  <HTMLVideoElement> <unknown>document.getElementsByTagName("source")[document.getElementsByTagName("source").length - 1]
-        audioHtml.pause();
-        audioHtml.load();
+        let audioHtml  =   document.getElementsByTagName("source");
+        let audio = <HTMLVideoElement> <unknown>audioHtml[audioHtml.length - 1]
+        audio.pause();
+        audio.load();
         this.ref.detectChanges();
         console.log(this.audioMedia);
       }

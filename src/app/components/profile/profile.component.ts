@@ -184,7 +184,7 @@ public back(){
       
       document.addEventListener('avatarUploadedProfile',(event)=>{
         event.stopPropagation();
-        this.getImageApi();}); 
+        this.getImageApi();},{once:true}); 
     }
 
 
@@ -225,7 +225,7 @@ public back(){
              document.addEventListener('avatarReadedProfile',(event)=>{
               event.stopPropagation();
                this.base64dataToImage();
-              });
+              },{once:true});
          }
          },
          (errorRes:HttpErrorResponse) => {
@@ -234,6 +234,6 @@ public back(){
         }else{
           this.avatar=this.user.avatar;
         }
-      });
+      },{once:true});
     }
 }

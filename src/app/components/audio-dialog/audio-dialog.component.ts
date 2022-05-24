@@ -43,7 +43,6 @@ export class AudioDialogComponent implements OnInit {
     this.audioRecorderService.stopRecording(OutputFormat.WEBM_BLOB).then((output) => {
       console.log(output);
       this.uploadMediaApi(output);
-     // do post output steps
   }).catch(errrorCase => {
       console.error(errrorCase);
   });
@@ -68,7 +67,7 @@ private stopRecording():void {
     clearInterval(this.interval);
     this.stopRecording();
     const dialogResponse = this.dialogRef.close();
-    window.location.reload();
+    //  window.location.reload();
   }
 
   send():void{
@@ -94,7 +93,7 @@ private stopRecording():void {
     });
     document.addEventListener('audioUploadedDialog',(event)=>{
       event.stopPropagation();
-      this.getMediaApi();}); 
+      this.getMediaApi();},{once:true}); 
   }
 
 
@@ -130,13 +129,13 @@ private stopRecording():void {
            document.addEventListener('mediaReadedAudioDialog',(event)=>{
             event.stopPropagation();
              this.base64dataToImage();
-            });
+            },{once:true});
        }
        },
        (errorRes:HttpErrorResponse) => {
          console.error(errorRes);
        });
-    });
+    },{once:true});
   }
 
   public base64dataToImage() : void {

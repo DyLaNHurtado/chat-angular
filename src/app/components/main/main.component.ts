@@ -30,7 +30,7 @@ export class MainComponent implements OnInit {
     window.addEventListener("storage",(event)=>{
       event.stopPropagation();
       this.setTheme;
-    } , false);
+    },{once:true});
   }
 
   public base64dataToImage() : void {
@@ -109,7 +109,7 @@ export class MainComponent implements OnInit {
          document.addEventListener('readedImageMain',(event)=>{
           event.stopPropagation();
            this.base64dataToImage();
-         });
+         },{once:true});
      }
      },
      (errorRes:HttpErrorResponse) => {
@@ -118,7 +118,7 @@ export class MainComponent implements OnInit {
     }else{
       this.avatar=this.user.avatar;
     }
-  });
+  },{once:true});
   }
   
 }

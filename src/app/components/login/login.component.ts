@@ -130,7 +130,7 @@ export class LoginComponent implements OnInit {
             this.error=true;
             this.errorMsg=errorRes.error.error
         });
-    });
+    },{once:true});
     }
     
 

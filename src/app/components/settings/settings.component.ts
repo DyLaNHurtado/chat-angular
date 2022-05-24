@@ -19,7 +19,7 @@ export class SettingsComponent implements OnInit {
       window.addEventListener("storage", (event)=>{
         event.stopPropagation();
         this.setTheme
-      }, false);
+      }, {once:true});
   }
 
   public onSetBackground(background:string){

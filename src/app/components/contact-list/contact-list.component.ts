@@ -53,7 +53,7 @@ export class ContactListComponent implements OnInit {
     document.addEventListener('contactAdded',(event)=>{
       event.stopPropagation();
       this.setContactList();
-    })
+    },{once:true})
   }
 
 
@@ -159,7 +159,7 @@ export class ContactListComponent implements OnInit {
             }
         })
       });
-    });
+    },{once:true});
   }
 
   private getUsername(userId:string):any{
