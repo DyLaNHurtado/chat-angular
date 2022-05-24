@@ -67,7 +67,7 @@ private stopRecording():void {
     clearInterval(this.interval);
     this.stopRecording();
     const dialogResponse = this.dialogRef.close();
-    //  window.location.reload();
+    window.location.reload();
   }
 
   send():void{
