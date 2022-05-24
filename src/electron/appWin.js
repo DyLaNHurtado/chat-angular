@@ -32,7 +32,7 @@ appWin.setMenu(null);
     appWin.on('ready-to-show',()=>{
         const splash = require('./splash');
         setTimeout(()=>{
-            if(splash.isClosable){
+            if(!splash.isDestroyed()){
                 splash.close();
             }
             appWin.show();

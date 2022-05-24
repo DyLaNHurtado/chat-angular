@@ -18,8 +18,8 @@ export class SettingsComponent implements OnInit {
       this.setTheme();
       window.addEventListener("storage", (event)=>{
         event.stopPropagation();
-        this.setTheme
-      }, {once:true});
+        this.setTheme()
+      }, false);
   }
 
   public onSetBackground(background:string){

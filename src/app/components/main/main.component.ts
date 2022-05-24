@@ -29,8 +29,8 @@ export class MainComponent implements OnInit {
     
     window.addEventListener("storage",(event)=>{
       event.stopPropagation();
-      this.setTheme;
-    },{once:true});
+      this.setTheme();
+    },false);
   }
 
   public base64dataToImage() : void {

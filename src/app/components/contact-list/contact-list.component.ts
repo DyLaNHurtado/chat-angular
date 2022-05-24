@@ -53,7 +53,7 @@ export class ContactListComponent implements OnInit {
     document.addEventListener('contactAdded',(event)=>{
       event.stopPropagation();
       this.setContactList();
-    },{once:true})
+    });
   }
 
 

@@ -62,11 +62,13 @@ export class ChatMessageComponent implements OnInit {
         console.log("siiii");
         
         this.audioMedia = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(AudioDialogComponent.base64data));
-        let audioHtml  =   document.getElementsByTagName("source");
-        let audio = <HTMLVideoElement> <unknown>audioHtml[audioHtml.length - 1]
-        audio.pause();
-        audio.load();
-        this.ref.detectChanges();
+        let audiosHtml  =   document.getElementsByTagName("audio");
+        Array.from(audiosHtml).forEach((el) => {
+          let audio = <HTMLVideoElement> el;
+          audio.pause();
+          audio.load();
+          this.ref.detectChanges();
+      });
         console.log(this.audioMedia);
       }
   }

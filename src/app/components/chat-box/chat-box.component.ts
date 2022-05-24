@@ -67,7 +67,7 @@ export class ChatBoxComponent implements OnInit {
       this.contact=JSON.parse(localStorage.getItem('contact'));
       this.getMessages();
       this.getImageApi();
-    },{once:true});
+    });
       
       
       
