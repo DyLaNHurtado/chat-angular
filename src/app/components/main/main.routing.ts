@@ -1,11 +1,9 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import  { ModuleWithProviders} from "@angular/core";
 import { MainComponent } from "./main.component";
 import { ProfileComponent } from "../profile/profile.component";
 import { HomeComponent } from "../home/home.component";
 import { AboutUsComponent } from "../aboutUs/aboutUs.component";
-import { SettingsModule } from "../settings/settings.module";
 import { SettingsComponent } from "../settings/settings.component";
 
 const routes: Routes = [
