@@ -16,7 +16,7 @@ export class MainComponent implements OnInit {
   avatar:string ="https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif";
   user:any;
   public static base64data:any;
-  constructor(private router:Router,public socket:SocketProviderConnect,public httpService:HttpclientService,private cookieService:CookieService,private _sanitizer: DomSanitizer) { 
+  constructor(private router:Router,public socket:SocketProviderConnect,public httpService:HttpclientService,private cookieService:CookieService,private _sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {

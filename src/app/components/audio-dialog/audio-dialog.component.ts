@@ -13,7 +13,7 @@ import { SocketProviderConnect } from 'src/app/web-socket.service';
   styleUrls: ['./audio-dialog.component.scss']
 })
 export class AudioDialogComponent implements OnInit {
-  minutes:number; 
+  minutes:number;
   seconds:number;
   interval;
   lastAudio:any;
@@ -78,7 +78,7 @@ private stopRecording():void {
   private uploadMediaApi(output){
     const fd = new FormData();
     fd.append('media', output, "media.webm");
-  console.log(JSON.parse(this.cookieService.get('payload')).id); 
+  console.log(JSON.parse(this.cookieService.get('payload')).id);
   console.log(this.cookieService.get('token'));
   
    this.httpService.uploadMedia(JSON.parse(localStorage.getItem('chatId')),JSON.parse(this.cookieService.get('payload')).id,fd)
@@ -93,7 +93,7 @@ private stopRecording():void {
     });
     document.addEventListener('audioUploadedDialog',(event)=>{
       event.stopPropagation();
-      this.getMediaApi();},{once:true}); 
+      this.getMediaApi();},{once:true});
   }
 
 

@@ -71,7 +71,7 @@ export class ChatBoxComponent implements OnInit {
       
       
       
-    this.socket.on('writting',()=>{      
+    this.socket.on('writting',()=>{
       this.isWritting=true;
     });
     this.socket.on('notWritting',()=>{
@@ -105,7 +105,7 @@ export class ChatBoxComponent implements OnInit {
         (errorRes: HttpErrorResponse) => {
           console.error(errorRes);
         }
-      );        
+      );
       });
       
   }
@@ -231,7 +231,7 @@ export class ChatBoxComponent implements OnInit {
         (errorRes: HttpErrorResponse) => {
           console.error(errorRes);
         }
-      );        
+      );
   }
 
   public call(){
