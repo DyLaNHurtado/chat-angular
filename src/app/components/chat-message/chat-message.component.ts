@@ -46,7 +46,7 @@ export class ChatMessageComponent implements OnInit {
              document.addEventListener('mediaReadedChatMessage',(event)=>{
                event.preventDefault();
                this.base64dataToImage();
-              },false);
+              },{once:true});
          }
          },
          (errorRes:HttpErrorResponse) => {

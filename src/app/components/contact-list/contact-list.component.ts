@@ -144,7 +144,8 @@ export class ContactListComponent implements OnInit {
       console.log("hola");
       this.socket.on('messageSentCL',(idChat,userId)=>{
         console.log("hola");
-        
+        var audio = <HTMLVideoElement> document.getElementById("audio");
+        audio.play();
         let contacts = document.getElementsByClassName("contact");
     
           Array.from(contacts).forEach((el)=>{

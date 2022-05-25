@@ -8,6 +8,9 @@ img{
 p{
     text-align: center;
     margin: 3vh 5;
+    font-size: large;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .contact{
     user-select: none;
@@ -38,11 +41,7 @@ p{
 .button-add:hover{
     background: linear-gradient(to bottom, #e6cd66,#f18f70);
 }
-p{
-    font-size: large;
-font-weight: bold;
-font-family: Arial, Helvetica, sans-serif;
-}
+
 .my-dark-theme mat-selection-list .contact-option{
     background: linear-gradient(to right, #310855, #420b71);
 }
@@ -74,4 +73,7 @@ font-family: Arial, Helvetica, sans-serif;
 }
 .show-nmessage{
     display: inline;
+}
+#audio{
+    display: none;
 }
