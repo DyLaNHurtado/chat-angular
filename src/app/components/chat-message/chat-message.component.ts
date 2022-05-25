@@ -20,6 +20,7 @@ export class ChatMessageComponent implements OnInit {
   @Input() type:string;
   @Input() url:string;
   audioMedia:string;
+  audioList:string[]=[];
   static base64data:any;
   userId:string;
   constructor(private cookieService:CookieService,public httpService:HttpclientService,private _sanitizer: DomSanitizer,private ref: ChangeDetectorRef) { }
@@ -37,13 +38,15 @@ export class ChatMessageComponent implements OnInit {
            var reader = new FileReader();
            reader.readAsDataURL(res.body);
              reader.onload = () => {
+               console.log("1");
+               
                AudioDialogComponent.base64data = reader.result;
                document.dispatchEvent(new Event("mediaReadedChatMessage",{bubbles:false,cancelable:true}));
              }
              document.addEventListener('mediaReadedChatMessage',(event)=>{
-              event.stopPropagation();
+               event.preventDefault();
                this.base64dataToImage();
-              },{once:true});
+              },false);
          }
          },
          (errorRes:HttpErrorResponse) => {
@@ -60,15 +63,24 @@ export class ChatMessageComponent implements OnInit {
         this.getMediaApi();
       }else{
         console.log("siiii");
+        this.audioList.push(this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(AudioDialogComponent.base64data)));
+        console.log(this.audioList);
         
-        this.audioMedia = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(AudioDialogComponent.base64data));
-        let audiosHtml  =   document.getElementsByTagName("audio");
-        Array.from(audiosHtml).forEach((el) => {
-          let audio = <HTMLVideoElement> el;
+        let audiosHtml = document.getElementsByTagName("audio");
+        if(document.getElementsByTagName("audio").length==1){
+          let audio = <HTMLVideoElement> document.getElementsByTagName("audio")[0];
+          audio.src=this.audioList[0];
           audio.pause();
           audio.load();
-          this.ref.detectChanges();
-      });
+
+        }else{
+              for (let i = 0; i < Array.from(audiosHtml).length; i++){
+                  Array.from(audiosHtml)[i].src=this.audioList[i];
+                  Array.from(audiosHtml)[i].pause();
+                  Array.from(audiosHtml)[i].load();
+                  console.log(Array.from(audiosHtml)[i]);
+              }
+        }
         console.log(this.audioMedia);
       }
   }
