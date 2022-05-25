@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class SocketProviderConnect  extends Socket{
-  @Output() outEven: EventEmitter<any> = new EventEmitter(); 
+  @Output() outEven: EventEmitter<any> = new EventEmitter();
   constructor(private cookieService: CookieService) {
     super({
       url: environment.serverSocket,

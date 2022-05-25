@@ -117,7 +117,7 @@ public back(){
       this.disableInputs();
       
       this.httpService.editProfile({"name":this.inputName,"lastname":this.inputLastName,"email":this.inputEmail,"status":this.inputStatus},JSON.parse(this.cookieService.get('payload')).id)
-      .subscribe(res => { 
+      .subscribe(res => {
         this.error=false;
         window.location.reload();
       },
@@ -163,7 +163,7 @@ public back(){
     private uploadImageApi(file){
       const fd = new FormData();
       fd.append('avatar', file, file.name);
-    console.log(JSON.parse(this.cookieService.get('payload')).id); 
+    console.log(JSON.parse(this.cookieService.get('payload')).id);
     console.log(this.cookieService.get('token'));
     
      this.httpService.uploadImage(JSON.parse(this.cookieService.get('payload')).id,fd)
@@ -184,7 +184,7 @@ public back(){
       
       document.addEventListener('avatarUploadedProfile',(event)=>{
         event.stopPropagation();
-        this.getImageApi();},{once:true}); 
+        this.getImageApi();},{once:true});
     }
 
 
