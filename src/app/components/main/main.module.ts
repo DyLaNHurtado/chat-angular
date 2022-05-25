@@ -9,7 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { LoginModule } from '../login/login.module';
 import { RegisterModule } from '../register/register.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
- import {MatMenuModule} from '@angular/material/menu'; 
+ import {MatMenuModule} from '@angular/material/menu';
 import { MainRoutingModule } from './main.routing';
 import { HomeModule } from '../home/home.module';
 import { AboutUsModule } from '../aboutUs/aboutUs.module';

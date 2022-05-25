@@ -10,8 +10,8 @@ import { MatCardModule } from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
-import {MatTabsModule} from '@angular/material/tabs'; 
-import {MatButtonToggleModule} from '@angular/material/button-toggle'; 
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   imports: [
@@ -22,7 +22,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
-    MatInputModule,  
+    MatInputModule,
     MatCardModule,
     MatSnackBarModule,
     MatRadioModule,

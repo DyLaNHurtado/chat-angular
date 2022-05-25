@@ -50,7 +50,7 @@ export class AddDialogComponent implements OnInit {
         (errorRes: HttpErrorResponse) => {
           console.error(errorRes);
         }
-      );  
+      );
       this.errorMsg="✅ User added!"
       setTimeout(()=>this.dialogRef.close(),500);
     }
