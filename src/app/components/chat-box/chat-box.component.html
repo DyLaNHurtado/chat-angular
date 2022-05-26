@@ -17,8 +17,7 @@
       <button mat-icon-button (click)="call()"><mat-icon class="icon">phone</mat-icon></button>
       <button mat-icon-button [matMenuTriggerFor]="beforeMenu"><mat-icon class="icon">more_vert</mat-icon></button>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <button mat-menu-item (click)="cleanMessages()" >
-          
+        <button mat-menu-item (click)="cleanMessages()">
           <span class="menu-option">Clear chat messages</span>
         </button>
       </mat-menu>
@@ -36,9 +35,10 @@
           chatMessagesList[i].createdAt.substring(0, 10) ===
           chatMessagesList[i - 1]?.createdAt.substring(0, 10)
         "
-        [date]="message.createdAt.substring(0, 10)"
-        [type]="message.type"
-        [url]="message.url"
+        [date]="message?.createdAt.substring(0, 10)"
+        [type]="message?.type"
+        [url]="message?.url"
+        [audiosList]="audioList"
       ></app-chat-message>
     </div>
   </div>

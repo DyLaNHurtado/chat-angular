@@ -39,7 +39,7 @@ export class ChatBoxComponent implements OnInit {
     'https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif';
   isWritting:boolean=false;
   chatMessagesList:any[]=[];
-  
+  audioList:string[]=[];
   userId:string;
 
   constructor(
@@ -62,7 +62,7 @@ export class ChatBoxComponent implements OnInit {
     
     
     document.addEventListener('userSelected',(event)=>{
-      event.stopPropagation();
+      event.preventDefault();
       console.log("gsf");
       this.contact=JSON.parse(localStorage.getItem('contact'));
       this.getMessages();
@@ -97,9 +97,12 @@ export class ChatBoxComponent implements OnInit {
             let arr:any[]=[]
             arr.push(res.body)
             this.chatMessagesList=arr[0];
-              
+            for (let audio of this.chatMessagesList){
+              if(audio.url!=undefined){
+                this.audioList.push(audio.url);
+              }
+            } 
             this.scrollToBottom();
-              
           }
         },
         (errorRes: HttpErrorResponse) => {

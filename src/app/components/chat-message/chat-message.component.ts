@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Input, OnInit, SecurityContext } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit, SecurityContext, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpclientService } from 'src/app/httpclient.service';
@@ -19,8 +19,8 @@ export class ChatMessageComponent implements OnInit {
   @Input() date:string;
   @Input() type:string;
   @Input() url:string;
+  @Input() audiosList:string[];
   audioMedia:string;
-  audioList:string[]=[];
   static base64data:any;
   userId:string;
   constructor(private cookieService:CookieService,public httpService:HttpclientService,private _sanitizer: DomSanitizer,private ref: ChangeDetectorRef) { }
@@ -28,18 +28,19 @@ export class ChatMessageComponent implements OnInit {
   ngOnInit() {
     this.userId=this.userId=JSON.parse(this.cookieService.get('payload')).id;
     this.getMediaApi();
+    console.log(this.getIndexByUrl());
   }
 
     private getMediaApi(){
-      if(this.url!==undefined){
-        this.httpService.getFile(this.url.replace("uploads/",""))
+      if(this.getIndexByUrl()!= -1){
+        console.log(this.audiosList[this.getIndexByUrl()]);
+        
+        this.httpService.getFile(this.audiosList[this.getIndexByUrl()].replace("uploads/",""))
         .subscribe(res => {
          if(res.status == 200){
            var reader = new FileReader();
            reader.readAsDataURL(res.body);
              reader.onload = () => {
-               console.log("1");
-               
                AudioDialogComponent.base64data = reader.result;
                document.dispatchEvent(new Event("mediaReadedChatMessage",{bubbles:false,cancelable:true}));
              }
@@ -58,30 +59,22 @@ export class ChatMessageComponent implements OnInit {
     }
     public base64dataToImage() : void {
 
-      if(!AudioDialogComponent.base64data){
-        console.log("nooo");
-        this.getMediaApi();
-      }else{
+       if(!AudioDialogComponent.base64data){
+         console.log("nooo");
+         this.getMediaApi();
+       }else{
         console.log("siiii");
-        this.audioList.push(this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(AudioDialogComponent.base64data)));
-        console.log(this.audioList);
-        
-        let audiosHtml = document.getElementsByTagName("audio");
-        if(document.getElementsByTagName("audio").length==1){
-          let audio = <HTMLVideoElement> document.getElementsByTagName("audio")[0];
-          audio.src=this.audioList[0];
-          audio.pause();
-          audio.load();
+        this.audioMedia = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(AudioDialogComponent.base64data));
+        this.ref.detectChanges();
+       }
+  }
 
-        }else{
-              for (let i = 0; i < Array.from(audiosHtml).length; i++){
-                  Array.from(audiosHtml)[i].src=this.audioList[i];
-                  Array.from(audiosHtml)[i].pause();
-                  Array.from(audiosHtml)[i].load();
-                  console.log(Array.from(audiosHtml)[i]);
-              }
-        }
-        console.log(this.audioMedia);
+  private getIndexByUrl(){
+    for(let i = 0; i < this.audiosList.length; i++){
+      if(this.audiosList[i] == this.url){
+        return i;
       }
+    }
+    return -1;
   }
 }
