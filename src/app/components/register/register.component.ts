@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpclientService } from 'src/app/httpclient.service';
+import { JwtHelperService } from 'src/app/jwt-helper.service';
+import { SocketProviderConnect } from 'src/app/web-socket.service';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +28,7 @@ export class RegisterComponent implements OnInit {
   themeDark:boolean;
   @Output() setLogin=new EventEmitter();
   
-  constructor(public dialog: MatDialog,private router:Router,private cookieService:CookieService,public httpService:HttpclientService) { }
+  constructor(public dialog: MatDialog,private router:Router,private cookieService:CookieService,private httpService:HttpclientService,private jwtService:JwtHelperService,private socket:SocketProviderConnect) { }
 
   ngOnInit() {
     this.error=false;
@@ -38,6 +40,12 @@ export class RegisterComponent implements OnInit {
       inputPass: new FormControl("", [Validators.required]),
       inputConfirmPass: new FormControl("", [Validators.required]),
     })
+    if(this.cookieService.get('token')!="" && this.cookieService.get('payload')!=""){
+      if (this.jwtService.isTokenValid(this.cookieService.get('token'))) {
+        this.socket.connect();
+        this.router.navigate(["../home"]);
+      }
+    }
   }
 
   private setTheme(){
