@@ -245,7 +245,8 @@ export class ChatBoxComponent implements OnInit {
 
   public openAudioDialog() {
     this.dialog.open(AudioDialogComponent,{
-      disableClose:true
+      disableClose:true,
+      panelClass:'dialog'
     });
   }
 

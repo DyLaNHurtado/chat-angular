@@ -224,6 +224,8 @@ export class ContactListComponent implements OnInit {
   }
 
   public openAddDialog() {
-    this.dialog.open(AddDialogComponent);
+    this.dialog.open(AddDialogComponent,{
+      panelClass:'dialog'
+    });
   }
 }
