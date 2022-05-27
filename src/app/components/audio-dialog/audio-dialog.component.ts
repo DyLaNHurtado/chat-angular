@@ -116,20 +116,15 @@ private stopRecording():void {
 
 
   document.addEventListener('gotUserAudioDialog',(event)=>{
-    event.stopPropagation();
+    event.preventDefault();
     this.httpService.getFile(this.lastAudio.url.replace("uploads/",""))
       .subscribe(res => {
        if(res.status == 200){
          var reader = new FileReader();
          reader.readAsDataURL(res.body);
            reader.onload = () => {
-             AudioDialogComponent.base64data = reader.result;
-             document.dispatchEvent(new Event("mediaReadedAudioDialog",{bubbles:false,cancelable:true}));
+            this.base64dataToImage(reader.result);
            }
-           document.addEventListener('mediaReadedAudioDialog',(event)=>{
-            event.stopPropagation();
-             this.base64dataToImage();
-            },{once:true});
        }
        },
        (errorRes:HttpErrorResponse) => {
@@ -138,21 +133,19 @@ private stopRecording():void {
     },{once:true});
   }
 
-  public base64dataToImage() : void {
 
-    if(!AudioDialogComponent.base64data){
-      console.log("nooo");
-      this.getMediaApi();
-    }else{
-      console.log("siiii");
-      
-      this.audioTest = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(AudioDialogComponent.base64data));
-      let audioHtml  =  <HTMLVideoElement> document.getElementById('audio');
-      audioHtml.pause();
-      audioHtml.load();
-      this.ref.detectChanges();
-      console.log(this.audioTest);
-    }
+
+private base64dataToImage(base64data: string | ArrayBuffer) : void {
+
+  if(!base64data){
+    console.log("nooo");
+    this.getMediaApi();
+  }else{
+    console.log("siiii");
+    let htmlAudio = document.getElementById('dialog-audio');
+    htmlAudio.setAttribute("src",this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(base64data.toString())));
+    this.ref.detectChanges();
+  }
 }
 
 }

@@ -17,7 +17,7 @@
   </mat-card>
 
   <mat-card *ngIf="type=='audio'" class="message-card" fxLayout="row wrap">
-    <audio class="audio-messages" controls [src]="audioMedia">
+    <audio class="audio-messages" controls src="">
     </audio>
     <span class="message-time" fxLayoutAlign="end end">{{ time }}</span>
   </mat-card>

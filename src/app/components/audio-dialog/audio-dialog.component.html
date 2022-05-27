@@ -34,7 +34,7 @@
   fxLayoutAlign="end center"
 >
   <p>✅ Audio Recorded!</p>
-  <audio class="audio" controls>
+  <audio id="dialog-audio" controls>
     <source [src]="audioTest" />
   </audio>
   <button mat-raised-button (click)="close()" color="primary">Close</button>

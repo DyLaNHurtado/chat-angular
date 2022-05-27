@@ -42,12 +42,8 @@ export class ChatMessageComponent implements OnInit {
            reader.readAsDataURL(res.body);
              reader.onload = () => {
                AudioDialogComponent.base64data = reader.result;
-               document.dispatchEvent(new Event("mediaReadedChatMessage",{bubbles:false,cancelable:true}));
+               this.base64dataToImage(reader.result);
              }
-             document.addEventListener('mediaReadedChatMessage',(event)=>{
-               event.preventDefault();
-               this.base64dataToImage();
-              },{once:true});
          }
          },
          (errorRes:HttpErrorResponse) => {
@@ -57,14 +53,16 @@ export class ChatMessageComponent implements OnInit {
       
 
     }
-    public base64dataToImage() : void {
+    private base64dataToImage(base64data: string | ArrayBuffer) : void {
 
-       if(!AudioDialogComponent.base64data){
+       if(!base64data){
          console.log("nooo");
          this.getMediaApi();
        }else{
         console.log("siiii");
-        this.audioMedia = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(AudioDialogComponent.base64data));
+        let htmlAudios = document.getElementsByClassName('audio-messages');
+        let currentAudioHtml = htmlAudios[this.getIndexByUrl()];
+        currentAudioHtml.setAttribute("src",this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(base64data.toString())));
         this.ref.detectChanges();
        }
   }
