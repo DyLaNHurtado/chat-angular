@@ -15,10 +15,24 @@
     </div>
     <div fxLayout="row" fxFlex="100" fxLayoutAlign="end center" class="header-actions">
       <button mat-icon-button (click)="call()"><mat-icon class="icon">phone</mat-icon></button>
+      <button
+      mat-icon-button
+      [matMenuTriggerFor]="attachMenu"
+    >
+      <mat-icon class="icon" >attach_file</mat-icon>
+    </button>
+    <mat-menu #attachMenu="matMenu" xPosition="after">
+      <button mat-menu-item (click)="cleanMessages()">
+        <span class="menu-option">📷  Attach Image</span>
+      </button>
+      <button mat-menu-item (click)="cleanMessages()">
+        <span class="menu-option">📽️ Attach Video</span>
+      </button>
+    </mat-menu>
       <button mat-icon-button [matMenuTriggerFor]="beforeMenu"><mat-icon class="icon">more_vert</mat-icon></button>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
         <button mat-menu-item (click)="cleanMessages()">
-          <span class="menu-option">Clear chat messages</span>
+          <span class="menu-option">🗑️ Clean messages</span>
         </button>
       </mat-menu>
     </div>
