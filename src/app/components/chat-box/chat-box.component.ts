@@ -250,6 +250,31 @@ export class ChatBoxComponent implements OnInit {
     });
   }
 
+  public openInputImageFile(){
+    document.getElementById('image-input').click();
+  }
+  public openInputVideoFile(){
+    document.getElementById('video-input').click();
+  }
+
+  onChangeImage(event:any) {
+    const file = event.target.files[0];
+    this.uploadImageApi(file);
+    }
+
+    onChangeVideo(event:any) {
+    
+      const file = event.target.files[0];
+      this.uploadVideoApi(file);
+      }
+
+  private uploadVideoApi(file){
+
+  }
+
+  private uploadImageApi(file){
+
+  }
 }
 
 @Component({

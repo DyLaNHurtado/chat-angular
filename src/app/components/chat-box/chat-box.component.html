@@ -22,12 +22,14 @@
       <mat-icon class="icon" >attach_file</mat-icon>
     </button>
     <mat-menu #attachMenu="matMenu" xPosition="after">
-      <button mat-menu-item (click)="cleanMessages()">
+      <button mat-menu-item (click)="openInputImageFile()">
         <span class="menu-option">📷  Attach Image</span>
       </button>
-      <button mat-menu-item (click)="cleanMessages()">
+      <button mat-menu-item (click)="openInputVideoFile()">
         <span class="menu-option">📽️ Attach Video</span>
       </button>
+      <input id="image-input" type="file" (change)="onChangeVideo($event)" style="display: none;" />
+      <input id="video-input" type="file" (change)="onChangeImage($event)" style="display: none;" />
     </mat-menu>
       <button mat-icon-button [matMenuTriggerFor]="beforeMenu"><mat-icon class="icon">more_vert</mat-icon></button>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
@@ -64,6 +66,7 @@
       (emojiSelect)="addEmoji($event)"
       title="Choose it!"
       emoji="point_up"
+      [isNative]="true"
       color="#e0a963"
     ></emoji-mart>
     <div class="input-box" fxLayoutAlign="center center">
