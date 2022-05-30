@@ -166,7 +166,7 @@ public back(){
     console.log(JSON.parse(this.cookieService.get('payload')).id);
     console.log(this.cookieService.get('token'));
     
-     this.httpService.uploadImage(JSON.parse(this.cookieService.get('payload')).id,fd)
+     this.httpService.uploadAvatar(JSON.parse(this.cookieService.get('payload')).id,fd)
     .subscribe(res => {
       console.log(res.status);
       if(res.status == 200){
@@ -183,7 +183,7 @@ public back(){
 
       
       document.addEventListener('avatarUploadedProfile',(event)=>{
-        event.stopPropagation();
+        event.preventDefault();
         this.getImageApi();},{once:true});
     }
 

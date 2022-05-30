@@ -21,6 +21,14 @@
     </audio>
     <span class="message-time" fxLayoutAlign="end end">{{ time }}</span>
   </mat-card>
+  <mat-card *ngIf="type=='image'" class="message-card" fxLayout="row wrap">
+    <img class="img-messages" controls src=""/>
+    <span class="message-time" fxLayoutAlign="end end">{{ time }}</span>
+  </mat-card>
+  <mat-card *ngIf="type=='video'" class="message-card" fxLayout="row wrap">
+    <video class="video-messages" src=""></video>
+    <span class="message-time" fxLayoutAlign="end end">{{ time }}</span>
+  </mat-card>
 </div>
 
 

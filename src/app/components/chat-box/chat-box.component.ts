@@ -268,12 +268,41 @@ export class ChatBoxComponent implements OnInit {
       this.uploadVideoApi(file);
       }
 
-  private uploadVideoApi(file){
-
-  }
 
   private uploadImageApi(file){
+    const fd = new FormData();
+      fd.append('file', file, file.type);
+    console.log(JSON.parse(this.cookieService.get('payload')).id);
+    console.log(this.cookieService.get('token'));
+    
+     this.httpService.uploadImage(JSON.parse(localStorage.getItem('chatId')),JSON.parse(this.cookieService.get('payload')).id,fd)
+    .subscribe(res => {
+      console.log(res.status);
+      if(res.status == 200){
+        window.location.reload();
+      }
+      },
+      (errorRes:HttpErrorResponse) => {
+        console.error(errorRes);
+      });
+  }
 
+  private uploadVideoApi(file){
+    const fd = new FormData();
+      fd.append('file', file, file.type);
+    console.log(JSON.parse(this.cookieService.get('payload')).id);
+    console.log(this.cookieService.get('token'));
+    
+     this.httpService.uploadVideo(JSON.parse(localStorage.getItem('chatId')),JSON.parse(this.cookieService.get('payload')).id,fd)
+    .subscribe(res => {
+      console.log(res.status);
+      if(res.status == 200){
+        window.location.reload();
+      }
+      },
+      (errorRes:HttpErrorResponse) => {
+        console.error(errorRes);
+      });
   }
 }
 

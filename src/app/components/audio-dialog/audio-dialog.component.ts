@@ -77,11 +77,11 @@ private stopRecording():void {
   
   private uploadMediaApi(output){
     const fd = new FormData();
-    fd.append('media', output, "media.webm");
+    fd.append('file', output, "media.webm");
   console.log(JSON.parse(this.cookieService.get('payload')).id);
   console.log(this.cookieService.get('token'));
   
-   this.httpService.uploadMedia(JSON.parse(localStorage.getItem('chatId')),JSON.parse(this.cookieService.get('payload')).id,fd)
+   this.httpService.uploadAudio(JSON.parse(localStorage.getItem('chatId')),JSON.parse(this.cookieService.get('payload')).id,fd)
   .subscribe(res => {
     console.log(res.status);
     if(res.status == 200){
