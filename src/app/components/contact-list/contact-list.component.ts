@@ -51,7 +51,7 @@ export class ContactListComponent implements OnInit {
     
     
     document.addEventListener('contactAdded',(event)=>{
-      event.stopPropagation();
+      event.preventDefault();
       this.setContactList();
     });
   }
@@ -76,7 +76,7 @@ export class ContactListComponent implements OnInit {
         }
       );
     document.addEventListener('gotUsersCL', (event) => {
-      event.stopPropagation();
+      event.preventDefault();
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),
         map((value) => this._filter(value))

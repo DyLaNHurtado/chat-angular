@@ -92,7 +92,7 @@ private stopRecording():void {
       console.error(errorRes);
     });
     document.addEventListener('audioUploadedDialog',(event)=>{
-      event.stopPropagation();
+      event.preventDefault();
       this.getMediaApi();},{once:true});
   }
 

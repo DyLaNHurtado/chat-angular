@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
 
   private setUserSettings(){
     document.addEventListener('tokenReady',(event)=>{
-      event.stopPropagation();
+      event.preventDefault();
       console.log("tokenReady");
       
       this.httpService.getUserByEmail(this.cookieService.get('token'),this.inputEmail)

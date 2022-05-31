@@ -27,7 +27,6 @@ export class ProfileComponent implements OnInit {
   public inputEmail: string;
   public inputStatus: string;
   public themeDark:boolean;
-  public static base64data:any;
   constructor( private router:Router,private cookieService:CookieService,public httpService:HttpclientService,private _sanitizer: DomSanitizer) { }
 
 
@@ -57,31 +56,23 @@ export class ProfileComponent implements OnInit {
     
     
   }
-  public base64dataToImage() : void {
-
-      if(!ProfileComponent.base64data){
-        console.log("nooo");
+  public base64dataToImage(base64data: string | ArrayBuffer) : void {
+      if(!base64data){
         this.getImageApi()
       }else{
-        console.log("siiii");
-        
-        this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(ProfileComponent.base64data));
+        this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(base64data.toString()));
       }
 }
 
-private setDataApiInputs(){
+private setDataApiInputs(): void{
   this.entityForm.setValue({inputName:this.user.name,
     inputLastName:this.user.lastname,
     inputEmail:this.user.email,
     inputStatus:this.user.status});
-    //this.avatar=this.user.avatar
-    
-    console.log(this.avatar);
-    
 }
 
 
-  private setTheme(){
+  private setTheme(): void{
     if(JSON.parse(localStorage.getItem('theme'))==1){
       this.themeDark=true;
     }else{
@@ -104,11 +95,11 @@ private setDataApiInputs(){
   }
   
 
-public back(){
+public back(): void{
   this.router.navigate(["../home"])
 }
 
-  public onEditFields(){
+  public onEditFields(): void{
     if(!this.edit){
       this.edit=!this.edit;
       this.enableInputs();
@@ -129,14 +120,14 @@ public back(){
     }
   }
 
-  public enableInputs(){
+  public enableInputs(): void{
     this.entityForm.get("inputName").enable();
     this.entityForm.get("inputLastName").enable();
     this.entityForm.get("inputEmail").enable();
     this.entityForm.get("inputStatus").enable();
   }
 
-  public disableInputs(){
+  public disableInputs(): void{
     if(this.validateToSend()){
       this.entityForm.get("inputName").disable();
       this.entityForm.get("inputLastName").disable();
@@ -151,16 +142,15 @@ public back(){
     }
   }
 
-  change(event:any) {
-    
-    const file =event.target.files[0];
+  change(event:any): void {
+    const file = event.target.files[0];
     this.uploadImageApi(file);
     }
 
 
 
 
-    private uploadImageApi(file){
+    private uploadImageApi(file:any): void{
       const fd = new FormData();
       fd.append('avatar', file, file.name);
     console.log(JSON.parse(this.cookieService.get('payload')).id);
@@ -190,8 +180,7 @@ public back(){
 
 
 
-    private getImageApi(){
-    
+    private getImageApi(): void{
       this.httpService.getUserByEmail(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).email)
       .subscribe(res => {
         console.log(res.status);
@@ -210,8 +199,8 @@ public back(){
          
 
 
-    document.addEventListener('gotUserProfile',(event)=>{
-      event.stopPropagation();
+    document.addEventListener('gotUserProfile',(event) => {
+      event.preventDefault();
         if(!this.user.avatar.includes("https://ui-avatars.com/api/")){
       this.httpService.getFile(this.user.avatar.replace("uploads/",""))
         .subscribe(res => {
@@ -219,13 +208,8 @@ public back(){
            var reader = new FileReader();
            reader.readAsDataURL(res.body);
              reader.onload = () => {
-               ProfileComponent.base64data = reader.result;
-               document.dispatchEvent(new Event("avatarReadedProfile",{bubbles:false,cancelable:true}));
+              this.base64dataToImage(reader.result);
              }
-             document.addEventListener('avatarReadedProfile',(event)=>{
-              event.stopPropagation();
-               this.base64dataToImage();
-              },{once:true});
          }
          },
          (errorRes:HttpErrorResponse) => {

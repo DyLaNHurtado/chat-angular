@@ -155,7 +155,7 @@ export class ChatBoxComponent implements OnInit {
                 document.dispatchEvent(new Event('avatarReadedChatBox',{bubbles:false,cancelable:true}));
               };
               document.addEventListener('avatarReadedChatBox', (event) => {
-                event.stopPropagation();
+                event.preventDefault();
                 this.base64dataToImage();
                 console.log(res.body);
               },{once:true});

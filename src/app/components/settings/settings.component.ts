@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
       this.setTheme();
       window.addEventListener("storage", (event)=>{
-        event.stopPropagation();
+        event.preventDefault();
         this.setTheme()
       }, false);
   }
