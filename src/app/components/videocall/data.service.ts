@@ -32,7 +32,6 @@ export class DataService {
       this.socket$.subscribe(
         // Called whenever there is a message from the server
         msg => {
-          console.log('Received message of type: ' + msg.type);
           this.messagesSubject.next(msg);
         }
       );
@@ -40,7 +39,6 @@ export class DataService {
   }
 
   sendMessage(msg: Message): void {
-    console.log('sending message: ' + msg.type);
     this.socket$.next(msg);
   }
 
@@ -52,12 +50,10 @@ export class DataService {
       url: WS_ENDPOINT,
       openObserver: {
         next: () => {
-          console.log('[DataService]: connection ok');
         }
       },
       closeObserver: {
         next: () => {
-          console.log('[DataService]: connection closed');
           this.socket$ = undefined;
           this.connect();
         }

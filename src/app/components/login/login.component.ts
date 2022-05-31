@@ -87,14 +87,10 @@ export class LoginComponent implements OnInit {
   private loginApi(){
     this.httpService.login({"email":this.inputEmail,"password":this.inputPass})
     .subscribe(res => {
-      console.log(res.status);
       if(res.status == 200){
         this.error=false;
-        console.log(res.body);
         const token=res.body.token
-        console.log(token);
         const tokenInfo = this.getDecodedAccessToken(token);
-        console.log(tokenInfo);
         this.cookieService.set("token",token);
         this.cookieService.set("payload",JSON.stringify(this.getDecodedAccessToken(token)));
         document.dispatchEvent(new Event('tokenReady',{bubbles:false,cancelable:true}));
@@ -110,16 +106,11 @@ export class LoginComponent implements OnInit {
 
   private setUserSettings(){
     document.addEventListener('tokenReady',(event)=>{
-      event.preventDefault();
-      console.log("tokenReady");
-      
+      event.preventDefault();  
       this.httpService.getUserByEmail(this.cookieService.get('token'),this.inputEmail)
       .subscribe(res => {
-        console.log(res.status);
         if(res.status == 200){
           let user = res.body[0];
-          console.log(res.body);
-          
           localStorage.setItem('theme',JSON.stringify(user.theme));
           localStorage.setItem('bg_color',JSON.stringify(user.bgColor));
           localStorage.setItem('bg',JSON.stringify(user.background));

@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
   }
 
   public onCalling(option:any){
-    console.log(option);
     this.isCalling=option;
   }
 

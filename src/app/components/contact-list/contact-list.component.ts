@@ -140,18 +140,12 @@ export class ContactListComponent implements OnInit {
           }
       });
       });
-      
-      console.log("hola");
       this.socket.on('messageSentCL',(idChat,userId)=>{
-        console.log("hola");
         var audio = <HTMLVideoElement> document.getElementById("audio");
         audio.play();
         let contacts = document.getElementsByClassName("contact");
     
           Array.from(contacts).forEach((el)=>{
-            console.log(this.getUsername(userId));
-            console.log(JSON.parse(localStorage.getItem('chatId')),idChat);
-            
             if(el.children[1].innerHTML==this.getUsername(userId) && JSON.parse(localStorage.getItem('chatId'))!=idChat){
               el.children[2].children[0].innerHTML = (parseInt(el.children[2].children[0].innerHTML ) + 1).toString();
               if(el.children[2].children[0].innerHTML >='0'){
@@ -192,13 +186,6 @@ export class ContactListComponent implements OnInit {
     );
   }
   public sendName() {
-    console.log(this.user);
-    console.log(this.user.chats);
-    console.log(this.contactObjectsList[
-      this.getIndexByName(this.contact.selectedOptions.selected[0].value)
-    ]._id);
-    console.log(this.user._id);
-    
     for (const chat of this.user.chats) {
       if(chat.members.includes(this.user._id) &&
         chat.members.includes(this.contactObjectsList[
@@ -211,7 +198,6 @@ export class ContactListComponent implements OnInit {
             if(el.children[1].innerHTML==this.contact.selectedOptions.selected[0].value){
               el.children[2].children[0].innerHTML="0";
               el.children[2].children[0].classList.replace("show-nmessage","hide-nmessage");
-              
             }
           })
       }

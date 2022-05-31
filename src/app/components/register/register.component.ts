@@ -69,12 +69,9 @@ export class RegisterComponent implements OnInit {
 
         this.httpService.register({"name":this.inputName,"lastname":this.inputLastName,"email":this.inputEmail,"password":this.inputPass,"avatar":`https://ui-avatars.com/api/?name=${this.inputName}+${this.inputLastName}&background=random&format=svg`})
         .subscribe(res => {
-          console.log(res.status);
           if(res.status == 200){
             this.error=false;
-            console.log(res.body);
             const token=res.body
-            console.log(token);
           }
           },
           (errorRes:HttpErrorResponse) => {

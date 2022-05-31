@@ -39,8 +39,6 @@ export class AddDialogComponent implements OnInit {
       this.httpService.addContact({'email':this.addInput},JSON.parse(this.cookieService.get('payload')).id)
       .subscribe(
         (res) => {
-          console.log(res.body);
-          
           if (res.status == 200) {
             this.error=false;
             this.success=true;

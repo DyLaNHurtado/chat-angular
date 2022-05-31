@@ -31,8 +31,6 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit() {
-
-    console.log(JSON.parse(this.cookieService.get('payload')).email);
     this.email=JSON.parse(this.cookieService.get('payload')).email
     this.httpService.getUserByEmail(this.cookieService.get('token'),this.email).subscribe(res => {
       this.user=res.body[0];
@@ -109,7 +107,7 @@ public back(): void{
         window.location.reload();
       },
         (errorRes:HttpErrorResponse) => {
-          console.log(errorRes);
+          console.error(errorRes);
             this.error=true;
             this.errorMsg=errorRes.error.error
         });
@@ -149,20 +147,15 @@ public back(): void{
     private uploadImageApi(file:any): void{
       const fd = new FormData();
       fd.append('avatar', file, file.name);
-    console.log(JSON.parse(this.cookieService.get('payload')).id);
-    console.log(this.cookieService.get('token'));
-    
      this.httpService.uploadAvatar(JSON.parse(this.cookieService.get('payload')).id,fd)
     .subscribe(res => {
-      console.log(res.status);
       if(res.status == 200){
         this.error=false;
         document.dispatchEvent(new Event("avatarUploadedProfile",{bubbles:false,cancelable:true}));
       }
       },
       (errorRes:HttpErrorResponse) => {
-        console.log(errorRes);
-        
+        console.error(errorRes);
           this.error=true;
           this.errorMsg=errorRes.error.error
       });
@@ -179,16 +172,14 @@ public back(): void{
     private getImageApi(): void{
       this.httpService.getUserByEmail(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).email)
       .subscribe(res => {
-        console.log(res.status);
         if(res.status == 200){
           this.error=false;
           this.user=res.body[0];
-          console.log(this.user);
           document.dispatchEvent(new Event("gotUserProfile",{bubbles:false,cancelable:true}));
         }
         },
         (errorRes:HttpErrorResponse) => {
-          console.log(errorRes);
+          console.error(errorRes);
             this.error=true;
             this.errorMsg=errorRes.error.error
         });

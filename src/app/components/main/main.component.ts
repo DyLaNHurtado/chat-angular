@@ -73,7 +73,6 @@ export class MainComponent implements OnInit {
 
     this.httpService.getUserByEmail(this.cookieService.get('token'),JSON.parse(this.cookieService.get('payload')).email)
       .subscribe(res => {
-      console.log(res.status);
       if(res.status == 200){
         this.user=res.body[0];
         }

@@ -76,11 +76,8 @@ export class VideocallComponent implements AfterViewInit {
 
   private addIncominMessageHandler(): void {
     this.dataService.connect();
-
-    // this.transactions$.subscribe();
     this.dataService.messages$.subscribe(
       msg => {
-        // console.log('Received message: ' + msg.type);
         switch (msg.type) {
           case 'offer':
             this.handleOfferMessage(msg.data);
@@ -98,14 +95,12 @@ export class VideocallComponent implements AfterViewInit {
             console.log('unknown message of type ' + msg.type);
         }
       },
-      error => console.log(error)
+      error => console.error(error)
     );
   }
 
-   /* ########################  MESSAGE HANDLER  ################################## */
 
    private handleOfferMessage(msg: RTCSessionDescriptionInit): void {
-    console.log('handle incoming offer');
     if (!this.peerConnection) {
       this.createPeerConnection();
     }
@@ -151,7 +146,6 @@ export class VideocallComponent implements AfterViewInit {
   }
 
   private handleHangupMessage(msg: Message): void {
-    console.log(msg);
     this.closeVideoCall();
   }
 
@@ -173,7 +167,6 @@ export class VideocallComponent implements AfterViewInit {
   }
 
   startLocalVideo(): void {
-    console.log('starting local stream');
     this.localStream.getTracks().forEach(track => {
       track.enabled = true;
     });
@@ -183,7 +176,6 @@ export class VideocallComponent implements AfterViewInit {
   }
 
   pauseLocalVideo(): void {
-    console.log('pause local stream');
     this.localStream.getTracks().forEach(track => {
       track.enabled = false;
     });
@@ -201,7 +193,6 @@ export class VideocallComponent implements AfterViewInit {
   }
 
   private createPeerConnection(): void {
-    console.log('creating PeerConnection...');
     this.peerConnection = new RTCPeerConnection(ENV_RTCPeerConfiguration);
 
     this.peerConnection.onicecandidate = this.handleICECandidateEvent;
@@ -211,22 +202,17 @@ export class VideocallComponent implements AfterViewInit {
   }
 
   public closeVideoCall(): void {
-    console.log('Closing call');
 
     if (this.peerConnection) {
-      console.log('--> Closing the peer connection');
-
       this.peerConnection.ontrack = null;
       this.peerConnection.onicecandidate = null;
       this.peerConnection.oniceconnectionstatechange = null;
       this.peerConnection.onsignalingstatechange = null;
 
-      // Stop all transceivers on the connection
       this.peerConnection.getTransceivers().forEach(transceiver => {
         transceiver.stop();
       });
 
-      // Close the peer connection
       this.peerConnection.close();
       this.peerConnection = null;
 

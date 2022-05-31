@@ -40,7 +40,6 @@ export class AudioDialogComponent implements OnInit {
     this.isRecording=false;
     this.socket.emit('messageSent',JSON.parse(localStorage.getItem('chatId')),JSON.parse(this.cookieService.get('payload')).id);
     this.audioRecorderService.stopRecording(OutputFormat.WEBM_BLOB).then((output) => {
-      console.log(output);
       this.uploadMediaApi(output);
   }).catch(errrorCase => {
       console.error(errrorCase);
@@ -58,8 +57,6 @@ private stopRecording():void {
       this.seconds = 0;
       this.minutes++;
     }
-   
-    console.log(this.seconds);
   }
 
   close():void{
@@ -77,12 +74,8 @@ private stopRecording():void {
   private uploadMediaApi(output){
     const fd = new FormData();
     fd.append('file', output, "media.webm");
-  console.log(JSON.parse(this.cookieService.get('payload')).id);
-  console.log(this.cookieService.get('token'));
-  
    this.httpService.uploadAudio(JSON.parse(localStorage.getItem('chatId')),JSON.parse(this.cookieService.get('payload')).id,fd)
   .subscribe(res => {
-    console.log(res.status);
     if(res.status == 200){
       document.dispatchEvent(new Event("audioUploadedDialog",{bubbles:false,cancelable:true}));
     }
@@ -101,15 +94,13 @@ private stopRecording():void {
     
     this.httpService.getLastAudio()
     .subscribe(res => {
-      console.log(res.status);
       if(res.status == 200){
         this.lastAudio=res.body;
-        console.log(this.lastAudio);
         document.dispatchEvent(new Event("gotUserAudioDialog",{bubbles:false,cancelable:true}));
       }
       },
       (errorRes:HttpErrorResponse) => {
-        console.log(errorRes);
+        console.error(errorRes);
       });
        
 
@@ -135,16 +126,9 @@ private stopRecording():void {
 
 
 private base64dataToImage(base64data: string | ArrayBuffer) : void {
-
-  if(!base64data){
-    console.log("nooo");
-    this.getMediaApi();
-  }else{
-    console.log("siiii");
     let htmlAudio = document.getElementById('dialog-audio');
     htmlAudio.setAttribute("src",this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(base64data.toString())));
     this.ref.detectChanges();
-  }
 }
 
 }

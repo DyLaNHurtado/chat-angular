@@ -66,7 +66,6 @@ export class ChatBoxComponent implements OnInit {
     
     document.addEventListener('userSelected',(event)=>{
       event.preventDefault();
-      console.log("gsf");
       this.contact=JSON.parse(localStorage.getItem('contact'));
       this.getMessages();
       this.getAvatarApi();
@@ -87,13 +86,10 @@ export class ChatBoxComponent implements OnInit {
   }
 
   private getMessages(){
-
-      console.log(this.chatMessagesList);
         this.httpService
       .getAllMessageByChatId(JSON.parse(localStorage.getItem('chatId')))
       .subscribe(
         (res) => {
-          console.log(res.body);
           if (res.status == 200) {
             let arr:any[]=[]
             arr.push(res.body)
@@ -214,12 +210,9 @@ export class ChatBoxComponent implements OnInit {
       .deleteChatMessages(JSON.parse(localStorage.getItem('chatId')))
       .subscribe(
         (res) => {
-          console.log(res.body);
-          
           if (res.status == 200) {
             this.chatMessagesList=[];
             this.scrollToBottom();
-              
           }
         },
         (errorRes: HttpErrorResponse) => {
@@ -230,8 +223,6 @@ export class ChatBoxComponent implements OnInit {
 
   public call(){
     this.isCalling.emit(true);
-    
-    console.log("onCalling",this.isCalling);
   }
 
   public openAudioDialog() {
@@ -263,12 +254,8 @@ export class ChatBoxComponent implements OnInit {
   private uploadImageApi(file){
     const fd = new FormData();
       fd.append('file', file, file.type);
-    console.log(JSON.parse(this.cookieService.get('payload')).id);
-    console.log(this.cookieService.get('token'));
-    
      this.httpService.uploadImage(JSON.parse(localStorage.getItem('chatId')),JSON.parse(this.cookieService.get('payload')).id,fd)
     .subscribe(res => {
-      console.log(res.status);
       if(res.status == 200){
         this.socket.emit('messageSent',JSON.parse(localStorage.getItem('chatId')),this.userId);
         window.location.reload();
@@ -283,12 +270,9 @@ export class ChatBoxComponent implements OnInit {
   private uploadVideoApi(file){
     const fd = new FormData();
       fd.append('file', file, file.type);
-    console.log(JSON.parse(this.cookieService.get('payload')).id);
-    console.log(this.cookieService.get('token'));
     
      this.httpService.uploadVideo(JSON.parse(localStorage.getItem('chatId')),JSON.parse(this.cookieService.get('payload')).id,fd)
     .subscribe(res => {
-      console.log(res.status);
       if(res.status == 200){
         this.socket.emit('messageSent',JSON.parse(localStorage.getItem('chatId')),this.userId);
         window.location.reload();
@@ -308,8 +292,6 @@ export class ChatBoxComponent implements OnInit {
 export class ImageDialog {
   image: string;
   ngOnInit() {
-    console.log(this.data.img);
-    
     this.image = this.data.img;
   }
   constructor(
