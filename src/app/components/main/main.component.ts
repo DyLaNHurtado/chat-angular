@@ -15,7 +15,6 @@ export class MainComponent implements OnInit {
   themeDark:boolean;
   avatar:string ="https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif";
   user:any;
-  public static base64data:any;
   constructor(private router:Router,public socket:SocketProviderConnect,public httpService:HttpclientService,private cookieService:CookieService,private _sanitizer: DomSanitizer) {
   }
 
@@ -33,15 +32,8 @@ export class MainComponent implements OnInit {
     },false);
   }
 
-  public base64dataToImage() : void {
-    setTimeout(()=>{
-      if(!MainComponent.base64data){
-        console.log("nooo");
-        this.getImageApi();
-      }else{
-        this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(MainComponent.base64data));
-      }
-    },1)
+  public base64dataToImage(base64data) : void {
+    this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(base64data));
   }
 
   private setTheme(){
@@ -84,10 +76,6 @@ export class MainComponent implements OnInit {
       console.log(res.status);
       if(res.status == 200){
         this.user=res.body[0];
-        console.log(this.user);
-
-        let payload = this.cookieService.get('payload');
-          
         }
         
         document.dispatchEvent(new Event("gotUserMain",{bubbles:false,cancelable:true}));
@@ -105,20 +93,15 @@ export class MainComponent implements OnInit {
        var reader = new FileReader();
        reader.readAsDataURL(res.body);
          reader.onload = () => {
-           MainComponent.base64data = reader.result;
-           document.dispatchEvent(new Event("readedImageMain",{bubbles:false,cancelable:true}));
+           this.base64dataToImage(reader.result);
          }
-         document.addEventListener('readedImageMain',(event)=>{
-          event.preventDefault();
-           this.base64dataToImage();
-         },{once:true});
      }
      },
      (errorRes:HttpErrorResponse) => {
        console.error(errorRes);
      }).unsubscribe;
     }else{
-      this.avatar=this.user.avatar;
+      this.avatar = this.user.avatar;
     }
   },{once:true});
   }

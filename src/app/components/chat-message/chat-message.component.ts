@@ -82,36 +82,24 @@ export class ChatMessageComponent implements OnInit {
     }
 
     private base64dataToAudio(base64data: string | ArrayBuffer) : void {
-       if(!base64data){
-         this.getMediaApi();
-       }else{
         let htmlAudios = document.getElementsByClassName('audio-messages');
         let currentAudioHtml = htmlAudios[this.getIndexByUrl(this.audiosList)];
         currentAudioHtml.setAttribute("src",this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(base64data.toString())));
         this.ref.detectChanges();
-       }
   }
 
   private base64dataToVideo(base64data: string | ArrayBuffer) : void {
-    if(!base64data){
-      this.getMediaApi();
-    }else{
      let htmlVideos = document.getElementsByClassName('video-messages');
      let currentVideoHtml = htmlVideos[this.getIndexByUrl(this.videosList)];
      currentVideoHtml.setAttribute("src",this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(base64data.toString())));
      this.ref.detectChanges();
-    }
 }
 
 private base64dataToImage(base64data: string | ArrayBuffer) : void {
-  if(!base64data){
-    this.getMediaApi();
-  }else{
    let htmlImages = document.getElementsByClassName('image-messages');
-   let currentImageHtml = htmlImages[this.getIndexByUrl(this.imagesList)];
-   currentImageHtml.setAttribute("src",this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(base64data.toString())));
-   this.ref.detectChanges();
-  }
+    let currentImageHtml = htmlImages[this.getIndexByUrl(this.imagesList)];
+    currentImageHtml.setAttribute("src",this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(base64data.toString())));
+    this.ref.detectChanges();
 }
 
   private getIndexByUrl(list: string[]): number{

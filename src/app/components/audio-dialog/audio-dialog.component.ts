@@ -15,10 +15,9 @@ import { SocketProviderConnect } from 'src/app/web-socket.service';
 export class AudioDialogComponent implements OnInit {
   minutes:number;
   seconds:number;
-  interval;
+  interval: number;
   lastAudio:any;
   audioTest:string="";
-  static base64data:any;
   isRecording:boolean=true;
   
   constructor(private dialogRef: MatDialogRef<AudioDialogComponent>,private audioRecorderService: NgAudioRecorderService,private cookieService:CookieService,public httpService:HttpclientService,private _sanitizer: DomSanitizer,private ref: ChangeDetectorRef,public socket:SocketProviderConnect) {

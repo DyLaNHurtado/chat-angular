@@ -57,11 +57,7 @@ export class ProfileComponent implements OnInit {
     
   }
   public base64dataToImage(base64data: string | ArrayBuffer) : void {
-      if(!base64data){
-        this.getImageApi()
-      }else{
-        this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(base64data.toString()));
-      }
+    this.avatar = this._sanitizer.sanitize(SecurityContext.RESOURCE_URL,this._sanitizer.bypassSecurityTrustResourceUrl(base64data.toString()));
 }
 
 private setDataApiInputs(): void{

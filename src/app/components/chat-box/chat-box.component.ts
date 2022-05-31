@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Inject,
@@ -34,7 +35,6 @@ export class ChatBoxComponent implements OnInit {
   public themeDark: boolean;
   public entityForm: FormGroup;
   public input: string;
-  static base64data: any;
   avatar: string =
     'https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif';
   isWritting:boolean=false;
@@ -50,7 +50,8 @@ export class ChatBoxComponent implements OnInit {
     public httpService: HttpclientService,
     private _sanitizer: DomSanitizer,
     public socket:SocketProviderConnect,
-    public viewContainerRef: ViewContainerRef
+    public viewContainerRef: ViewContainerRef,
+    private ref: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -60,7 +61,7 @@ export class ChatBoxComponent implements OnInit {
       input: new FormControl('', []),
     });
     this.getMessages();
-    this.getImageApi();
+    this.getAvatarApi();
     
     
     document.addEventListener('userSelected',(event)=>{
@@ -68,7 +69,7 @@ export class ChatBoxComponent implements OnInit {
       console.log("gsf");
       this.contact=JSON.parse(localStorage.getItem('contact'));
       this.getMessages();
-      this.getImageApi();
+      this.getAvatarApi();
     });
       
       
@@ -88,7 +89,6 @@ export class ChatBoxComponent implements OnInit {
   private getMessages(){
 
       console.log(this.chatMessagesList);
-      setTimeout(()=>{
         this.httpService
       .getAllMessageByChatId(JSON.parse(localStorage.getItem('chatId')))
       .subscribe(
@@ -116,7 +116,6 @@ export class ChatBoxComponent implements OnInit {
           console.error(errorRes);
         }
       );
-      });
       
   }
   private scrollToBottom(){
@@ -125,23 +124,16 @@ export class ChatBoxComponent implements OnInit {
       div.scrollTop = div.scrollHeight;
     })
   }
-  public base64dataToImage(): void {
-    if (!ChatBoxComponent.base64data) {
-      console.log('nooo');
-      this.getImageApi();
-    } else {
-      console.log('siiii');
-
+  public base64dataToImage(base64data): void {
       this.avatar = this._sanitizer.sanitize(
         SecurityContext.RESOURCE_URL,
         this._sanitizer.bypassSecurityTrustResourceUrl(
-          ChatBoxComponent.base64data
+          base64data.toString()
         )
       );
-    }
   }
 
-  private getImageApi() {
+  private getAvatarApi() {
     if (!this.contact.avatar.includes('https://ui-avatars.com/api/')) {
       this.httpService
         .getFile(this.contact.avatar.replace('uploads/', ''))
@@ -151,14 +143,8 @@ export class ChatBoxComponent implements OnInit {
               var reader = new FileReader();
               reader.readAsDataURL(res.body);
               reader.onload = () => {
-                ChatBoxComponent.base64data = reader.result;
-                document.dispatchEvent(new Event('avatarReadedChatBox',{bubbles:false,cancelable:true}));
+                this.base64dataToImage(reader.result);
               };
-              document.addEventListener('avatarReadedChatBox', (event) => {
-                event.preventDefault();
-                this.base64dataToImage();
-                console.log(res.body);
-              },{once:true});
             }
             
           },
@@ -284,7 +270,9 @@ export class ChatBoxComponent implements OnInit {
     .subscribe(res => {
       console.log(res.status);
       if(res.status == 200){
+        this.socket.emit('messageSent',JSON.parse(localStorage.getItem('chatId')),this.userId);
         window.location.reload();
+        this.scrollToBottom();
       }
       },
       (errorRes:HttpErrorResponse) => {
@@ -302,7 +290,9 @@ export class ChatBoxComponent implements OnInit {
     .subscribe(res => {
       console.log(res.status);
       if(res.status == 200){
+        this.socket.emit('messageSent',JSON.parse(localStorage.getItem('chatId')),this.userId);
         window.location.reload();
+        this.scrollToBottom();
       }
       },
       (errorRes:HttpErrorResponse) => {
