@@ -1,4 +1,4 @@
-const { BrowserWindow,dialog,Menu } = require("electron");
+const { BrowserWindow,dialog } = require("electron");
 let appWin = new BrowserWindow({
     width: 1200,
     height: 800,
