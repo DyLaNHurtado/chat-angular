@@ -17,16 +17,15 @@
   </mat-card>
 
   <mat-card *ngIf="type=='audio'" class="message-card" fxLayout="row wrap">
-    <audio class="audio-messages" controls src="">
-    </audio>
+    <audio class="audio-messages" controls src=""></audio>
     <span class="message-time" fxLayoutAlign="end end">{{ time }}</span>
   </mat-card>
-  <mat-card *ngIf="type=='image'" class="message-card" fxLayout="row wrap">
-    <img class="img-messages" controls src=""/>
+  <mat-card *ngIf="type=='image'" class="message-card" fxLayout="row wrap" (click)="openImageDialog($event)">
+    <img class="image-messages" src="https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif"/>
     <span class="message-time" fxLayoutAlign="end end">{{ time }}</span>
   </mat-card>
   <mat-card *ngIf="type=='video'" class="message-card" fxLayout="row wrap">
-    <video class="video-messages" src=""></video>
+    <video class="video-messages" controls src=""></video>
     <span class="message-time" fxLayoutAlign="end end">{{ time }}</span>
   </mat-card>
 </div>
