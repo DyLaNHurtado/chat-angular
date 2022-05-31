@@ -9,7 +9,7 @@ export class HttpclientService {
 
   public url:string=environment.APIUri
 
-  constructor(private http: HttpClient,) { }
+  constructor(private http: HttpClient) { }
 
   public login(body:any){
     return this.http.post<any>(this.url+"user/login",body,{ observe: 'response' });
@@ -32,9 +32,9 @@ export class HttpclientService {
     return this.http.get(this.url+`user/file/${fileName}`,{observe: 'response',responseType: 'blob' });
   }
 
-  public uploadImage(userId:string,formdata:FormData){
+  public uploadAvatar(userId:string,formdata:FormData){
 
-    return this.http.put<any>(this.url+`user/upload-image/${userId}`,formdata,{observe: 'response' });
+    return this.http.put<any>(this.url+`user/upload-avatar/${userId}`,formdata,{observe: 'response' });
   }
 
   public editProfile(body:any,idUser:string){
@@ -65,8 +65,14 @@ export class HttpclientService {
     return this.http.delete<any>(this.url+`chat/${chatId}`,{ observe: 'response' });
   }
 
-  public uploadMedia(chatId:string,userId:string,formdata:FormData){
-    return this.http.put<any>(this.url+`user/upload-media/${chatId}/${userId}`,formdata,{observe: 'response' });
+  public uploadAudio(chatId:string,userId:string,formdata:FormData){
+    return this.http.put<any>(this.url+`chat/upload-audio/${chatId}/${userId}`,formdata,{observe: 'response' });
+  }
+  public uploadVideo(chatId:string,userId:string,formdata:FormData){
+    return this.http.put<any>(this.url+`chat/upload-video/${chatId}/${userId}`,formdata,{observe: 'response' });
+  }
+  public uploadImage(chatId:string,userId:string,formdata:FormData){
+    return this.http.put<any>(this.url+`chat/upload-image/${chatId}/${userId}`,formdata,{observe: 'response' });
   }
   public getLastAudio(){
     return this.http.get(this.url+`message/last/audio`,{ observe: 'response' });

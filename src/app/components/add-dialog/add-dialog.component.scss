@@ -26,14 +26,10 @@ button:hover{
     margin-bottom: 1.5em;
     
   }
-  h1{
-    font-size: 2vw;
-    font-weight: bold;
-    color:#e0a963;
-    margin:0;
-    margin-bottom: 2vh;
-    text-align:center;
-    text-shadow: 1px 2px 2px black;
-    font-family: 'Lastica', cursive;
-    font-weight: bold;
+  p{
+    margin: 0 0 0.5em;
+    text-align: center;
+    font-family: 'Lastica';
+    font-size: 2em;
+    overflow-wrap: anywhere;
   }

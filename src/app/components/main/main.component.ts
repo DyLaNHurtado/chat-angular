@@ -22,13 +22,13 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.getImageApi();
     document.addEventListener('startSettings',(event)=>{
-      event.stopPropagation();
+      event.preventDefault();
       this.setTheme();
       window.location.reload();
     });
     
     window.addEventListener("storage",(event)=>{
-      event.stopPropagation();
+      event.preventDefault();
       this.setTheme();
     },false);
   }
@@ -73,6 +73,8 @@ export class MainComponent implements OnInit {
 
   private resetLocalStorage(){
     localStorage.setItem('contact',JSON.stringify(""));
+    this.cookieService.set('token','');
+    this.cookieService.set('payload','');
   }
 
   private getImageApi(){
@@ -95,7 +97,7 @@ export class MainComponent implements OnInit {
  });
 
   document.addEventListener('gotUserMain',(event)=>{
-    event.stopPropagation();
+    event.preventDefault();
     if(!this.user.avatar.includes("https://ui-avatars.com/api/")){
   this.httpService.getFile(this.user.avatar.replace("uploads/",""))
     .subscribe(res => {
@@ -107,7 +109,7 @@ export class MainComponent implements OnInit {
            document.dispatchEvent(new Event("readedImageMain",{bubbles:false,cancelable:true}));
          }
          document.addEventListener('readedImageMain',(event)=>{
-          event.stopPropagation();
+          event.preventDefault();
            this.base64dataToImage();
          },{once:true});
      }

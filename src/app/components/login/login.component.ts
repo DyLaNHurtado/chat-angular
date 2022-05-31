@@ -8,6 +8,7 @@ import { SocketProviderConnect } from 'src/app/web-socket.service';
 import jwt_decode from 'jwt-decode';
 import { HttpErrorResponse } from '@angular/common/http';
 import { HttpclientService } from 'src/app/httpclient.service';
+import { JwtHelperService } from 'src/app/jwt-helper.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
   public entityForm!: FormGroup;
   public inputEmail!: string;
   public inputPass!: string;
-  constructor(public dialog: MatDialog,private router:Router,private cookieService: CookieService,public socket:SocketProviderConnect,public httpService:HttpclientService,
+  constructor(public dialog: MatDialog,private router:Router,private cookieService: CookieService,public socket:SocketProviderConnect,public httpService:HttpclientService,public jwtService:JwtHelperService
   ) {
     
   }
@@ -44,7 +45,14 @@ export class LoginComponent implements OnInit {
       inputEmail: new FormControl("", [Validators.email,Validators.required]),
       inputPass: new FormControl("", [Validators.required])
     });
-
+    
+    if(this.cookieService.get('token')!="" && this.cookieService.get('payload')!=""){
+      if (this.jwtService.isTokenValid(this.cookieService.get('token'))) {
+        this.socket.connect();
+        this.router.navigate(["../home"]);
+      }
+    }
+    
   }
   private getDecodedAccessToken(token: string): any {
     try {
@@ -60,11 +68,8 @@ export class LoginComponent implements OnInit {
     this.inputEmail=this.entityForm.get("inputEmail")!.value;
     this.inputPass=this.entityForm.get("inputPass")!.value;
     if(this.validateToSend()){
-        //Api llamada
-       
           this.loginApi();
-          this.setUserSettings();
-        
+          this.setUserSettings();        
         
     }else{
       this.error=false;
@@ -81,20 +86,16 @@ export class LoginComponent implements OnInit {
 
   private loginApi(){
     this.httpService.login({"email":this.inputEmail,"password":this.inputPass})
-        
     .subscribe(res => {
       console.log(res.status);
       if(res.status == 200){
-        
         this.error=false;
         console.log(res.body);
         const token=res.body.token
         console.log(token);
         const tokenInfo = this.getDecodedAccessToken(token);
         console.log(tokenInfo);
-        
         this.cookieService.set("token",token);
-        
         this.cookieService.set("payload",JSON.stringify(this.getDecodedAccessToken(token)));
         document.dispatchEvent(new Event('tokenReady',{bubbles:false,cancelable:true}));
         this.socket.connect();
@@ -104,13 +105,12 @@ export class LoginComponent implements OnInit {
       (errorRes:HttpErrorResponse) => {
           this.error=true;
           this.errorMsg=errorRes.error.error
-      
       });
   }
 
   private setUserSettings(){
     document.addEventListener('tokenReady',(event)=>{
-      event.stopPropagation();
+      event.preventDefault();
       console.log("tokenReady");
       
       this.httpService.getUserByEmail(this.cookieService.get('token'),this.inputEmail)

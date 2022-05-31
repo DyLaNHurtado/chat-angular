@@ -15,11 +15,26 @@
     </div>
     <div fxLayout="row" fxFlex="100" fxLayoutAlign="end center" class="header-actions">
       <button mat-icon-button (click)="call()"><mat-icon class="icon">phone</mat-icon></button>
+      <button
+      mat-icon-button
+      [matMenuTriggerFor]="attachMenu"
+    >
+      <mat-icon class="icon" >attach_file</mat-icon>
+    </button>
+    <mat-menu #attachMenu="matMenu" xPosition="after">
+      <button mat-menu-item (click)="openInputImageFile()">
+        <span class="menu-option">📷  Attach Image</span>
+      </button>
+      <button mat-menu-item (click)="openInputVideoFile()">
+        <span class="menu-option">📽️ Attach Video</span>
+      </button>
+      <input id="image-input" type="file" (change)="onChangeImage($event)" style="display: none;" />
+      <input id="video-input" type="file" (change)="onChangeVideo($event)" style="display: none;" />
+    </mat-menu>
       <button mat-icon-button [matMenuTriggerFor]="beforeMenu"><mat-icon class="icon">more_vert</mat-icon></button>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <button mat-menu-item (click)="cleanMessages()" >
-          
-          <span class="menu-option">Clear chat messages</span>
+        <button mat-menu-item (click)="cleanMessages()">
+          <span class="menu-option">🗑️ Clean messages</span>
         </button>
       </mat-menu>
     </div>
@@ -36,9 +51,12 @@
           chatMessagesList[i].createdAt.substring(0, 10) ===
           chatMessagesList[i - 1]?.createdAt.substring(0, 10)
         "
-        [date]="message.createdAt.substring(0, 10)"
-        [type]="message.type"
-        [url]="message.url"
+        [date]="message?.createdAt.substring(0, 10)"
+        [type]="message?.type"
+        [url]="message?.url"
+        [audiosList]="audioList"
+        [videosList]="videosList"
+        [imagesList]="imagesList"
       ></app-chat-message>
     </div>
   </div>
@@ -50,6 +68,7 @@
       (emojiSelect)="addEmoji($event)"
       title="Choose it!"
       emoji="point_up"
+      [isNative]="true"
       color="#e0a963"
     ></emoji-mart>
     <div class="input-box" fxLayoutAlign="center center">

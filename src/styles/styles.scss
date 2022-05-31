@@ -51,6 +51,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   opacity: 0.9;
   background: linear-gradient(to bottom, #f7c5f7, #98a8e6);
 }
+.dialog {
+  mat-dialog-container {
+      background: linear-gradient(to bottom, #f7c5f7, #98a8e6);
+  }
+}
 
 @font-face {
   font-family: 'Lastica';

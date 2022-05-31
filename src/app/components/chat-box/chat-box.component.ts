@@ -39,7 +39,9 @@ export class ChatBoxComponent implements OnInit {
     'https://raw.githubusercontent.com/DyLaNHurtado/chat-angular/develop/src/assets/img/loading-gif.gif';
   isWritting:boolean=false;
   chatMessagesList:any[]=[];
-  
+  audioList:string[]=[];
+  videosList:string[]=[];
+  imagesList:string[]=[];
   userId:string;
 
   constructor(
@@ -62,7 +64,7 @@ export class ChatBoxComponent implements OnInit {
     
     
     document.addEventListener('userSelected',(event)=>{
-      event.stopPropagation();
+      event.preventDefault();
       console.log("gsf");
       this.contact=JSON.parse(localStorage.getItem('contact'));
       this.getMessages();
@@ -92,14 +94,22 @@ export class ChatBoxComponent implements OnInit {
       .subscribe(
         (res) => {
           console.log(res.body);
-          
           if (res.status == 200) {
             let arr:any[]=[]
             arr.push(res.body)
             this.chatMessagesList=arr[0];
-              
+            for (let resource of this.chatMessagesList){
+              if(resource.url!=undefined){
+                if(resource.type=="audio"){
+                  this.audioList.push(resource.url);
+                }else if(resource.type=="video"){
+                  this.videosList.push(resource.url);
+                }else if(resource.type=="image"){
+                  this.imagesList.push(resource.url);
+                }
+              }
+            } 
             this.scrollToBottom();
-              
           }
         },
         (errorRes: HttpErrorResponse) => {
@@ -138,7 +148,6 @@ export class ChatBoxComponent implements OnInit {
         .subscribe(
           (res) => {
             if (res.status == 200) {
-              
               var reader = new FileReader();
               reader.readAsDataURL(res.body);
               reader.onload = () => {
@@ -146,7 +155,7 @@ export class ChatBoxComponent implements OnInit {
                 document.dispatchEvent(new Event('avatarReadedChatBox',{bubbles:false,cancelable:true}));
               };
               document.addEventListener('avatarReadedChatBox', (event) => {
-                event.stopPropagation();
+                event.preventDefault();
                 this.base64dataToImage();
                 console.log(res.body);
               },{once:true});
@@ -208,10 +217,9 @@ export class ChatBoxComponent implements OnInit {
   }
 
   public openImageDialog() {
-    console.log(this.avatar);
-
     this.dialog.open(ImageDialog, {
       data: { img: this.avatar },
+      panelClass:"dialog"
     });
   }
 
@@ -236,15 +244,71 @@ export class ChatBoxComponent implements OnInit {
 
   public call(){
     this.isCalling.emit(true);
+    
     console.log("onCalling",this.isCalling);
   }
 
   public openAudioDialog() {
     this.dialog.open(AudioDialogComponent,{
-      disableClose:true
+      disableClose:true,
+      panelClass:'dialog'
     });
   }
 
+  public openInputImageFile(){
+    document.getElementById('image-input').click();
+  }
+  public openInputVideoFile(){
+    document.getElementById('video-input').click();
+  }
+
+  onChangeImage(event:any) {
+    const file = event.target.files[0];
+    this.uploadImageApi(file);
+    }
+
+    onChangeVideo(event:any) {
+    
+      const file = event.target.files[0];
+      this.uploadVideoApi(file);
+      }
+
+
+  private uploadImageApi(file){
+    const fd = new FormData();
+      fd.append('file', file, file.type);
+    console.log(JSON.parse(this.cookieService.get('payload')).id);
+    console.log(this.cookieService.get('token'));
+    
+     this.httpService.uploadImage(JSON.parse(localStorage.getItem('chatId')),JSON.parse(this.cookieService.get('payload')).id,fd)
+    .subscribe(res => {
+      console.log(res.status);
+      if(res.status == 200){
+        window.location.reload();
+      }
+      },
+      (errorRes:HttpErrorResponse) => {
+        console.error(errorRes);
+      });
+  }
+
+  private uploadVideoApi(file){
+    const fd = new FormData();
+      fd.append('file', file, file.type);
+    console.log(JSON.parse(this.cookieService.get('payload')).id);
+    console.log(this.cookieService.get('token'));
+    
+     this.httpService.uploadVideo(JSON.parse(localStorage.getItem('chatId')),JSON.parse(this.cookieService.get('payload')).id,fd)
+    .subscribe(res => {
+      console.log(res.status);
+      if(res.status == 200){
+        window.location.reload();
+      }
+      },
+      (errorRes:HttpErrorResponse) => {
+        console.error(errorRes);
+      });
+  }
 }
 
 @Component({
@@ -254,8 +318,9 @@ export class ChatBoxComponent implements OnInit {
 export class ImageDialog {
   image: string;
   ngOnInit() {
-    this.image = this.data.img;
     console.log(this.data.img);
+    
+    this.image = this.data.img;
   }
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,

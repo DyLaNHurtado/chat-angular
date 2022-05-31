@@ -61,7 +61,8 @@ export class VideocallComponent implements AfterViewInit {
       await this.peerConnection.setLocalDescription(offer);
 
       this.inCall = true;
-
+      let audioCalling = <HTMLVideoElement> document.getElementById('calling');
+      setTimeout(()=>{audioCalling.play();},3000); 
       this.dataService.sendMessage({type: 'offer', data: offer});
     } catch (err) {
       this.handleGetUserMediaError(err);
