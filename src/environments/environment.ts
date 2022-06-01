@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  serverSocket: '//tcp-mo1.mogenius.io:18799',
-  APIUri: '//tcp-mo1.mogenius.io:31259/api/v1/',
+  serverSocket: 'tcp-mo1.mogenius.io:18799',
+  APIUri: 'tcp-mo1.mogenius.io:31259/api/v1/',
   wsEndpoint: 'ws://localhost:8081/',
   RTCPeerConfiguration: {
     iceServers: [
