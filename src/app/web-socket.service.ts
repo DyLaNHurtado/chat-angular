@@ -10,12 +10,14 @@ export class SocketProviderConnect  extends Socket{
   @Output() outEven: EventEmitter<any> = new EventEmitter();
   constructor(private cookieService: CookieService) {
     super({
-      url: environment.serverSocket,
+      url: environment.APIOption != "CLOUD" ? environment.serverSocketLocal : environment.serverSocketCloud,
       options: {
-          query: {
-              payload: cookieService.get('payload')
-          }
+        query: {
+          payload: cookieService.get('payload')
+        }
       }
-  });
+    });
+    console.log( environment.APIOption != "CLOUD" ? environment.serverSocketLocal : environment.serverSocketCloud);
+    
   }
 }

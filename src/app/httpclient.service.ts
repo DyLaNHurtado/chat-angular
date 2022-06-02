@@ -7,11 +7,14 @@ import { environment } from 'src/environments/environment';
 })
 export class HttpclientService {
 
-  public url:string=environment.APIUri
+  private url:string=environment.APIOption != "CLOUD" ? environment.APILocalUri : environment.APILocalUri;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public login(body:any){
+    console.log(this.url);
+    
     return this.http.post<any>(this.url+"user/login",body,{ observe: 'response' });
   }
 
