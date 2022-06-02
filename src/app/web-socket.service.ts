@@ -17,7 +17,5 @@ export class SocketProviderConnect  extends Socket{
         }
       }
     });
-    console.log( environment.APIOption != "CLOUD" ? environment.serverSocketLocal : environment.serverSocketCloud);
-    
   }
 }

@@ -100,9 +100,7 @@ export class ContactListComponent implements OnInit {
               el.children[2].children[0].classList.add("show-nmessage");
             }
       });
-
       });
-
 
       this.socket.on('userConnected',(id) => {
         let contacts = document.getElementsByClassName("contact");
@@ -120,17 +118,13 @@ export class ContactListComponent implements OnInit {
             }
         });
         }
-        
-        
       });
-
 
       this.socket.on('userDisconnected',(id,usersConnected) => {
         let contacts = document.getElementsByClassName("contact");
         for (const e of this.contactObjectsList) {
           if(e._id==id){
             usersConnected=e;
-
           }
         }
         
@@ -184,6 +178,7 @@ export class ContactListComponent implements OnInit {
     return this.contactList.filter((option) =>
       option.toLowerCase().includes(filterValue)
     );
+    
   }
   public sendName() {
     for (const chat of this.user.chats) {

@@ -13,8 +13,6 @@ export class HttpclientService {
   }
 
   public login(body:any){
-    console.log(this.url);
-    
     return this.http.post<any>(this.url+"user/login",body,{ observe: 'response' });
   }
 
