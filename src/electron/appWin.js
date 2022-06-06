@@ -13,7 +13,7 @@ let appWin = new BrowserWindow({
         nodeIntegration: true,
     }
 });
-appWin.loadURL(`http://localhost:4200`);
+appWin.loadURL(`https://cosmos-chat.netlify.app`);
 appWin.center();
 appWin.setMenu(null);
 
