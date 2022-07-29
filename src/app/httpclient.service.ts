@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class HttpclientService {
 
-  private url:string=environment.APIOption != "CLOUD" ? environment.APILocalUri : environment.APILocalUri;
+  private url:string=environment.APIOption != "CLOUD" ? environment.APILocalUri : environment.APICloudUri;
 
   constructor(private http: HttpClient) {
   }
