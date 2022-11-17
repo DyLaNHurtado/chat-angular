@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
   serverSocketLocal: 'http://localhost:5000',
-  serverSocketCloud: 'https://chat-api-node-prod-cosmos-chat-bu1tlu.mo1.mogenius.io/',
+  serverSocketCloud: 'https://cosmos-chat-api.onrender.com:5000',
   APILocalUri: 'http://localhost:8888/api/v1/',
-  APICloudUri: 'http://tcp-mo1.mogenius.io:31259/api/v1/',
+  APICloudUri: 'https://cosmos-chat-api.onrender.com/api/v1/',
   APIOption: 'CLOUD',
   wsEndpoint: 'ws://localhost:8081/',
   RTCPeerConfiguration: {
