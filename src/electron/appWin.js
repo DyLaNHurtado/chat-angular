@@ -13,7 +13,7 @@ let appWin = new BrowserWindow({
     nodeIntegration: true,
   },
 });
-appWin.loadURL(`https://cosmos-chat.netlify.app`);
+appWin.loadURL(`https://chat-angular-fawn.vercel.app`);
 appWin.center();
 appWin.setMenu(null);
 

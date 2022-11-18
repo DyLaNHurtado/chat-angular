@@ -1,6 +1,7 @@
 {
   "name": "chat-angular",
   "version": "0.0.0",
+  "main": "src/electron/main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
