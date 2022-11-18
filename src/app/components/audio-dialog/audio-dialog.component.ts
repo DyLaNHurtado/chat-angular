@@ -15,7 +15,7 @@ import { SocketProviderConnect } from 'src/app/web-socket.service';
 export class AudioDialogComponent implements OnInit {
   minutes:number;
   seconds:number;
-  interval: number;
+  interval: any;
   lastAudio:any;
   audioTest:string="";
   isRecording:boolean=true;
